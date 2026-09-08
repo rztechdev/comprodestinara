@@ -130,8 +130,9 @@
       </nav>
 
       <div class="flex items-center gap-space-sm md:gap-space-md">
-        <a href="destinasi.html" class="hidden sm:inline-flex bg-primary-container text-on-primary font-label-action text-label-action px-space-md md:px-space-lg py-space-xs md:py-space-sm rounded-lg hover:bg-primary transition-colors items-center justify-center shadow-sm">
-          Jelajahi Destinasi
+        <a href="destinasi.html" class="inline-flex bg-primary-container text-on-primary font-label-action text-xs sm:text-label-action px-2.5 sm:px-space-md md:px-space-lg py-1.5 sm:py-space-xs md:py-space-sm rounded-lg hover:bg-primary transition-colors items-center justify-center shadow-sm whitespace-nowrap">
+          <span class="sm:hidden">Jelajahi</span>
+          <span class="hidden sm:inline">Jelajahi Destinasi</span>
         </a>
         <a href="kontak.html" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary-container transition-colors">
           <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
@@ -197,84 +198,42 @@
         </div>
 
         <!-- Editorial Horizontal Filtering Bar -->
-        <div class="mt-space-xl sm:mt-space-2xl pt-space-md border-t-0 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm sm:gap-space-md bg-surface-container-low p-space-sm sm:p-space-md rounded-xl shadow-sm">
-          <div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1 w-full sm:w-auto flex-nowrap sm:flex-wrap -mx-1 px-1 sm:mx-0 sm:px-0" id="categoryFilter">
-            <button class="flex-shrink-0 whitespace-nowrap px-space-md py-2 rounded-lg bg-primary-container text-on-primary font-label-action text-label-action transition-all cursor-pointer shadow-sm min-h-[40px] flex items-center" data-filter="all" type="button">
+        <div class="mt-space-lg sm:mt-space-2xl bg-surface-container-low/90 backdrop-blur-md p-3 sm:p-space-md rounded-2xl border border-outline-variant/30 shadow-sm flex flex-col gap-2.5">
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full flex-nowrap scroll-smooth touch-pan-x" id="categoryFilter">
+            <button class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-xl bg-primary-container text-on-primary font-label-action text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm min-h-[42px] flex items-center border border-primary/20 active:scale-95" data-filter="all" type="button">
               Semua Wilayah
             </button>
-            <button class="flex-shrink-0 whitespace-nowrap px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface font-label-action text-label-action transition-all cursor-pointer min-h-[40px] flex items-center" data-filter="budaya" type="button">
+            <button class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-on-surface-variant bg-surface hover:text-on-surface hover:bg-surface-container font-label-action text-xs sm:text-sm font-medium transition-all cursor-pointer min-h-[42px] flex items-center border border-outline-variant/30 active:scale-95" data-filter="budaya" type="button">
               Budaya &amp; Tradisi
             </button>
-            <button class="flex-shrink-0 whitespace-nowrap px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface font-label-action text-label-action transition-all cursor-pointer min-h-[40px] flex items-center" data-filter="ekologi" type="button">
+            <button class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-on-surface-variant bg-surface hover:text-on-surface hover:bg-surface-container font-label-action text-xs sm:text-sm font-medium transition-all cursor-pointer min-h-[42px] flex items-center border border-outline-variant/30 active:scale-95" data-filter="ekologi" type="button">
               Ekologi &amp; Hutan
             </button>
-            <button class="flex-shrink-0 whitespace-nowrap px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface font-label-action text-label-action transition-all cursor-pointer min-h-[40px] flex items-center" data-filter="pangan" type="button">
+            <button class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-on-surface-variant bg-surface hover:text-on-surface hover:bg-surface-container font-label-action text-xs sm:text-sm font-medium transition-all cursor-pointer min-h-[42px] flex items-center border border-outline-variant/30 active:scale-95" data-filter="pangan" type="button">
               Kemandirian Pangan
             </button>
-            <button class="flex-shrink-0 whitespace-nowrap px-space-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface font-label-action text-label-action transition-all cursor-pointer min-h-[40px] flex items-center" data-filter="bahari" type="button">
+            <button class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-on-surface-variant bg-surface hover:text-on-surface hover:bg-surface-container font-label-action text-xs sm:text-sm font-medium transition-all cursor-pointer min-h-[42px] flex items-center border border-outline-variant/30 active:scale-95" data-filter="bahari" type="button">
               Lanskap Bahari
             </button>
           </div>
-          <div class="flex items-center gap-space-xs font-caption-fieldnote text-caption-fieldnote text-secondary pt-1 sm:pt-0 shrink-0">
-            <span class="w-2 h-2 rounded-full bg-secondary"></span>
-            <span id="destinasiCountBadge">4 tapak aktif semester genap</span>
+          <div class="flex items-center justify-between px-1 text-xs text-secondary font-medium pt-1 border-t border-outline-variant/20">
+            <div class="flex items-center gap-1.5 font-caption-fieldnote italic">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+              <span id="destinasiCountBadge">4 tapak aktif semester genap</span>
+            </div>
+            <span class="sm:hidden text-outline text-[11px] italic flex items-center gap-1">
+              <span>Geser kategori</span>
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </span>
           </div>
         </div>
-      </section>
-
-      <!-- Showcase Editorial Alternating Blocks -->
-      <div class="flex flex-col w-full gap-space-4xl py-space-xl">
-        
-        <!-- Blok 1: Sasak Sade (Budaya) -->
-        <section class="w-full bg-surface-container-lowest py-space-3xl shadow-sm fade-item" data-category="budaya">
-          <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-            <div class="grid grid-cols-12 gap-space-2xl items-center">
-              <div class="col-span-12 lg:col-span-7 flex flex-col gap-space-xs">
-                <div class="relative overflow-hidden rounded-lg bg-surface-dim shadow-md aspect-[16/10] group">
-                  <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Arsitektur vernakular Bale Tani di Desa Adat Sasak Sade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_v-tuvxyzwc5_nWhI4sbGnGUwM3Rddtq9x7Qn2__YOIREX0k3f_vdiXvuP6IHPq57A4Q-g0abMladlQli7l5cGuLoDlUPsZTXvMhLqCdPb3OOTm1Lyp_Y0EthfLd1QGk54-hFn9WQcQjPkz8jzZr358JNo8RNd-zGuIoQf-4gL7KmNDLird6N9pKnrao4OVOLxPdUILcgMYSPYF_o0hEl34CxZz9YbwMAgbZlG34k8okGp99YGGLfBQ"/>
-                  <div class="absolute top-space-md left-space-md bg-surface/90 backdrop-blur-md px-space-md py-space-xs rounded-lg font-caption-fieldnote text-caption-fieldnote text-on-surface">
-                    Plat Arsip No. 01 / NTB
-                  </div>
-                </div>
-                <div class="flex items-center justify-between px-space-xs text-on-surface-variant">
-                  <span class="font-caption-fieldnote text-caption-fieldnote italic">Pewarna alami dari daun mangga dan akar mengkudu, Rembitan.</span>
-                  <span class="font-label-tag text-label-tag text-secondary">8°53'38"S 116°17'31"E</span>
-                </div>
-              </div>
-              <div class="col-span-12 lg:col-span-5 flex flex-col justify-center gap-space-md">
-                <div class="flex items-center gap-space-sm">
-                  <span class="px-space-sm py-space-2xs rounded-lg bg-surface-container text-primary font-label-tag text-label-tag">
-                    Etnografi &amp; Kriya
-                  </span>
-                  <span class="font-body-sm text-body-sm text-on-surface-variant">Lombok Tengah, NTB</span>
-                </div>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
-                  Desa Adat Sasak Sade
-                </h2>
-                <p class="font-body-default text-body-default text-on-surface-variant">
-                  Tegak melintasi lima belas generasi, struktur Bale Tani memanfaatkan campuran tanah lempung, sekam padi, dan getah pohon kamboja yang lentur meredam gelombang seismik tektonik zona sesar busur belakang.
-                </p>
-                <div class="p-space-md bg-surface-container-low rounded-lg flex flex-col gap-space-xs">
-                  <span class="font-label-tag text-label-tag text-secondary font-semibold">Fokus Riset Pembelajaran</span>
-                  <p class="font-body-sm text-body-sm text-on-surface">
-                    Rekayasa material vernakular tahan gempa, matematika fraktal motif tenun Subahnale, dan etika pewarisan lisan kaum perempuan Sasak.
-                  </p>
-                </div>
-                <div class="pt-space-sm flex items-center justify-between">
-                  <button class="font-headline-sm text-headline-sm text-primary underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer" data-open-dossier="sade">
-                    Lihat Dossier Lengkap Desa Sade
-                  </button>
-                  <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Kapasitas: 24 Peneliti</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
         <!-- Blok 2: Hutan Wonosadi (Ekologi) -->
-        <section class="w-full bg-surface-container-low py-space-3xl shadow-sm fade-item" data-category="ekologi">
+        <section class="w-full bg-surface-container-low py-8 sm:py-space-3xl shadow-sm fade-item" data-category="ekologi">
           <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-            <div class="grid grid-cols-12 gap-space-2xl items-center">
+            <div class="grid grid-cols-12 gap-6 sm:gap-space-2xl items-center">
               <div class="col-span-12 lg:col-span-5 flex flex-col justify-center gap-space-md order-2 lg:order-1">
                 <div class="flex items-center gap-space-sm">
                   <span class="px-space-sm py-space-2xs rounded-lg bg-surface-container-highest text-secondary font-label-tag text-label-tag">
@@ -294,11 +253,12 @@
                     Hidrologi karst tersembunyi, taksonomi vegetasi endemik Jawa Selatan, dan mekanisme sanksi sosial pemuliaan hutan tanpa aparat kepolisian.
                   </p>
                 </div>
-                <div class="pt-space-sm flex items-center justify-between">
-                  <button class="font-headline-sm text-headline-sm text-primary underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer" data-open-dossier="wonosadi">
-                    Lihat Dossier Lengkap Hutan Wonosadi
+                <div class="pt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-t border-outline-variant/20 sm:border-0">
+                  <button class="font-headline-sm text-base sm:text-headline-sm text-primary font-semibold underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer flex items-center justify-between sm:justify-start gap-2" data-open-dossier="wonosadi">
+                    <span>Lihat Dossier Lengkap Hutan Wonosadi</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                   </button>
-                  <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Kapasitas: 18 Peneliti</span>
+                  <span class="font-caption-fieldnote text-xs sm:text-caption-fieldnote text-secondary italic bg-surface-container px-3 py-1 rounded-full w-fit">Kapasitas: 18 Peneliti</span>
                 </div>
               </div>
               <div class="col-span-12 lg:col-span-7 flex flex-col gap-space-xs order-1 lg:order-2">
@@ -308,9 +268,9 @@
                     Plat Arsip No. 02 / DIY
                   </div>
                 </div>
-                <div class="flex items-center justify-between px-space-xs text-on-surface-variant">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-space-xs text-on-surface-variant mt-1.5">
                   <span class="font-caption-fieldnote text-caption-fieldnote italic">Kawasan resapan air Sendang Gedhe dan mata air Kali Nglanggeran.</span>
-                  <span class="font-label-tag text-label-tag text-secondary">7°52'14"S 110°38'42"E</span>
+                  <span class="font-label-tag text-xs sm:text-label-tag text-secondary shrink-0">7°52'14"S 110°38'42"E</span>
                 </div>
               </div>
             </div>
@@ -318,9 +278,9 @@
         </section>
 
         <!-- Blok 3: Kintamani Subak (Pangan) -->
-        <section class="w-full bg-surface-container-lowest py-space-3xl shadow-sm fade-item" data-category="pangan">
+        <section class="w-full bg-surface-container-lowest py-8 sm:py-space-3xl shadow-sm fade-item" data-category="pangan">
           <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-            <div class="grid grid-cols-12 gap-space-2xl items-center">
+            <div class="grid grid-cols-12 gap-6 sm:gap-space-2xl items-center">
               <div class="col-span-12 lg:col-span-7 flex flex-col gap-space-xs">
                 <div class="relative overflow-hidden rounded-lg bg-surface-dim shadow-md aspect-[16/10] group">
                   <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Perkebunan kopi arabika terasering Kintamani Bali" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLcJo_-AiqT_Xm6RrzZFIXsDw4LnMyjvawRRh7W0krYGlKGXhSJtgETTB-xLNvSNwe2S7v1cuqnDy-X45qsno-pVZOvU-kauLK8snpXLM2qOec-fXNRlyc9EymLUdJpUI4rLTEiTUTwv6wmp9FBk6ZW-Ffv5nh4A_U3V2yXejOlM40dX39pPDgmaUHpyFvDyBxZY9BpTCLsJ8UesdnBgLXmLtTNdnTKgyFiK-x82eLbxS2vDgmjNpNoA"/>
@@ -328,9 +288,9 @@
                     Plat Arsip No. 03 / BALI
                   </div>
                 </div>
-                <div class="flex items-center justify-between px-space-xs text-on-surface-variant">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-space-xs text-on-surface-variant mt-1.5">
                   <span class="font-caption-fieldnote text-caption-fieldnote italic">Sistem tumpang sari kopi arabika di bawah naungan pohon jeruk kintamani.</span>
-                  <span class="font-label-tag text-label-tag text-secondary">8°14'45"S 115°19'30"E</span>
+                  <span class="font-label-tag text-xs sm:text-label-tag text-secondary shrink-0">8°14'45"S 115°19'30"E</span>
                 </div>
               </div>
               <div class="col-span-12 lg:col-span-5 flex flex-col justify-center gap-space-md">
@@ -352,11 +312,12 @@
                     Filsafat Tri Hita Karana dalam manajemen kebun, pengolahan fermentasi anaerobik alami, serta rantai pasok kopi berkeadilan langsung ke sanggar desa.
                   </p>
                 </div>
-                <div class="pt-space-sm flex items-center justify-between">
-                  <button class="font-headline-sm text-headline-sm text-primary underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer" data-open-dossier="kintamani">
-                    Lihat Dossier Lengkap Subak Kintamani
+                <div class="pt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-t border-outline-variant/20 sm:border-0">
+                  <button class="font-headline-sm text-base sm:text-headline-sm text-primary font-semibold underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer flex items-center justify-between sm:justify-start gap-2" data-open-dossier="kintamani">
+                    <span>Lihat Dossier Lengkap Subak Kintamani</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                   </button>
-                  <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Kapasitas: 30 Peneliti</span>
+                  <span class="font-caption-fieldnote text-xs sm:text-caption-fieldnote text-secondary italic bg-surface-container px-3 py-1 rounded-full w-fit">Kapasitas: 30 Peneliti</span>
                 </div>
               </div>
             </div>
@@ -364,9 +325,9 @@
         </section>
 
         <!-- Blok 4: Bajo Mola (Bahari) -->
-        <section class="w-full bg-surface-container-low py-space-3xl shadow-sm fade-item" data-category="bahari">
+        <section class="w-full bg-surface-container-low py-8 sm:py-space-3xl shadow-sm fade-item" data-category="bahari">
           <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-            <div class="grid grid-cols-12 gap-space-2xl items-center">
+            <div class="grid grid-cols-12 gap-6 sm:gap-space-2xl items-center">
               <div class="col-span-12 lg:col-span-5 flex flex-col justify-center gap-space-md order-2 lg:order-1">
                 <div class="flex items-center gap-space-sm">
                   <span class="px-space-sm py-space-2xs rounded-lg bg-surface-container-highest text-secondary font-label-tag text-label-tag">
@@ -386,11 +347,12 @@
                     Navigasi maritim nirkemudi magnetik, konservasi padang lamun untuk duyung, dan tata ruang sosial kampung laut adaptif pasang surut air laut.
                   </p>
                 </div>
-                <div class="pt-space-sm flex items-center justify-between">
-                  <button class="font-headline-sm text-headline-sm text-primary underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer" data-open-dossier="cirebon">
-                    Lihat Dossier Lengkap Bajo Mola
+                <div class="pt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-t border-outline-variant/20 sm:border-0">
+                  <button class="font-headline-sm text-base sm:text-headline-sm text-primary font-semibold underline underline-offset-8 decoration-primary/40 hover:decoration-primary transition-all text-left cursor-pointer flex items-center justify-between sm:justify-start gap-2" data-open-dossier="cirebon">
+                    <span>Lihat Dossier Lengkap Bajo Mola</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                   </button>
-                  <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Kapasitas: 16 Peneliti</span>
+                  <span class="font-caption-fieldnote text-xs sm:text-caption-fieldnote text-secondary italic bg-surface-container px-3 py-1 rounded-full w-fit">Kapasitas: 16 Peneliti</span>
                 </div>
               </div>
               <div class="col-span-12 lg:col-span-7 flex flex-col gap-space-xs order-1 lg:order-2">
@@ -400,9 +362,9 @@
                     Plat Arsip No. 04 / SULTRA
                   </div>
                 </div>
-                <div class="flex items-center justify-between px-space-xs text-on-surface-variant">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-space-xs text-on-surface-variant mt-1.5">
                   <span class="font-caption-fieldnote text-caption-fieldnote italic">Dermaga titian kayu ulin di perbatasan zona inti konservasi karang tepi.</span>
-                  <span class="font-label-tag text-label-tag text-secondary">5°19'40"S 123°32'15"E</span>
+                  <span class="font-label-tag text-xs sm:text-label-tag text-secondary shrink-0">5°19'40"S 123°32'15"E</span>
                 </div>
               </div>
             </div>
@@ -413,7 +375,7 @@
 
       <!-- Field Discovery Form Section -->
       <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop w-full my-space-3xl" id="usulkan">
-        <div class="bg-surface-container p-space-2xl md:p-space-3xl rounded-xl shadow-sm">
+        <div class="bg-surface-container p-4 sm:p-space-2xl md:p-space-3xl rounded-2xl shadow-sm">
           <div class="grid grid-cols-12 gap-space-2xl">
             <div class="col-span-12 lg:col-span-5 flex flex-col justify-between gap-space-xl">
               <div class="flex flex-col gap-space-sm">
@@ -450,7 +412,7 @@
             </div>
 
             <!-- Submission Form -->
-            <div class="col-span-12 lg:col-span-7 bg-surface-container-lowest p-space-xl rounded-lg shadow-sm">
+            <div class="col-span-12 lg:col-span-7 bg-surface-container-lowest p-4 sm:p-space-xl rounded-xl shadow-sm">
               <form class="flex flex-col gap-space-lg" id="submissionForm">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
                   <div class="flex flex-col gap-space-xs">

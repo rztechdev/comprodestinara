@@ -150,11 +150,11 @@ function initDestinasiFilter() {
 
       // Update button visual state
       buttons.forEach((b) => {
-        b.classList.remove('bg-primary-container', 'text-on-primary');
-        b.classList.add('text-on-surface-variant', 'bg-transparent');
+        b.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold', 'border-primary/20', 'shadow-sm');
+        b.classList.add('text-on-surface-variant', 'bg-surface', 'border-outline-variant/30', 'font-medium');
       });
-      btn.classList.add('bg-primary-container', 'text-on-primary');
-      btn.classList.remove('text-on-surface-variant', 'bg-transparent');
+      btn.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold', 'border-primary/20', 'shadow-sm');
+      btn.classList.remove('text-on-surface-variant', 'bg-surface', 'border-outline-variant/30', 'font-medium');
 
       // Filter sections
       let visibleCount = 0;
