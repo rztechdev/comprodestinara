@@ -1,0 +1,31 @@
+---
+# ============================================================
+#  cPanel Git Deployment - DESTINARA (destinara.id)
+# ============================================================
+# Catatan: Sesuaikan username cPanel (contoh: destinar / u12345678)
+# dan lokasi folder repositori sesuai konfigurasi cPanel Anda.
+# ============================================================
+deployment:
+  tasks:
+    - export APPDIR=${DEPLOYPATH:-$PWD}
+    - export PUBDIR=/home/$(whoami)/public_html
+    - export PHP="php"
+
+    # 1. Salin seluruh aset dan file publik ke public_html
+    - /bin/cp -R $APPDIR/public/. $PUBDIR/
+    - /bin/rm -f $PUBDIR/index.html $PUBDIR/default.html
+
+    # 2. Arahkan index.php di public_html ke folder repositori Laravel
+    - /bin/sed -i "s|__DIR__\.'/\.\./|$APPDIR/|g" $PUBDIR/index.php
+
+    # 3. Sinkronisasi folder storage publik (agar gambar upload terbaca)
+    - /bin/rm -rf $PUBDIR/storage
+    - /bin/mkdir -p $PUBDIR/storage
+    - /bin/cp -R $APPDIR/storage/app/public/. $PUBDIR/storage/ 2>/dev/null || true
+    - /bin/chmod -R 775 $APPDIR/storage $PUBDIR/storage $APPDIR/bootstrap/cache
+
+    # 4. Optimasi & Bersihkan Cache Laravel
+    - cd $APPDIR && $PHP artisan optimize:clear
+    - cd $APPDIR && $PHP artisan config:cache
+    - cd $APPDIR && $PHP artisan route:cache
+    - cd $APPDIR && $PHP artisan view:cache

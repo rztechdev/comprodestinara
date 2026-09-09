@@ -1,0 +1,45 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit Testimoni')
+
+@section('content')
+<div class="max-w-xl mx-auto space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-gray-800">Edit Testimoni: {{ $testimonial->name }}</h2>
+        <a href="{{ route('admin.testimonials.index') }}" class="text-xs text-gray-500 hover:underline">Kembali</a>
+    </div>
+
+    <form action="{{ route('admin.testimonials.update', $testimonial->id) }}" method="POST" class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4 text-xs">
+        @csrf
+        @method('PUT')
+
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Nama Lengkap *</label>
+            <input type="text" name="name" value="{{ old('name', $testimonial->name) }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#703a3a]">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Peran / Jabatan *</label>
+                <input type="text" name="role" value="{{ old('role', $testimonial->role) }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#703a3a]">
+            </div>
+            <div>
+                <label class="block font-medium text-gray-700 mb-1">Institusi</label>
+                <input type="text" name="institution" value="{{ old('institution', $testimonial->institution) }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#703a3a]">
+            </div>
+        </div>
+
+        <div>
+            <label class="block font-medium text-gray-700 mb-1">Kutipan / Testimoni *</label>
+            <textarea name="quote" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#703a3a]">{{ old('quote', $testimonial->quote) }}</textarea>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 flex justify-end gap-3">
+            <a href="{{ route('admin.testimonials.index') }}" class="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50">Batal</a>
+            <button type="submit" class="px-5 py-2 bg-[#703a3a] text-white font-medium rounded-lg hover:bg-[#582d2d] shadow-sm">
+                Perbarui
+            </button>
+        </div>
+    </form>
+</div>
+@endsection
