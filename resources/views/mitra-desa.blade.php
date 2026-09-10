@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Mitra Desa — Panduan Bergabung Pengelola Destinasi & Komunitas Adat | Destinara')
-@section('meta_description', 'Buka pintu desa Anda untuk program edukasi dan riset yang menghormati adat warga. 100% manfaat langsung ke masyarakat desa tanpa potongan calo bersama Destinara.')
+@section('title', __('sections.for_villages.hero.title') . ' | Destinara')
+@section('meta_description', __('sections.for_villages.hero.subtitle'))
 @section('meta_keywords', 'mitra desa wisata, kemitraan desa adat, homestay desa nusantara, pemberdayaan warga desa, wisata edukasi desa, kearifan lokal desa, daftar mitra destinara')
 @section('og_image', asset('assets/img/hd/desa-serambi.jpg'))
 
@@ -14,19 +14,19 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Layanan",
+      "name": "{{ __('site.nav.services') }}",
       "item": "{{ url('/') }}#navigation"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Mitra Desa",
+      "name": "{{ __('site.nav.for_villages') }}",
       "item": "{{ route('for-villages') }}"
     }
   ]
@@ -47,35 +47,35 @@
       <section class="relative w-full py-space-3xl px-gutter-mobile md:px-gutter-desktop max-w-[1280px] mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
           <div class="lg:col-span-7 flex flex-col items-start pr-0 lg:pr-6">
-            @if($hero?->badge)
+            @if($hero?->badge || __('sections.for_villages.hero.badge'))
             <div class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-none bg-surface-container text-secondary mb-space-md sm:mb-space-lg border border-outline-variant/40 text-xs sm:text-sm">
               <span class="material-symbols-outlined text-[18px]">nature_people</span>
-              <span class="font-body-sm font-medium">{{ $hero->badge }}</span>
+              <span class="font-body-sm font-medium">{{ $hero?->badge ?? __('sections.for_villages.hero.badge') }}</span>
             </div>
             @endif
             <h1 class="font-headline-lg text-2xl sm:text-3xl md:text-4xl lg:text-headline-lg text-on-surface mb-space-sm sm:mb-space-md leading-tight">
-              {{ $hero?->title ?? 'Buka pintu desa Anda untuk ruang belajar yang menghormati warga' }}
+              {{ $hero?->title ?? __('sections.for_villages.hero.title') }}
             </h1>
             <p class="font-body-default text-sm sm:text-body-default text-on-surface-variant mb-space-lg sm:mb-space-xl max-w-2xl">
-              {{ $hero?->subtitle ?? 'Desa bukan tontonan yang riuh dan buru-buru. Bersama Destinara, mari hadirkan rombongan pelajar dan peneliti yang datang dengan niat tulus: mendengarkan petuah sesepuh, belajar merawat bumi, dan menjaga adat istiadat setempat.' }}
+              {{ $hero?->subtitle ?? __('sections.for_villages.hero.subtitle') }}
             </p>
             <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-space-md w-full sm:w-auto">
               <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center text-center whitespace-nowrap" href="{{ $hero?->button_link ?? '#formulir-kemitraan' }}">
-                {{ $hero?->button_text ?? 'Daftar sebagai Pengelola Destinasi' }}
+                {{ $hero?->button_text ?? __('sections.for_villages.hero.button_text') }}
               </a>
               <a class="rgs-btn rgs-btn-outline rounded-none inline-flex items-center justify-center gap-space-xs whitespace-nowrap" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_ryan', '6285774410978') }}?text={{ urlencode('Halo Ryan, kami pengelola desa ingin menanyakan kemitraan tapak Destinara.') }}" rel="noopener noreferrer" target="_blank">
                 <span class="material-symbols-outlined text-[20px]">chat</span>
-                <span>Tanya lewat WhatsApp</span>
+                <span>{{ __('sections.for_villages.hero.ask_whatsapp') }}</span>
               </a>
             </div>
             <div class="mt-space-md sm:mt-space-lg flex flex-wrap items-center gap-space-sm sm:gap-space-md text-on-surface-variant font-body-sm text-xs sm:text-sm">
               <div class="flex items-center gap-space-2xs">
                 <span class="material-symbols-outlined text-secondary text-[18px] sm:text-[20px]">check_circle</span>
-                <span>Bebas biaya pendaftaran</span>
+                <span>{{ __('sections.for_villages.hero.perk_free') }}</span>
               </div>
               <div class="flex items-center gap-space-2xs">
                 <span class="material-symbols-outlined text-secondary text-[18px] sm:text-[20px]">check_circle</span>
-                <span>Adat warga nomor satu</span>
+                <span>{{ __('sections.for_villages.hero.perk_custom') }}</span>
               </div>
             </div>
           </div>
@@ -84,10 +84,10 @@
           <div class="lg:col-span-5">
             <div class="rounded-none overflow-hidden border border-outline-variant/40 bg-surface-container shadow-none">
               <div class="relative">
-                <img class="w-full h-64 sm:h-[300px] lg:h-[340px] object-cover" alt="{{ $hero?->title ?? 'Tetua desa menyambut tamu' }}" src="{{ $hero?->image_url ?? asset('assets/img/hd/desa-serambi.jpg') }}"/>
+                <img class="w-full h-64 sm:h-[300px] lg:h-[340px] object-cover" alt="{{ $hero?->title ?? __('sections.for_villages.hero.title') }}" src="{{ $hero?->image_url ?? asset('assets/img/hd/desa-serambi.jpg') }}"/>
                 <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/30 to-transparent p-space-md sm:p-space-lg">
                   <p class="font-caption-fieldnote text-xs sm:text-caption-fieldnote text-surface italic">
-                    {{ $hero?->image_caption ?? 'Sambutan di serambi bale: silaturahmi yang bersahaja sebelum memulai penelusuran tapak.' }}
+                    {{ $hero?->image_caption ?? __('sections.for_villages.hero.image_caption') }}
                   </p>
                 </div>
               </div>
@@ -98,8 +98,8 @@
                   <span class="material-symbols-outlined text-[26px]">volunteer_activism</span>
                 </div>
                 <div>
-                  <p class="font-headline-sm text-lg sm:text-headline-sm text-on-surface font-semibold leading-tight">100% Manfaat Langsung</p>
-                  <p class="font-body-sm text-xs sm:text-body-sm text-on-surface-variant leading-relaxed">Penghasilan inap &amp; bimbingan mengalir langsung ke warga tanpa potongan calo.</p>
+                  <p class="font-headline-sm text-lg sm:text-headline-sm text-on-surface font-semibold leading-tight">{{ __('sections.for_villages.hero.benefit_title') }}</p>
+                  <p class="font-body-sm text-xs sm:text-body-sm text-on-surface-variant leading-relaxed">{{ __('sections.for_villages.hero.benefit_desc') }}</p>
                 </div>
               </div>
             </div>
@@ -120,11 +120,11 @@
                 <span class="material-symbols-outlined text-[36px]">format_quote</span>
               </div>
               <blockquote class="font-headline-md text-headline-md text-on-surface italic font-normal leading-relaxed mb-space-md text-lg md:text-xl font-serif">
-                “Warga kami tidak butuh keramaian yang menyisakan sampah. Yang membuat hati kami tentram adalah ketika anak-anak sekolah ini duduk bersila di tikar bambu, mencatat tutur leluhur, dan pamit dengan menundukkan kepala sebelum melangkah ke mata air kami.”
+                {{ __('sections.for_villages.elder_quote.quote') }}
               </blockquote>
               <div>
-                <p class="font-body-default text-body-default font-semibold text-on-surface">Pak Lurah Marto Suwito</p>
-                <p class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Tetua Adat &amp; Pengelola Wisata Edukasi Dusun Watu Klopo, Kulon Progo</p>
+                <p class="font-body-default text-body-default font-semibold text-on-surface">{{ __('sections.for_villages.elder_quote.author') }}</p>
+                <p class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">{{ __('sections.for_villages.elder_quote.role') }}</p>
               </div>
             </div>
           </div>
@@ -134,12 +134,12 @@
       <!-- Benefits Section: 3 Unboxed Cards with Bottom Demarcation Lines -->
       <section class="w-full py-space-3xl px-gutter-mobile md:px-gutter-desktop max-w-[1280px] mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-space-2xl">
-          <span class="text-secondary font-label-tag text-label-tag font-semibold">Keuntungan Menjadi Mitra</span>
+          <span class="text-secondary font-label-tag text-label-tag font-semibold">{{ __('sections.for_villages.benefits.tag') }}</span>
           <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-2xs">
-            Bekerja bersama demi ketenteraman kampung
+            {{ __('sections.for_villages.benefits.title') }}
           </h2>
           <p class="font-body-default text-body-default text-on-surface-variant mt-space-xs">
-            Kerjasama yang menempatkan kesepakatan warga desa di atas segalanya, dengan tata kelola yang transparan dan bersahaja.
+            {{ __('sections.for_villages.benefits.subtitle') }}
           </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
@@ -148,14 +148,14 @@
               <span class="material-symbols-outlined text-[32px]">handshake</span>
             </div>
             <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm font-semibold">
-              Tamu yang menghargai adat
+              {{ __('sections.for_villages.benefits.c1_title') }}
             </h3>
             <p class="font-body-default text-body-default text-on-surface-variant mb-space-md flex-1">
-              Sebelum berangkat, setiap pelajar dan pengajar diwajibkan mengikuti pembekalan tata krama. Mereka diajarkan berpakaian sopan, mematuhi larangan desa, serta tidak berbicara keras di dekat tempat sakral warga.
+              {{ __('sections.for_villages.benefits.c1_desc') }}
             </p>
             <div class="pt-space-md bg-surface-container-low p-space-md rounded-none border-l-2 border-l-secondary">
               <p class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">
-                “Bukan rombongan pelancong bising, melainkan tunas muda yang mau menimba ilmu kehidupan.”
+                {{ __('sections.for_villages.benefits.c1_note') }}
               </p>
             </div>
           </div>
@@ -165,14 +165,14 @@
               <span class="material-symbols-outlined text-[32px]">payments</span>
             </div>
             <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm font-semibold">
-              Pendapatan utuh tanpa perantara
+              {{ __('sections.for_villages.benefits.c2_title') }}
             </h3>
             <p class="font-body-default text-body-default text-on-surface-variant mb-space-md flex-1">
-              Seluruh biaya inap di rumah warga (homestay), hidangan dapur dusun, penyewaan sanggar, hingga honor tetua pembimbing dibayarkan langsung secara utuh tanpa ada potongan komisi sepeser pun dari kami.
+              {{ __('sections.for_villages.benefits.c2_desc') }}
             </p>
             <div class="pt-space-md bg-surface-container-low p-space-md rounded-none border-l-2 border-l-secondary">
               <p class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">
-                Kas masuk langsung ke kas rukun warga atau keluarga pengasuh rombongan secara terbuka.
+                {{ __('sections.for_villages.benefits.c2_note') }}
               </p>
             </div>
           </div>
@@ -182,14 +182,14 @@
               <span class="material-symbols-outlined text-[32px]">assignment_turned_in</span>
             </div>
             <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm font-semibold">
-              Dokumen &amp; perizinan diurus tuntas
+              {{ __('sections.for_villages.benefits.c3_title') }}
             </h3>
             <p class="font-body-default text-body-default text-on-surface-variant mb-space-md flex-1">
-              Pengelola desa tidak perlu pusing menyiapkan surat menyurat formal. Tim Destinara mengurus seluruh perizinan sekolah, dinas, perlindungan asuransi kesehatan siswa, serta protokol pertolongan pertama di lapangan.
+              {{ __('sections.for_villages.benefits.c3_desc') }}
             </p>
             <div class="pt-space-md bg-surface-container-low p-space-md rounded-none border-l-2 border-l-secondary">
               <p class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">
-                Warga fokus menjadi tuan rumah yang tenang, urusan administratif diselesaikan Destinara.
+                {{ __('sections.for_villages.benefits.c3_note') }}
               </p>
             </div>
           </div>
@@ -199,15 +199,15 @@
       <!-- Photo Banner Break -->
       <section class="w-full max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop my-space-lg">
         <div class="relative rounded-none overflow-hidden border border-outline-variant/30 h-80 bg-surface-container shadow-none">
-          <img class="w-full h-full object-cover" alt="Pemandangan pedesaan asri di kaki bukit hijau" src="{{ asset('assets/img/hd/desa-bukit.jpg') }}"/>
+          <img class="w-full h-full object-cover" alt="{{ __('sections.for_villages.banner.title') }}" src="{{ asset('assets/img/hd/desa-bukit.jpg') }}"/>
           <div class="absolute inset-0 bg-gradient-to-r from-inverse-surface/85 via-inverse-surface/50 to-transparent flex items-center p-space-xl md:p-space-2xl">
             <div class="max-w-xl">
-              <p class="text-secondary-fixed font-label-tag text-label-tag mb-space-xs">Harmoni Ruang dan Tradisi</p>
+              <p class="text-secondary-fixed font-label-tag text-label-tag mb-space-xs">{{ __('sections.for_villages.banner.tag') }}</p>
               <h3 class="font-headline-lg text-headline-lg text-surface mb-space-sm text-2xl md:text-3xl">
-                Kekayaan desa adalah pengetahuan, bukan komoditas sekali pakai
+                {{ __('sections.for_villages.banner.title') }}
               </h3>
               <p class="font-body-default text-body-default text-surface-container">
-                Kami menjaga agar sawah, mata air, dan balai adat Anda tetap tenang seperti sedia kala, seraya memberi manfaat nyata bagi kesejahteraan anak cucu.
+                {{ __('sections.for_villages.banner.desc') }}
               </p>
             </div>
           </div>
@@ -217,12 +217,12 @@
       <!-- How It Works Section: 4-step Stepper with Bottom Demarcation -->
       <section class="w-full py-space-3xl px-gutter-mobile md:px-gutter-desktop max-w-[1280px] mx-auto border-b border-outline-variant/30">
         <div class="text-center max-w-2xl mx-auto mb-space-2xl">
-          <span class="text-secondary font-label-tag text-label-tag font-semibold">Langkah Mudah</span>
+          <span class="text-secondary font-label-tag text-label-tag font-semibold">{{ __('sections.for_villages.steps.tag') }}</span>
           <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-2xs">
-            Empat langkah sederhana menjadi mitra
+            {{ __('sections.for_villages.steps.title') }}
           </h2>
           <p class="font-body-default text-body-default text-on-surface-variant mt-space-xs">
-            Tanpa formulir rumit atau istilah asing. Cukup obrolan akrab untuk saling mengenal dan memahami kebiasaan desa Anda.
+            {{ __('sections.for_villages.steps.subtitle') }}
           </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl relative">
@@ -233,10 +233,10 @@
               <span class="material-symbols-outlined text-outline text-[22px]">forum</span>
             </div>
             <h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs font-semibold">
-              Sapa &amp; ceritakan desa
+              {{ __('sections.for_villages.steps.s1_title') }}
             </h4>
             <p class="font-body-default text-body-default text-on-surface-variant">
-              Hubungi kami melalui WhatsApp santai. Ceritakan secara ringkas apa yang ada di desa: sawah terasering, kerajinan tangan, kesenian tutur, atau riwayat sejarah setempat.
+              {{ __('sections.for_villages.steps.s1_desc') }}
             </p>
           </div>
           <!-- Step 2 -->
@@ -246,10 +246,10 @@
               <span class="material-symbols-outlined text-outline text-[22px]">cottage</span>
             </div>
             <h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs font-semibold">
-              Kunjungan silaturahmi
+              {{ __('sections.for_villages.steps.s2_title') }}
             </h4>
             <p class="font-body-default text-body-default text-on-surface-variant">
-              Tim Destinara bertamu langsung ke balai desa atau rumah pengelola. Kita duduk bersama, minum teh hangat, dan mendengarkan harapan para sesepuh desa.
+              {{ __('sections.for_villages.steps.s2_desc') }}
             </p>
           </div>
           <!-- Step 3 -->
@@ -259,10 +259,10 @@
               <span class="material-symbols-outlined text-outline text-[22px]">policy</span>
             </div>
             <h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs font-semibold">
-              Sepakati aturan bersama
+              {{ __('sections.for_villages.steps.s3_title') }}
             </h4>
             <p class="font-body-default text-body-default text-on-surface-variant">
-              Warga menentukan sendiri batas zona sakral, jumlah maksimal tamu per kunjungan, serta aturan adat yang pantang dilanggar oleh rombongan pelajar.
+              {{ __('sections.for_villages.steps.s3_desc') }}
             </p>
           </div>
           <!-- Step 4 -->
@@ -272,10 +272,10 @@
               <span class="material-symbols-outlined text-secondary text-[22px]">groups</span>
             </div>
             <h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs font-semibold">
-              Sambut tamu perdana
+              {{ __('sections.for_villages.steps.s4_title') }}
             </h4>
             <p class="font-body-default text-body-default text-on-surface-variant">
-              Rombongan sekolah tiba dengan didampingi fasilitator Destinara. Anda dan warga bertindak sebagai guru kehidupan yang membagikan ilmu dengan bangga.
+              {{ __('sections.for_villages.steps.s4_desc') }}
             </p>
           </div>
         </div>
@@ -288,54 +288,54 @@
             <!-- Left: Form -->
             <div class="lg:col-span-7 bg-surface p-space-xl rounded-none border-l-4 border-l-primary border-t border-r border-b border-outline-variant/30 shadow-none">
               <div class="mb-space-lg">
-                <span class="text-secondary font-label-tag text-label-tag font-semibold">Formulir Sederhana</span>
+                <span class="text-secondary font-label-tag text-label-tag font-semibold">{{ __('sections.for_villages.form.tag') }}</span>
                 <h3 class="font-headline-md text-headline-md text-on-surface mt-space-2xs">
-                  Mulai silaturahmi dengan kami
+                  {{ __('sections.for_villages.form.title') }}
                 </h3>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">
-                  Isi keterangan singkat di bawah ini. Tim perwakilan kami di Sleman atau Jakarta akan membalas dengan ramah melalui telepon atau pesan WhatsApp.
+                  {{ __('sections.for_villages.form.subtitle') }}
                 </p>
               </div>
-              <form class="flex flex-col gap-space-md" id="mitraForm" onsubmit="event.preventDefault(); showToast('Keterangan desa diterima. Tim narahubung Destinara akan segera bersilaturahmi.', 'success'); this.reset();">
+              <form class="flex flex-col gap-space-md" id="mitraForm" onsubmit="event.preventDefault(); showToast('{{ addslashes(__('sections.for_villages.form.toast_success')) }}', 'success'); this.reset();">
                 <div>
                   <label class="block font-body-sm text-body-sm text-on-surface font-medium mb-space-2xs" for="namaLengkap">
-                    Nama Lengkap Anda
+                    {{ __('sections.for_villages.form.name_label') }}
                   </label>
-                  <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="namaLengkap" placeholder="Contoh: Pak Budi Santoso" required="" type="text"/>
+                  <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="namaLengkap" placeholder="{{ __('sections.for_villages.form.name_placeholder') }}" required="" type="text"/>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                   <div>
                     <label class="block font-body-sm text-body-sm text-on-surface font-medium mb-space-2xs" for="nomorHp">
-                      Nomor WhatsApp yang Aktif
+                      {{ __('sections.for_villages.form.phone_label') }}
                     </label>
-                    <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="nomorHp" placeholder="Contoh: 0812 3456 7890" required="" type="tel"/>
+                    <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="nomorHp" placeholder="{{ __('sections.for_villages.form.phone_placeholder') }}" required="" type="tel"/>
                   </div>
                   <div>
                     <label class="block font-body-sm text-body-sm text-on-surface font-medium mb-space-2xs" for="peranWarga">
-                      Peran di Desa
+                      {{ __('sections.for_villages.form.role_label') }}
                     </label>
                     <select class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="peranWarga">
-                      <option value="pengurus-pokdarwis">Pengurus Pokdarwis / Desa Wisata</option>
-                      <option value="aparatur-desa">Kepala Desa / Perangkat Desa</option>
-                      <option value="tetua-adat">Tokoh Masyarakat / Tetua Adat</option>
-                      <option value="warga-perseorangan">Warga / Pemilik Homestay</option>
+                      <option value="pengurus-pokdarwis">{{ __('sections.for_villages.form.role_pokdarwis') }}</option>
+                      <option value="aparatur-desa">{{ __('sections.for_villages.form.role_aparatur') }}</option>
+                      <option value="tetua-adat">{{ __('sections.for_villages.form.role_tetua') }}</option>
+                      <option value="warga-perseorangan">{{ __('sections.for_villages.form.role_warga') }}</option>
                     </select>
                   </div>
                 </div>
                 <div>
                   <label class="block font-body-sm text-body-sm text-on-surface font-medium mb-space-2xs" for="lokasiDesa">
-                    Nama Dusun, Desa, dan Kabupaten
+                    {{ __('sections.for_villages.form.location_label') }}
                   </label>
-                  <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="lokasiDesa" placeholder="Contoh: Dusun Watu Klopo, Desa Pendoworejo, Kulon Progo" required="" type="text"/>
+                  <input class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40" id="lokasiDesa" placeholder="{{ __('sections.for_villages.form.location_placeholder') }}" required="" type="text"/>
                 </div>
                 <div>
                   <label class="block font-body-sm text-body-sm text-on-surface font-medium mb-space-2xs" for="kegiatanKhas">
-                    Hal yang bisa dipelajari oleh siswa di desa Anda
+                    {{ __('sections.for_villages.form.activities_label') }}
                   </label>
-                  <textarea class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40 resize-none" id="kegiatanKhas" placeholder="Ceritakan singkat: misal bertani padi organik, membatik pewarna alami, gamelan, atau belajar merawat hutan adat..." rows="3"></textarea>
+                  <textarea class="w-full px-space-md py-space-sm rounded-none bg-surface text-on-surface font-body-default text-body-default focus:outline-none focus:border-primary shadow-none border border-outline-variant/40 resize-none" id="kegiatanKhas" placeholder="{{ __('sections.for_villages.form.activities_placeholder') }}" rows="3"></textarea>
                 </div>
                 <button class="rgs-btn rgs-btn-primary rounded-none w-full text-center py-space-sm cursor-pointer mt-space-xs" type="submit">
-                  Kirimkan Keterangan Desa Kami
+                  {{ __('sections.for_villages.form.submit_btn') }}
                 </button>
               </form>
             </div>
@@ -344,31 +344,31 @@
             <div class="lg:col-span-5 flex flex-col justify-between gap-space-lg">
               <div>
                 <h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-md font-semibold">
-                  Pertanyaan yang sering diajukan warga
+                  {{ __('sections.for_villages.faq.title') }}
                 </h4>
                 <div class="flex flex-col gap-space-md">
                   <div class="bg-surface p-space-md rounded-none border-b-2 border-[#8C5151]/25 hover:border-[#8C5151] transition-colors">
                     <p class="font-body-default text-body-default font-semibold text-on-surface mb-space-2xs">
-                      Apakah rumah warga harus mewah?
+                      {{ __('sections.for_villages.faq.q1') }}
                     </p>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">
-                      Sama sekali tidak. Rumah bambu atau kayu yang bersih, kasur beralas seprai rapi, dan kamar mandi higienis dengan air jernih sudah sangat memadai bagi kegiatan belajar santun ini.
+                      {{ __('sections.for_villages.faq.a1') }}
                     </p>
                   </div>
                   <div class="bg-surface p-space-md rounded-none border-b-2 border-[#8C5151]/25 hover:border-[#8C5151] transition-colors">
                     <p class="font-body-default text-body-default font-semibold text-on-surface mb-space-2xs">
-                      Berapa jumlah rombongan yang datang?
+                      {{ __('sections.for_villages.faq.q2') }}
                     </p>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">
-                      Kami membatasi kelompok kecil (biasanya 15 hingga 30 siswa) agar tidak membebani daya tampung desa dan tidak mengganggu ketenangan tetangga sekitar.
+                      {{ __('sections.for_villages.faq.a2') }}
                     </p>
                   </div>
                   <div class="bg-surface p-space-md rounded-none border-b-2 border-[#8C5151]/25 hover:border-[#8C5151] transition-colors">
                     <p class="font-body-default text-body-default font-semibold text-on-surface mb-space-2xs">
-                      Bagaimana jika ada aturan tabu di desa?
+                      {{ __('sections.for_villages.faq.q3') }}
                     </p>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">
-                      Aturan adat Anda mutlak dihormati. Batasan tersebut dicantumkan dalam buku panduan siswa dan fasilitator kami akan mengawal langsung selama kegiatan berjalan.
+                      {{ __('sections.for_villages.faq.a3') }}
                     </p>
                   </div>
                 </div>
@@ -378,9 +378,9 @@
                 <div class="flex items-center gap-space-sm">
                   <span class="material-symbols-outlined text-secondary text-[24px]">support_agent</span>
                   <div>
-                    <p class="font-body-sm text-body-sm font-semibold text-on-surface">Lebih nyaman berbicara langsung?</p>
+                    <p class="font-body-sm text-body-sm font-semibold text-on-surface">{{ __('sections.for_villages.faq.talk_direct_title') }}</p>
                     <p class="font-body-sm text-body-sm text-on-surface-variant">
-                      Hubungi <a href="https://wa.me/6285774410978?text={{ urlencode('Halo Ryan, kami pengelola desa ingin menanyakan kemitraan tapak Destinara.') }}" target="_blank" rel="noopener" class="text-primary font-semibold hover:underline">Mas Ryan di +62 857-7441-0978</a>
+                      {!! __('sections.for_villages.faq.talk_direct_desc', ['name' => '<a href="https://wa.me/' . \App\Models\SiteSetting::get('contact_whatsapp_ryan', '6285774410978') . '?text=' . urlencode('Halo Ryan, kami pengelola desa ingin menanyakan kemitraan tapak Destinara.') . '" target="_blank" rel="noopener" class="text-primary font-semibold hover:underline">Mas Ryan</a>', 'phone' => '+62 857-7441-0978']) !!}
                     </p>
                   </div>
                 </div>
@@ -397,22 +397,22 @@
             <span class="material-symbols-outlined text-[32px]">door_front</span>
           </div>
           <h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-md text-2xl md:text-3xl lg:text-headline-lg">
-            Mari bersama-sama menjaga marwah dan kelestarian tanah leluhur
+            {{ __('sections.for_villages.cta.title') }}
           </h2>
           <p class="font-body-lead text-body-lead text-on-surface-variant mb-space-2xl max-w-2xl">
-            Bimbing generasi penerus bangsa untuk mengerti arti gotong royong, menghargai pangan dari tanah sendiri, dan memuliakan petuah tetua desa Anda.
+            {{ __('sections.for_villages.cta.desc') }}
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-space-md w-full sm:w-auto">
             <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center text-center w-full sm:w-auto" href="#formulir-kemitraan">
-              Daftar sebagai Pengelola Destinasi
+              {{ __('sections.for_villages.cta.btn_register') }}
             </a>
-            <a class="rgs-btn rgs-btn-outline rounded-none inline-flex items-center justify-center gap-space-xs w-full sm:w-auto" href="https://wa.me/6285774410978?text={{ urlencode('Halo Ryan, kami pengelola desa ingin mendaftarkan destinasi kami.') }}" rel="noopener noreferrer" target="_blank">
+            <a class="rgs-btn rgs-btn-outline rounded-none inline-flex items-center justify-center gap-space-xs w-full sm:w-auto" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_ryan', '6285774410978') }}?text={{ urlencode('Halo Ryan, kami pengelola desa ingin mendaftarkan destinasi kami.') }}" rel="noopener noreferrer" target="_blank">
               <span class="material-symbols-outlined text-[20px]">chat</span>
-              <span>Tanya Lewat WhatsApp</span>
+              <span>{{ __('sections.for_villages.cta.btn_whatsapp') }}</span>
             </a>
           </div>
           <p class="font-caption-fieldnote text-caption-fieldnote text-on-surface-variant italic mt-space-lg">
-            Pendampingan ramah lapangan oleh narahubung lokal Destinara di Daerah Istimewa Yogyakarta, Jawa Tengah, Jawa Barat, dan Bali.
+            {{ __('sections.for_villages.cta.note') }}
           </p>
         </div>
       </section>

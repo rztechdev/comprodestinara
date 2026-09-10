@@ -6,6 +6,7 @@ use App\Http\Controllers\StoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LegalDocumentController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\StoryController as AdminStoryController;
@@ -19,6 +20,9 @@ use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController
 use App\Models\Destination;
 use App\Models\Story;
 use Illuminate\Support\Facades\Route;
+
+// ==================== PENGALIHAN BAHASA (LANGUAGE SWITCHER) ====================
+Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
 // ==================== HALAMAN PUBLIK ====================
 Route::get('/', [HomeController::class, 'index'])->name('home');

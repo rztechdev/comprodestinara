@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initMobileMenu();
   initActiveNavLink();
   initBackToTop();
@@ -12,6 +13,85 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initDossierModals();
 });
+
+/* ==========================================================================
+   0. Light Mode & Dark Mode System
+   ========================================================================== */
+function initThemeToggle() {
+  const desktopBtn = document.getElementById('themeToggleBtn');
+  const mobileBtn = document.getElementById('mobileThemeToggleBtn');
+  const drawerBtn = document.getElementById('drawerThemeToggleBtn');
+
+  function isDarkMode() {
+    return document.documentElement.classList.contains('dark');
+  }
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('destinara-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('destinara-theme', 'light');
+    }
+    updateToggleButtons(theme === 'dark');
+    window.dispatchEvent(new CustomEvent('destinara-theme-changed', { detail: { theme } }));
+  }
+
+  function toggleTheme() {
+    const nextTheme = isDarkMode() ? 'light' : 'dark';
+    applyTheme(nextTheme);
+  }
+
+  function updateToggleButtons(isDark) {
+    const buttons = [desktopBtn, mobileBtn, drawerBtn].filter(Boolean);
+    buttons.forEach((btn) => {
+      const sunIcon = btn.querySelector('.theme-icon-light');
+      const moonIcon = btn.querySelector('.theme-icon-dark');
+      
+      btn.setAttribute('aria-label', isDark ? 'Beralih ke Mode Terang (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
+      btn.setAttribute('title', isDark ? 'Beralih ke Mode Terang' : 'Beralih ke Mode Gelap');
+
+      if (sunIcon && moonIcon) {
+        if (isDark) {
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+        } else {
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+        }
+      }
+    });
+  }
+
+  // Initial sync with active DOM state
+  updateToggleButtons(isDarkMode());
+
+  // Attach click listeners to all buttons
+  [desktopBtn, mobileBtn, drawerBtn].filter(Boolean).forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleTheme();
+    });
+  });
+
+  // Listen for OS system preference changes if user hasn't set an explicit preference
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const stored = localStorage.getItem('destinara-theme');
+      if (!stored) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+
+  // Synchronize across tabs and between public website, login, and admin panel
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'destinara-theme') {
+      applyTheme(e.newValue);
+    }
+  });
+}
 
 /* ==========================================================================
    1. Mobile Navigation Menu Drawer
@@ -320,10 +400,10 @@ window.showToast = function(message, type = 'success') {
   toast.innerHTML = `
     <span class="material-symbols-outlined ${iconColor} text-[24px] flex-shrink-0">${icon}</span>
     <div class="flex-1">
-      <p class="font-semibold text-sm text-[#231917] mb-0.5">${type === 'success' ? 'Pemberitahuan Berhasil' : 'Informasi'}</p>
-      <p class="text-xs text-[#524343] leading-relaxed">${message}</p>
+      <p class="font-semibold text-sm text-on-surface mb-0.5">${type === 'success' ? 'Pemberitahuan Berhasil' : 'Informasi'}</p>
+      <p class="text-xs text-on-surface-variant leading-relaxed">${message}</p>
     </div>
-    <button class="text-[#847372] hover:text-[#231917] p-1 text-sm font-bold ml-1" onclick="this.parentElement.remove()">✕</button>
+    <button class="text-outline hover:text-on-surface p-1 text-sm font-bold ml-1 cursor-pointer" onclick="this.parentElement.remove()">✕</button>
   `;
 
   container.appendChild(toast);

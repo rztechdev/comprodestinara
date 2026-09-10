@@ -26,10 +26,16 @@ class TeamMember extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true)->orderBy('order')->orderBy('id');
     }
+
+    public function getRoleAttribute($value) { return $this->getLocalized('role'); }
+    public function getAffiliationAttribute($value) { return $this->getLocalized('affiliation'); }
+    public function getBioAttribute($value) { return $this->getLocalized('bio'); }
 
     public function getPhotoUrlAttribute(): string
     {

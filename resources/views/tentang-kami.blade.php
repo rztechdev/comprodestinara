@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami — Jejak Cerita Pendiri & Nilai Dasar Inisiatif | Destinara')
-@section('meta_description', 'Mengenal visi, manifesto, dan dedikasi Destinara dalam menghidupkan ruang belajar berbasis komunitas adat dan kedaulatan pengetahuan lokal di seluruh Indonesia.')
+@section('title', __('site.nav.about') . ' — ' . __('sections.about.hero.badge') . ' | Destinara')
+@section('meta_description', __('sections.about.hero.title'))
 @section('meta_keywords', 'tentang destinara, profil destinara, pt destinara chakrawal artha, inisiatif pendidikan tapak, pendiri destinara, pelestarian budaya nusantara')
 @section('og_image', asset('assets/img/hd/hero-about.jpg'))
 
@@ -14,13 +14,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Tentang Kami",
+      "name": "{{ __('site.nav.about') }}",
       "item": "{{ route('about') }}"
     }
   ]
@@ -108,9 +108,9 @@
           <!-- Micro Metrics — RGS Line-Delimited Items -->
           @php
             $manifestoItems = $manifesto?->items ?? [
-                ['stat' => '12 Orang', 'desc' => 'Batas ketat daya tampung per kelompok guna menekan beban ekologis tapak.'],
-                ['stat' => '100% FPIC', 'desc' => 'Persetujuan awal tanpa paksaan (Free Prior Informed Consent) bersama dewan musyawarah desa mitra.'],
-                ['stat' => '48 Jam', 'desc' => 'Waktu orientasi hening tanpa gawai sebelum kegiatan riset lapangan dimulai.']
+                ['stat' => __('sections.about.manifesto.stat1'), 'desc' => __('sections.about.manifesto.desc1')],
+                ['stat' => __('sections.about.manifesto.stat2'), 'desc' => __('sections.about.manifesto.desc2')],
+                ['stat' => __('sections.about.manifesto.stat3'), 'desc' => __('sections.about.manifesto.desc3')]
             ];
           @endphp
           <div class="mt-14 w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8 rgs-grid-connected-alt">
@@ -146,10 +146,10 @@
                 <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-1">notes</span>
                 <div>
                   <p class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface leading-relaxed">
-                    “Beban terbesar pariwisata edukasi konvensional adalah kecenderungan menjadikan kehidupan pedesaan sekadar tontonan akhir pekan, bukan ekosistem hidup yang memiliki ritme dan martabatnya sendiri.”
+                    {{ __('sections.about.founder_story.quote') }}
                   </p>
                   <span class="font-label-tag text-xs text-on-surface-variant mt-2 block font-semibold">
-                    Catatan Lapangan Ryan Prasetya, November 2018
+                    {{ __('sections.about.founder_story.quote_author') }}
                   </span>
                 </div>
               </div>
@@ -194,13 +194,13 @@
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
           <div class="max-w-2xl mb-12">
             <span class="text-xs font-bold uppercase tracking-widest text-primary block mb-2">
-              DEWAN PENGGAGAS &amp; PENJAGA TAPAK
+              {{ __('sections.about.team.tag') }}
             </span>
             <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface tracking-tight">
-              Pribadi di Balik Percakapan Lapangan
+              {{ __('sections.about.team.title') }}
             </h2>
             <p class="font-body-default text-base text-on-surface-variant mt-2 leading-relaxed">
-              Menggabungkan ketelitian metodologi akademis dengan kepekaan kultural yang diasah bertahun-tahun di tanah perjumpaan.
+              {{ __('sections.about.team.subtitle') }}
             </p>
           </div>
           
@@ -237,7 +237,7 @@
                 </div>
               </div>
             @empty
-              <p class="text-on-surface-variant col-span-2 text-center py-8">Belum ada anggota kurator terdaftar.</p>
+              <p class="text-on-surface-variant col-span-2 text-center py-8">{{ __('sections.about.team.empty') }}</p>
             @endforelse
           </div>
         </div>
@@ -247,20 +247,20 @@
       <section class="w-full bg-surface-container-low py-16 sm:py-20 lg:py-24 relative overflow-hidden">
         <div class="max-w-[760px] mx-auto px-gutter-mobile md:px-gutter-desktop text-center flex flex-col items-center">
           <span class="text-xs font-bold uppercase tracking-widest text-primary mb-2">
-            {{ $gov?->badge ?? 'PINTU KAMI SELALU TERBUKA' }}
+            {{ $gov?->badge ?? __('sections.about.cta.badge') }}
           </span>
           <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface tracking-tight">
-            {{ $gov?->title ?? 'Mari Duduk dan Bercerita' }}
+            {{ $gov?->title ?? __('sections.about.cta.title') }}
           </h2>
           <p class="font-body-default text-base text-on-surface-variant mt-3 max-w-xl leading-relaxed">
-            {{ $gov?->subtitle ?? 'Apakah Anda seorang pendidik yang ingin memperkaya ruang kelas dengan realitas lapangan, atau peneliti yang mencari ruang belajar beretika? Kami mengundang Anda untuk bertukar pikiran bersama kami.' }}
+            {{ $gov?->subtitle ?? __('sections.about.cta.subtitle') }}
           </p>
           <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             <a class="rgs-btn rgs-btn-primary w-full sm:w-auto text-center" href="{{ $gov?->button_link ?? route('contact.index') }}">
-              <span>{{ $gov?->button_text ?? 'Kirim Pesan ke Tim Destinara' }}</span>
+              <span>{{ $gov?->button_text ?? __('sections.about.cta.button_text') }}</span>
             </a>
             <a class="rgs-btn rgs-btn-outline w-full sm:w-auto text-center" href="{{ route('destinations.index') }}">
-              <span>Jelajahi Wilayah Dampingan</span>
+              <span>{{ __('site.common.explore_destinations') }}</span>
             </a>
           </div>
         </div>

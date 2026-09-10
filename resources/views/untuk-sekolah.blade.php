@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Untuk Sekolah — Program Edukasi, Study Tour Resmi & Live-In Budaya | Destinara')
-@section('meta_description', 'Panduan program kunjungan belajar, study tour resmi berdokumen legal, dan live-in edukatif di desa adat bagi institusi sekolah dari SD hingga SMA bersama Destinara.')
+@section('title', __('sections.for_schools.hero.title') . ' — Destinara')
+@section('meta_description', __('sections.for_schools.hero.subtitle'))
 @section('meta_keywords', 'study tour resmi berizin, field trip sekolah, live in desa adat, edukasi budaya nusantara, wisata edukasi sekolah, kurikulum lapangan, destinara sekolah')
 @section('og_image', asset('assets/img/hd/hero-fieldwork.jpg'))
 
@@ -14,19 +14,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Layanan",
-      "item": "{{ url('/') }}#navigation"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Untuk Sekolah",
+      "name": "{{ __('site.nav.for_schools_full') }}",
       "item": "{{ route('for-schools') }}"
     }
   ]
@@ -58,33 +52,33 @@
               </span>
               @endif
               <h1 class="font-display-hero text-2xl sm:text-4xl md:text-5xl text-on-surface tracking-tight leading-tight">
-                {{ $hero?->title ?? 'Study tour yang terencana, aman, dan berdokumen resmi' }}
+                {{ $hero?->title ?? __('sections.for_schools.hero.title') }}
               </h1>
               <p class="font-body-lead text-base sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
-                {{ $hero?->subtitle ?? 'Menjawab kepatuhan penuh terhadap regulasi dinas pendidikan serta mengintegrasikan capaian Silabus Kurikulum Merdeka ke dalam ekosistem perdesaan yang autentik.' }}
+                {{ $hero?->subtitle ?? __('sections.for_schools.hero.subtitle') }}
               </p>
               <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto">
                 <a class="rgs-btn rgs-btn-primary text-center" href="{{ $hero?->button_link ?? '#konsultasi' }}">
-                  <span>{{ $hero?->button_text ?? 'Konsultasikan Kunjungan Sekolah' }}</span>
+                  <span>{{ $hero?->button_text ?? __('sections.for_schools.hero.button_text') }}</span>
                 </a>
                 <div class="flex items-center gap-2 text-secondary font-body-sm text-sm font-semibold">
                   <span class="material-symbols-outlined text-secondary text-[20px]">verified_user</span>
-                  <span>Dokumen dinas terverifikasi</span>
+                  <span>{{ __('site.common.verified_docs') }}</span>
                 </div>
               </div>
               <!-- Institutional Trust Strip -->
               <div class="pt-4 flex flex-wrap items-center gap-4 text-xs font-semibold uppercase tracking-wider text-secondary font-sans border-t border-[#2B211E]/10 w-full">
                 <div class="flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-primary text-[18px]">gavel</span>
-                  <span>MoU legal &amp; izin wilayah</span>
+                  <span>{{ __('site.common.legal_mou') }}</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-primary text-[18px]">health_and_safety</span>
-                  <span>Rasio pendamping 1:8</span>
+                  <span>{{ __('sections.for_schools.values.v2_title') }}</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-primary text-[18px]">receipt_long</span>
-                  <span>Draf LPJ siap inspeksi</span>
+                  <span>{{ __('sections.for_schools.cta_schools.inspection_draft') }}</span>
                 </div>
               </div>
             </div>
@@ -128,10 +122,10 @@
           
           @php
             $benefitItems = $benefits?->items ?? [
-                ['icon' => 'verified_user', 'title' => 'Kepatuhan Regulasi Dinas', 'desc' => 'Kelengkapan administrasi resmi mencakup izin dinas pendidikan, surat rekomendasi wilayah, dan MoU berpayung hukum legal.'],
-                ['icon' => 'menu_book', 'title' => 'Modul Silabus Tematik Terpadu', 'desc' => 'Materi disesuaikan dengan jenjang SMP/SMA: P5 Gaya Hidup Berkelanjutan, Kearifan Lokal, dan Rekayasa Teknologi Sederhana.'],
-                ['icon' => 'health_and_safety', 'title' => 'Protokol Keamanan & Mitigasi Rasio 1:8', 'desc' => 'Setiap 8 siswa didampingi oleh 1 fasilitator bersertifikasi pertolongan pertama (First Aid) dan relawan pemandu tapak desa.'],
-                ['icon' => 'receipt_long', 'title' => 'Laporan Pertanggungjawaban Rapi', 'desc' => 'Format pelaporan keuangan dan capaian belajar siap audit, dilengkapi portofolio lembar kerja refleksi siswa.']
+                ['icon' => 'verified_user', 'title' => __('sections.for_schools.values.v1_title'), 'desc' => __('sections.for_schools.values.v1_desc')],
+                ['icon' => 'menu_book', 'title' => __('sections.for_schools.values.v3_title'), 'desc' => __('sections.for_schools.values.v3_desc')],
+                ['icon' => 'health_and_safety', 'title' => __('sections.for_schools.values.v2_title'), 'desc' => __('sections.for_schools.values.v2_desc')],
+                ['icon' => 'receipt_long', 'title' => __('sections.for_schools.values.v4_title'), 'desc' => __('sections.for_schools.values.v4_desc')]
             ];
           @endphp
 
@@ -160,22 +154,22 @@
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
           <div class="max-w-2xl mb-12">
             <span class="text-xs font-bold uppercase tracking-widest text-secondary block mb-2">
-              {{ $flow?->badge ?? 'ALUR KEMITRAAN SEKOLAH' }}
+              {{ $flow?->badge ?? __('sections.for_schools.flow.tag') }}
             </span>
             <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface">
-              {{ $flow?->title ?? 'Bagaimana prosesnya' }}
+              {{ $flow?->title ?? __('sections.for_schools.flow.title') }}
             </h2>
             <p class="font-body-default text-base text-on-surface-variant mt-2 leading-relaxed">
-              {{ $flow?->subtitle ?? 'Empat tahapan terstruktur mendampingi bapak dan ibu guru sejak perumusan gagasan hingga pelaporan akhir selesai.' }}
+              {{ $flow?->subtitle ?? __('sections.for_schools.flow.subtitle') }}
             </p>
           </div>
 
           @php
             $flowItems = $flow?->items ?? [
-                ['step' => '01', 'title' => 'Konsultasi kebutuhan silabus', 'desc' => 'Pemetaan topik mata pelajaran, jenjang kelas, target profil pelajar, dan penyesuaian batasan anggaran sekolah bersama tim kurikuler kami.'],
-                ['step' => '02', 'title' => 'Penyesuaian jadwal & kalender desa', 'desc' => 'Sinkronisasi kalender akademik sekolah dengan dinamika panen atau ritus adat komunitas desa demi pengalaman belajar yang autentik dan aman.'],
-                ['step' => '03', 'title' => 'Pembekalan pra-keberangkatan', 'desc' => 'Sosialisasi daring bagi orang tua wali, pembekalan tata krama desa bagi siswa, serta pembagian panduan logistik rinci kepada guru pendamping.'],
-                ['step' => '04', 'title' => 'Pelaksanaan terpandu & refleksi', 'desc' => 'Eksplorasi di bawah panduan fasilitator lapangan, pengisian lembar refleksi malam, penyerahan kenang-kenangan, dan penyusunan draf berkas evaluasi.']
+                ['step' => '01', 'title' => __('sections.for_schools.flow.s1_title'), 'desc' => __('sections.for_schools.flow.s1_desc')],
+                ['step' => '02', 'title' => __('sections.for_schools.flow.s2_title'), 'desc' => __('sections.for_schools.flow.s2_desc')],
+                ['step' => '03', 'title' => __('sections.for_schools.flow.s3_title'), 'desc' => __('sections.for_schools.flow.s3_desc')],
+                ['step' => '04', 'title' => __('sections.for_schools.flow.s4_title'), 'desc' => __('sections.for_schools.flow.s4_desc')]
             ];
           @endphp
 
@@ -205,35 +199,35 @@
           <div class="grid grid-cols-12 gap-10 lg:gap-14 items-center">
             <div class="col-span-12 lg:col-span-7 flex flex-col gap-4">
               <span class="text-xs font-bold uppercase tracking-widest text-primary">
-                {{ $cta?->badge ?? 'KONSULTASI AWAL BEBAS BIAYA' }}
+                {{ $cta?->badge ?? __('sections.for_schools.cta_schools.badge') }}
               </span>
               <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-[34px] text-on-surface leading-snug">
-                {{ $cta?->title ?? 'Rencanakan agenda kunjungan sekolah bapak dan ibu bersama kurator kami' }}
+                {{ $cta?->title ?? __('sections.for_schools.cta_schools.title') }}
               </h2>
               <p class="font-body-lead text-base text-on-surface-variant max-w-2xl leading-relaxed">
-                {{ $cta?->subtitle ?? 'Luangkan waktu 20 menit untuk mendiskusikan pemetaan kurikulum, jadwal kalender akademik semester depan, serta gambaran rancangan anggaran sekolah.' }}
+                {{ $cta?->subtitle ?? __('sections.for_schools.cta_schools.subtitle') }}
               </p>
             </div>
             <div class="col-span-12 lg:col-span-5 flex flex-col">
               <div class="bg-surface rounded-none border-l-4 border-l-[#8C5151] border-y border-r border-[#2B211E]/15 p-6 sm:p-8 flex flex-col gap-4 shadow-xs">
                 <div>
-                  <p class="font-headline-sm text-xl text-on-surface font-bold">Jadwalkan Audiensi</p>
-                  <p class="font-body-sm text-sm text-on-surface-variant">Sesi daring langsung bersama tim kurikulum Destinara.</p>
+                  <p class="font-headline-sm text-xl text-on-surface font-bold">{{ __('sections.for_schools.cta_schools.schedule_title') }}</p>
+                  <p class="font-body-sm text-sm text-on-surface-variant">{{ __('sections.for_schools.cta_schools.schedule_subtitle') }}</p>
                 </div>
                 <form class="flex flex-col gap-3" action="{{ route('contact.send') }}" method="POST">
                   @csrf
-                  <input type="hidden" name="topic" value="Kemitraan Sekolah / Study Tour">
+                  <input type="hidden" name="topic" value="{{ __('sections.for_schools.hero.title') }}">
                   <div class="flex flex-col gap-1">
-                    <label class="font-body-sm text-xs font-semibold text-on-surface" for="full_name">Nama Lengkap &amp; Sekolah <span class="text-primary">*</span></label>
-                    <input class="w-full px-3 py-2 rounded-none bg-surface-container-lowest text-on-surface text-sm border border-[#2B211E]/20 focus:border-primary outline-none" id="full_name" name="full_name" placeholder="Contoh: Dra. Sri Wahyuni - SMA Negeri 3" required type="text"/>
+                    <label class="font-body-sm text-xs font-semibold text-on-surface" for="full_name">{{ __('site.form.full_name') }} <span class="text-primary">*</span></label>
+                    <input class="w-full px-3 py-2 rounded-none bg-surface-container-lowest text-on-surface text-sm border border-[#2B211E]/20 focus:border-primary outline-none" id="full_name" name="full_name" placeholder="{{ __('site.form.full_name_placeholder') }}" required type="text"/>
                   </div>
-                  <input type="hidden" name="institution" value="Institusi Sekolah">
+                  <input type="hidden" name="institution" value="{{ __('site.form.institution') }}">
                   <div class="flex flex-col gap-1">
-                    <label class="font-body-sm text-xs font-semibold text-on-surface" for="whatsapp">Nomor WhatsApp PIC / Kepala Sekolah <span class="text-primary">*</span></label>
-                    <input class="w-full px-3 py-2 rounded-none bg-surface-container-lowest text-on-surface text-sm border border-[#2B211E]/20 focus:border-primary outline-none" id="whatsapp" name="whatsapp" placeholder="0812-xxxx-xxxx" required type="tel"/>
+                    <label class="font-body-sm text-xs font-semibold text-on-surface" for="whatsapp">{{ __('site.form.whatsapp') }} <span class="text-primary">*</span></label>
+                    <input class="w-full px-3 py-2 rounded-none bg-surface-container-lowest text-on-surface text-sm border border-[#2B211E]/20 focus:border-primary outline-none" id="whatsapp" name="whatsapp" placeholder="{{ __('site.form.whatsapp_placeholder') }}" required type="tel"/>
                   </div>
                   <button class="mt-2 w-full rgs-btn rgs-btn-primary" type="submit">
-                    <span>{{ $cta?->button_text ?? 'Ajukan Waktu Diskusi' }}</span>
+                    <span>{{ $cta?->button_text ?? __('sections.for_schools.cta_schools.submit_btn') }}</span>
                   </button>
                 </form>
               </div>

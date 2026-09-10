@@ -33,10 +33,10 @@ class ContactController extends Controller
         if ($request->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Pesan berhasil terkirim. Narahubung kurikulum kami akan segera menghubungi Anda.',
+                'message' => __('site.form.success_msg'),
             ]);
         }
 
-        return redirect()->back()->with('success', 'Pesan Anda telah berhasil terkirim ke Tim Destinara! Kami akan segera menghubungi nomor WhatsApp Anda.');
+        return redirect()->back()->with('success', __('site.form.success_msg'));
     }
 }

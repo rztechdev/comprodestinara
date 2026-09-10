@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Destinara — Menghidupkan Ruang Belajar Nyata di Tapak Nusantara')
-@section('meta_description', 'Destinara menghubungkan institusi pendidikan, sekolah, dan peneliti dengan desa adat di seluruh Nusantara melalui program field trip berizin, live-in kurikulum tapak, dan riset berbasis kedaulatan pengetahuan lokal.')
+@section('title', 'Destinara — ' . __('sections.home.hero.title'))
+@section('meta_description', __('sections.home.hero.subtitle'))
 @section('meta_keywords', 'destinara, wisata edukasi nusantara, field trip sekolah, study tour berizin, live in desa, riset antropologi, penelitian tapak, kearifan lokal, kemitraan desa wisata, etnobotani, layanan destinara')
 @section('og_image', asset('assets/img/hd/hero-home.jpg'))
 
@@ -82,13 +82,13 @@
         <!-- Section Header -->
         <div class="max-w-[800px] mb-8 sm:mb-10">
           <span class="text-xs font-bold uppercase tracking-widest text-primary block mb-2">
-            PINTU AKSES BERDASARKAN KEBUTUHAN
+            {{ __('sections.home.gateways.tag') }}
           </span>
           <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface leading-snug">
-            Dirancang Sesuai Tanggung Jawab &amp; Standar Institusi Anda
+            {{ __('sections.home.gateways.title') }}
           </h2>
           <p class="mt-3 font-body-default text-on-surface-variant leading-relaxed">
-            Setiap kelompok pemangku kepentingan memiliki kebutuhan, tata kelola, dan tolok ukur capaian yang berbeda. Pilih jalur yang relevan dengan mandat Anda:
+            {{ __('sections.home.gateways.subtitle') }}
           </p>
         </div>
 
@@ -101,10 +101,10 @@
               <!-- Header Gambar dengan Category Tag Pinned di Kiri Atas -->
               <div class="relative w-full h-[220px] overflow-hidden bg-surface-container">
                 <span class="rgs-category-tag bg-[#8C5151] absolute top-3 left-0 z-10">
-                  Untuk Sekolah &amp; Madrasah
+                  {{ __('sections.home.gateways.school_tag') }}
                 </span>
                 <img src="{{ asset('assets/img/hd/story-ulin.jpg') }}" 
-                     alt="Program Sekolah Destinara" 
+                     alt="{{ __('sections.home.gateways.school_title') }}" 
                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-103"/>
                 <div class="absolute inset-0 bg-[#231917]/20 pointer-events-none"></div>
               </div>
@@ -112,25 +112,25 @@
               <!-- Content (Flush, Flat & Editorial) -->
               <div class="pt-5 pb-3 flex flex-col gap-3">
                 <h3 class="font-headline-sm text-xl sm:text-[22px] text-on-surface font-bold">
-                  Ekskursi &amp; Live-in Siswa
+                  {{ __('sections.home.gateways.school_title') }}
                 </h3>
                 <p class="font-body-default text-[15px] sm:text-[16px] text-on-surface-variant leading-relaxed">
-                  Pendidikan karakter kontekstual yang terhubung dengan silabus Kurikulum Merdeka (P5), dilengkapi rasio pendamping aman, SOP medis, dan perlindungan asuransi penuh.
+                  {{ __('sections.home.gateways.school_desc') }}
                 </p>
 
                 <!-- Checklist Detail -->
                 <div class="mt-2 pt-3 border-t border-[#2B211E]/10 space-y-2 text-sm text-on-surface font-body-sm">
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Modul tematik P5 &amp; kearifan lokal</span>
+                    <span>{{ __('sections.home.gateways.school_item1') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Rasio pendamping ketat 1 fasilitator : 8 siswa</span>
+                    <span>{{ __('sections.home.gateways.school_item2') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Lembar asesmen capaian belajar pasca-program</span>
+                    <span>{{ __('sections.home.gateways.school_item3') }}</span>
                   </div>
                 </div>
               </div>
@@ -140,7 +140,7 @@
             <div class="pt-4">
               <a href="{{ route('for-schools') }}" 
                  class="rgs-btn rgs-btn-primary w-full text-center">
-                <span>Pelajari Program Sekolah</span>
+                <span>{{ __('sections.home.gateways.school_btn') }}</span>
               </a>
             </div>
           </div>
@@ -151,10 +151,10 @@
               <!-- Header Gambar dengan Category Tag Pinned di Kiri Atas -->
               <div class="relative w-full h-[220px] overflow-hidden bg-surface-container">
                 <span class="rgs-category-tag bg-[#51634b] absolute top-3 left-0 z-10">
-                  Untuk Dosen &amp; Peneliti
+                  {{ __('sections.home.gateways.research_tag') }}
                 </span>
                 <img src="{{ asset('assets/img/hd/story-sikka.jpg') }}" 
-                     alt="Program Peneliti Destinara" 
+                     alt="{{ __('sections.home.gateways.research_title') }}" 
                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-103"/>
                 <div class="absolute inset-0 bg-[#231917]/20 pointer-events-none"></div>
               </div>
@@ -162,25 +162,25 @@
               <!-- Content (Flush, Flat & Editorial) -->
               <div class="pt-5 pb-3 flex flex-col gap-3">
                 <h3 class="font-headline-sm text-xl sm:text-[22px] text-on-surface font-bold">
-                  Laboratorium Hidup &amp; KKL
+                  {{ __('sections.home.gateways.research_title') }}
                 </h3>
                 <p class="font-body-default text-[15px] sm:text-[16px] text-on-surface-variant leading-relaxed">
-                  Stasiun riset tapak bagi dosen dan mahasiswa dengan protokol etika FPIC, akses ke narasumber tetua adat terverifikasi, dan akomodasi riset berbasis komunitas.
+                  {{ __('sections.home.gateways.research_desc') }}
                 </p>
 
                 <!-- Checklist Detail -->
                 <div class="mt-2 pt-3 border-t border-[#2B211E]/10 space-y-2 text-sm text-on-surface font-body-sm">
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Etika persetujuan awal masyarakat (FPIC 100%)</span>
+                    <span>{{ __('sections.home.gateways.research_item1') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Klaster etnobotani, kriya &amp; lanskap vernakular</span>
+                    <span>{{ __('sections.home.gateways.research_item2') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Fasilitasi izin riset &amp; publikasi bersama warga</span>
+                    <span>{{ __('sections.home.gateways.research_item3') }}</span>
                   </div>
                 </div>
               </div>
@@ -190,7 +190,7 @@
             <div class="pt-4">
               <a href="{{ route('for-researchers') }}" 
                  class="rgs-btn rgs-btn-secondary w-full text-center">
-                <span>Pelajari Kolaborasi Riset</span>
+                <span>{{ __('sections.home.gateways.research_btn') }}</span>
               </a>
             </div>
           </div>
@@ -201,10 +201,10 @@
               <!-- Header Gambar dengan Category Tag Pinned di Kiri Atas -->
               <div class="relative w-full h-[220px] overflow-hidden bg-surface-container">
                 <span class="rgs-category-tag bg-[#86580d] absolute top-3 left-0 z-10">
-                  Untuk Pengelola Desa &amp; Adat
+                  {{ __('sections.home.gateways.village_tag') }}
                 </span>
                 <img src="{{ asset('assets/img/hd/story-sasak.jpg') }}" 
-                     alt="Program Desa Adat Destinara" 
+                     alt="{{ __('sections.home.gateways.village_title') }}" 
                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-103"/>
                 <div class="absolute inset-0 bg-[#231917]/20 pointer-events-none"></div>
               </div>
@@ -212,25 +212,25 @@
               <!-- Content (Flush, Flat & Editorial) -->
               <div class="pt-5 pb-3 flex flex-col gap-3">
                 <h3 class="font-headline-sm text-xl sm:text-[22px] text-on-surface font-bold">
-                  Kemitraan Kedaulatan Tapak
+                  {{ __('sections.home.gateways.village_title') }}
                 </h3>
                 <p class="font-body-default text-[15px] sm:text-[16px] text-on-surface-variant leading-relaxed">
-                  Kerjasama bermartabat yang menjaga tanah ulayat dan tatanan adat, transparansi bagi hasil langsung ke kas desa, serta pembinaan pemuda lokal sebagai narasumber.
+                  {{ __('sections.home.gateways.village_desc') }}
                 </p>
 
                 <!-- Checklist Detail -->
                 <div class="mt-2 pt-3 border-t border-[#2B211E]/10 space-y-2 text-sm text-on-surface font-body-sm">
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Kedaulatan narasi mutlak milik warga tapak</span>
+                    <span>{{ __('sections.home.gateways.village_item1') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Alokasi dana kas sanggar &amp; regenerasi pemuda</span>
+                    <span>{{ __('sections.home.gateways.village_item2') }}</span>
                   </div>
                   <div class="flex items-start gap-2">
                     <span class="text-secondary font-bold">✓</span>
-                    <span>Pendamping lapangan siaga dari sekretariat</span>
+                    <span>{{ __('sections.home.gateways.village_item3') }}</span>
                   </div>
                 </div>
               </div>
@@ -240,7 +240,7 @@
             <div class="pt-4">
               <a href="{{ route('for-villages') }}" 
                  class="rgs-btn bg-[#86580d] hover:bg-[#684200] text-white w-full text-center">
-                <span>Kemitraan Kedaulatan Desa</span>
+                <span>{{ __('sections.home.gateways.village_btn') }}</span>
               </a>
             </div>
           </div>
@@ -339,18 +339,19 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#8C5151]/15 pb-6">
           <div class="max-w-[680px] flex flex-col gap-2">
             <span class="text-xs font-bold uppercase tracking-widest text-primary">
-              INDEX STASIUN TAPAK AKTIF
+              {{ __('sections.home.featured_destinations.tag') }}
             </span>
             <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface">
-              Tapak Studi &amp; Stasiun Riset Pilihan
+              {{ __('sections.home.featured_destinations.title') }}
             </h2>
             <p class="font-body-default text-on-surface-variant">
-              Lanskap pembelajaran terbuka yang telah lolos uji kelayakan etika adat, siap menyambut rombongan sekolah dan gugus riset dengan protokol budaya yang kokoh.
+              {{ __('sections.home.featured_destinations.subtitle') }}
             </p>
           </div>
+
           <a href="{{ route('destinations.index') }}" 
              class="rgs-btn rgs-btn-outline self-start md:self-end">
-            <span>Buka Seluruh Indeks Tapak</span>
+            <span>{{ __('sections.home.featured_destinations.all_btn') }}</span>
           </a>
         </div>
 
@@ -405,12 +406,12 @@
                   <!-- Technical Metadata Box -->
                   <div class="bg-surface-container border border-[#2B211E]/10 p-3.5 text-xs sm:text-[14px] text-on-surface space-y-2 font-body-sm">
                     <div class="flex items-center justify-between">
-                      <span class="text-on-surface-variant">Modul Silabus:</span>
-                      <span class="font-bold text-on-surface">{{ $dest->module_name ?? 'Kurikulum Tapak Terpadu' }}</span>
+                      <span class="text-on-surface-variant">{{ __('sections.home.featured_destinations.syllabus_module') }}</span>
+                      <span class="font-bold text-on-surface">{{ $dest->module_name ?? __('sections.home.featured_destinations.default_module') }}</span>
                     </div>
                     <div class="flex items-center justify-between">
-                      <span class="text-on-surface-variant">Kapasitas Aman:</span>
-                      <span class="font-bold text-secondary">{{ $dest->capacity ?? 'Maks. 20 Orang / Sesi' }}</span>
+                      <span class="text-on-surface-variant">{{ __('sections.home.featured_destinations.safe_capacity') }}</span>
+                      <span class="font-bold text-secondary">{{ $dest->capacity ?? __('sections.home.featured_destinations.default_capacity') }}</span>
                     </div>
                   </div>
                 </div>
@@ -420,13 +421,13 @@
               <div class="pt-4">
                 <a href="{{ route('destinations.show', $dest->slug) }}" 
                    class="rgs-btn rgs-btn-outline w-full text-center">
-                  <span>Buka Silabus Tapak</span>
+                  <span>{{ __('sections.home.featured_destinations.syllabus_btn') }}</span>
                 </a>
               </div>
 
             </div>
           @empty
-            <p class="text-on-surface-variant col-span-3 text-center py-12">Belum ada tapak pilihan aktif.</p>
+            <p class="text-on-surface-variant col-span-3 text-center py-12">{{ __('sections.home.featured_destinations.empty') }}</p>
           @endforelse
         </div>
 
@@ -440,13 +441,13 @@
         <!-- Header -->
         <div class="max-w-[800px] mb-12 sm:mb-16">
           <span class="text-xs font-bold uppercase tracking-widest text-secondary block mb-2">
-            STANDAR KESELAMATAN &amp; ETIKA RESMI
+            {{ __('sections.home.safety_matrix.tag') }}
           </span>
           <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface leading-snug">
-            Mitigasi Risiko Terpadu &amp; Tanggung Jawab Moral Lapangan
+            {{ __('sections.home.safety_matrix.title') }}
           </h2>
           <p class="mt-3 font-body-default text-on-surface-variant leading-relaxed">
-            Membawa rombongan siswa atau peneliti ke medan nyata menuntut kepastian standar operasional prosedur (SOP) yang teruji, bukan spekulasi wisata biasa:
+            {{ __('sections.home.safety_matrix.subtitle') }}
           </p>
         </div>
 
@@ -458,10 +459,10 @@
               <span class="material-symbols-outlined text-[24px]">medical_services</span>
             </div>
             <h4 class="font-headline-sm text-lg text-on-surface font-bold">
-              Mitigasi Medis &amp; Asuransi
+              {{ __('sections.home.safety_matrix.p1_title') }}
             </h4>
             <p class="font-body-sm text-[15px] text-on-surface-variant leading-relaxed">
-              Jaringan siaga bersama Puskesmas &amp; faskes rujukan terdekat, peralatan P3K bersertifikasi medan terbuka, dan asuransi rekanan resmi bagi seluruh rombongan.
+              {{ __('sections.home.safety_matrix.p1_desc') }}
             </p>
           </div>
 
@@ -470,10 +471,10 @@
               <span class="material-symbols-outlined text-[24px]">verified_user</span>
             </div>
             <h4 class="font-headline-sm text-lg text-on-surface font-bold">
-              Etika Persetujuan FPIC 100%
+              {{ __('sections.home.safety_matrix.p2_title') }}
             </h4>
             <p class="font-body-sm text-[15px] text-on-surface-variant leading-relaxed">
-              Persetujuan di muka tanpa paksaan (*Free, Prior, and Informed Consent*) bersama sesepuh adat demi menjaga privasi warga dan ritual sakral tapak.
+              {{ __('sections.home.safety_matrix.p2_desc') }}
             </p>
           </div>
 
@@ -482,10 +483,10 @@
               <span class="material-symbols-outlined text-[24px]">badge</span>
             </div>
             <h4 class="font-headline-sm text-lg text-on-surface font-bold">
-              Fasilitator Akademis Terlatih
+              {{ __('sections.home.safety_matrix.p3_title') }}
             </h4>
             <p class="font-body-sm text-[15px] text-on-surface-variant leading-relaxed">
-              Kolaborasi terpadu antara akademisi universitas dengan pemandu lokal tapak yang menguasai ekologi wilayah serta kearifan tutur sejarah lokal.
+              {{ __('sections.home.safety_matrix.p3_desc') }}
             </p>
           </div>
 
@@ -494,10 +495,10 @@
               <span class="material-symbols-outlined text-[24px]">fact_check</span>
             </div>
             <h4 class="font-headline-sm text-lg text-on-surface font-bold">
-              Evaluasi &amp; Asesmen Silabus
+              {{ __('sections.home.safety_matrix.p4_title') }}
             </h4>
             <p class="font-body-sm text-[15px] text-on-surface-variant leading-relaxed">
-              Instrumen evaluasi terstruktur untuk mengukur pemahaman peserta didik pasca-kegiatan yang dapat langsung dilaporkan ke pihak sekolah/fakultas.
+              {{ __('sections.home.safety_matrix.p4_desc') }}
             </p>
           </div>
 
@@ -513,13 +514,13 @@
           
           <div class="max-w-[640px] flex flex-col gap-3">
             <span class="text-xs font-bold uppercase tracking-widest text-primary">
-              PUSAT KOORDINASI INSTITUSI
+              {{ __('sections.home.doc_hub.tag') }}
             </span>
             <h2 class="font-headline-lg text-2xl sm:text-3xl text-on-surface leading-tight font-normal">
-              Butuh Dokumen Resmi untuk Rapat Dewan Guru, Yayasan, atau Senat Fakultas?
+              {{ __('sections.home.doc_hub.title') }}
             </h2>
             <p class="font-body-default text-base text-on-surface-variant leading-relaxed">
-              Kami menyediakan berkas Kerangka Acuan Kerja (KAK), proposal silabus P5, dan profil legalitas lengkap yang dapat Anda bawa langsung ke forum pertimbangan institusi Anda.
+              {{ __('sections.home.doc_hub.desc') }}
             </p>
           </div>
 
@@ -527,13 +528,13 @@
           <div class="flex flex-col sm:flex-row md:flex-col gap-3 flex-shrink-0">
             <a href="{{ route('contact.index') }}" 
                class="rgs-btn rgs-btn-primary text-center">
-              <span>Ajukan Audiensi / KAK</span>
+              <span>{{ __('sections.home.doc_hub.btn_submit') }}</span>
             </a>
-            <a href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_maya', '6282116200363') }}?text={{ urlencode('Halo Maya (Koordinator Program & Kurikulum Destinara), kami dari institusi pendidikan/riset ingin meminta berkas Kerangka Acuan Kerja (KAK) dan konsultasi jadwal.') }}" 
+            <a href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_maya', '6282116200363') }}?text={{ urlencode(__('sections.home.doc_hub.wa_message')) }}" 
                target="_blank" 
                rel="noopener noreferrer"
                class="rgs-btn rgs-btn-secondary text-center">
-              <span>WhatsApp Koordinator</span>
+              <span>{{ __('sections.home.doc_hub.btn_wa') }}</span>
             </a>
           </div>
 

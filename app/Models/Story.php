@@ -29,6 +29,8 @@ class Story extends Model
         'is_active' => 'boolean',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)->orderByDesc('published_at');
@@ -38,6 +40,12 @@ class Story extends Model
     {
         return $query->where('is_featured', true);
     }
+
+    public function getTitleAttribute($value) { return $this->getLocalized('title'); }
+    public function getExcerptAttribute($value) { return $this->getLocalized('excerpt'); }
+    public function getContentAttribute($value) { return $this->getLocalized('content'); }
+    public function getCategoryAttribute($value) { return $this->getLocalized('category'); }
+    public function getAuthorRoleAttribute($value) { return $this->getLocalized('author_role'); }
 
     public function getImageUrlAttribute(): string
     {

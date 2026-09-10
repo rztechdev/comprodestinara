@@ -26,6 +26,8 @@ class Program extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)->orderBy('order', 'asc');
@@ -35,6 +37,17 @@ class Program extends Model
     {
         return $query->where('target', $target);
     }
+
+    public function getTitleAttribute($value) { return $this->getLocalized('title'); }
+    public function getSubtitleAttribute($value) { return $this->getLocalized('subtitle'); }
+    public function getDescriptionAttribute($value) { return $this->getLocalized('description'); }
+    public function getFeaturesAttribute($value)
+    {
+        $localized = $this->getLocalized('features');
+        if (is_array($localized)) return $localized;
+        return $this->castAttribute('features', $value);
+    }
+    public function getCtaTextAttribute($value) { return $this->getLocalized('cta_text'); }
 
     public function getImageUrlAttribute(): string
     {

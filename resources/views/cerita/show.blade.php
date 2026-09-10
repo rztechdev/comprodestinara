@@ -17,13 +17,13 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Beranda",
+          "name": "{{ __('site.nav.home') }}",
           "item": "{{ url('/') }}"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Cerita Tapak",
+          "name": "{{ __('site.nav.stories') }}",
           "item": "{{ route('stories.index') }}"
         },
         {
@@ -42,7 +42,7 @@
       "image": "{{ $story->image_url ?? asset('assets/img/hd/hero-about.jpg') }}",
       "author": {
         "@type": "Person",
-        "name": "{{ addslashes($story->author_name ?? 'Kurator Destinara') }}"
+        "name": "{{ addslashes($story->author_name ?? __('site.common.destinara_curator')) }}"
       },
       "publisher": {
         "@id": "{{ url('/') }}/#organization"
@@ -68,7 +68,7 @@
       <div class="max-w-[880px] mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col gap-space-md">
         <a href="{{ route('stories.index') }}" class="inline-flex items-center gap-1.5 text-secondary font-label-action text-body-sm hover:underline">
           <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-          <span>Kembali ke Warta &amp; Cerita</span>
+          <span>{{ __('site.common.back_to_stories') }}</span>
         </a>
         <div class="flex items-center gap-space-sm text-xs text-secondary font-label-tag">
           <span class="bg-surface px-2.5 py-1 rounded-none border border-outline-variant/30">{{ $story->category }}</span>
@@ -83,7 +83,7 @@
           @if($story->author_role)
             <span>• {{ $story->author_role }}</span>
           @endif
-          <span>• {{ $story->published_at ? $story->published_at->format('d M Y') : date('d M Y') }}</span>
+          <span>• {{ $story->published_at ? $story->published_at->translatedFormat('d M Y') : now()->translatedFormat('d M Y') }}</span>
         </div>
       </div>
     </section>
@@ -104,10 +104,10 @@
 
       <div class="pt-space-xl border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-md">
         <div class="font-caption-fieldnote italic text-secondary text-body-sm">
-          Disimpan dalam Arsip Pengetahuan Lapangan Destinara Nusantara
+          {{ __('site.common.archived_in_knowledge') }}
         </div>
         <a href="{{ route('contact.index') }}" class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center text-body-sm">
-          Bahas Topik Ini Bersama Kami
+          {{ __('site.common.discuss_this_topic') }}
         </a>
       </div>
     </article>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Cerita & Monograf Lapangan — Warta Etnografi & Arsip Budaya | Destinara')
-@section('meta_description', 'Kumpulan catatan lapangan, monograf etnobotani, warta komunitas adat, dan refleksi pedagogis dari penelusuran tapak di Nusantara.')
+@section('title', __('site.common.stories_page_title'))
+@section('meta_description', __('site.common.stories_page_desc'))
 @section('meta_keywords', 'cerita destinara, monograf lapangan, etnobotani nusantara, warta budaya adat, catatan antropologi, arsip pengetahuan tapak')
 @section('og_image', asset('assets/img/hd/hero-about.jpg'))
 
@@ -14,13 +14,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Cerita Tapak",
+      "name": "{{ __('site.nav.stories') }}",
       "item": "{{ route('stories.index') }}"
     }
   ]
@@ -36,13 +36,13 @@
     <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop w-full pt-space-2xl pb-space-xl">
       <div class="flex flex-col gap-space-sm max-w-3xl">
         <span class="font-caption-fieldnote text-caption-fieldnote italic text-secondary">
-          Warta &amp; Arsip Pengetahuan Tapak
+          {{ __('site.common.field_stories_badge') }}
         </span>
         <h1 class="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-on-surface tracking-tight leading-tight">
-          Cerita dari Garis Depan Komunitas
+          {{ __('site.common.stories_hero_title') }}
         </h1>
         <p class="font-body-lead text-body-default md:text-body-lead text-on-surface-variant leading-relaxed">
-          Catatan lapangan, monograf etnobotani, dan refleksi pedagogis yang disusun bersama para peneliti dan tetua adat mitra di seluruh Nusantara.
+          {{ __('site.common.stories_hero_desc') }}
         </p>
       </div>
     </section>
@@ -73,9 +73,9 @@
                 {{ $featuredStory->excerpt }}
               </p>
               <div class="flex items-center justify-between pt-space-xs border-t border-outline-variant/30 text-body-sm text-on-surface-variant">
-                <span>Oleh {{ $featuredStory->author_name }}</span>
+                <span>{{ __('site.common.by_author', ['author' => $featuredStory->author_name]) }}</span>
                 <a href="{{ route('stories.show', $featuredStory->slug) }}" class="text-primary font-label-action inline-flex items-center gap-1.5 pb-0.5 border-b border-primary/40 hover:border-primary transition-colors">
-                  <span>Baca Selengkapnya</span>
+                  <span>{{ __('site.common.read_more') }}</span>
                   <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
               </div>
@@ -88,8 +88,8 @@
     <!-- Stories Grid: Unboxed Cards with Bottom Demarcation Lines -->
     <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop py-space-3xl w-full">
       <div class="flex flex-col gap-1 mb-space-xl">
-        <span class="font-caption-fieldnote text-caption-fieldnote italic text-secondary">Koleksi Lapangan</span>
-        <h3 class="font-headline-md text-headline-md text-on-surface">Arsip Catatan Terbaru</h3>
+        <span class="font-caption-fieldnote text-caption-fieldnote italic text-secondary">{{ __('site.common.field_collection_badge') }}</span>
+        <h3 class="font-headline-md text-headline-md text-on-surface">{{ __('site.common.recent_notes_archive') }}</h3>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-xl">
         @forelse($stories as $story)
@@ -116,12 +116,12 @@
               </div>
               <div class="pt-space-sm border-t border-outline-variant/20 flex items-center justify-between text-caption-fieldnote text-xs text-on-surface-variant italic">
                 <span>{{ $story->author_name }}</span>
-                <span>{{ $story->published_at ? $story->published_at->format('d M Y') : '' }}</span>
+                <span>{{ $story->published_at ? $story->published_at->translatedFormat('d M Y') : '' }}</span>
               </div>
             </div>
           </article>
         @empty
-          <p class="text-on-surface-variant col-span-3 text-center py-8">Belum ada cerita yang diterbitkan.</p>
+          <p class="text-on-surface-variant col-span-3 text-center py-8">{{ __('site.common.no_stories') }}</p>
         @endforelse
       </div>
 

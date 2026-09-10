@@ -32,12 +32,22 @@ class PageSection extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public static function getSection(string $pageSlug, string $sectionKey, $default = null): ?self
     {
         return static::where('page_slug', $pageSlug)
             ->where('section_key', $sectionKey)
             ->first() ?? $default;
     }
+
+    public function getTitleAttribute($value) { return $this->getLocalized('title'); }
+    public function getSubtitleAttribute($value) { return $this->getLocalized('subtitle'); }
+    public function getBadgeAttribute($value) { return $this->getLocalized('badge'); }
+    public function getContentAttribute($value) { return $this->getLocalized('content'); }
+    public function getImageCaptionAttribute($value) { return $this->getLocalized('image_caption'); }
+    public function getButtonTextAttribute($value) { return $this->getLocalized('button_text'); }
+    public function getSecondaryButtonTextAttribute($value) { return $this->getLocalized('secondary_button_text'); }
 
     public function getImageUrlAttribute(): ?string
     {

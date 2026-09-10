@@ -14,8 +14,12 @@ class Stat extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)->orderBy('order', 'asc');
     }
+
+    public function getLabelAttribute($value) { return $this->getLocalized('label'); }
 }

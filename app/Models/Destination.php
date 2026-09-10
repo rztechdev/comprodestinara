@@ -32,6 +32,8 @@ class Destination extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)->orderBy('order', 'asc');
@@ -41,6 +43,15 @@ class Destination extends Model
     {
         return $query->where('is_featured', true);
     }
+
+    public function getNameAttribute($value) { return $this->getLocalized('name'); }
+    public function getBadgeAttribute($value) { return $this->getLocalized('badge'); }
+    public function getLocationAttribute($value) { return $this->getLocalized('location'); }
+    public function getLeadAttribute($value) { return $this->getLocalized('lead'); }
+    public function getDescriptionAttribute($value) { return $this->getLocalized('description'); }
+    public function getResearchFocusAttribute($value) { return $this->getLocalized('research_focus'); }
+    public function getModuleNameAttribute($value) { return $this->getLocalized('module_name'); }
+    public function getCapacityAttribute($value) { return $this->getLocalized('capacity'); }
 
     public function getImageUrlAttribute(): string
     {

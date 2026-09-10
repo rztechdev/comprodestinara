@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak & Kemitraan — Ruang Musyawarah & Narahubung Resmi | Destinara')
-@section('meta_description', 'Hubungi tim Destinara untuk konsultasi program edukasi sekolah, izin riset lapangan dan kliring etik adat, serta pendaftaran kemitraan desa di seluruh Indonesia.')
+@section('title', ($hero?->title ?? __('sections.contact.hero.title')) . ' — ' . __('site.nav.contact_full') . ' | Destinara')
+@section('meta_description', $hero?->subtitle ?? __('sections.contact.hero.subtitle'))
 @section('meta_keywords', 'kontak destinara, narahubung destinara, konsultasi study tour edukasi, kantor destinara yogyakarta jakarta, kemitraan desa')
 @section('og_image', asset('assets/img/hd/hero-about.jpg'))
 
@@ -14,13 +14,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Kontak & Narahubung",
+      "name": "{{ __('site.nav.contact') }}",
       "item": "{{ route('contact.index') }}"
     }
   ]
@@ -41,11 +41,11 @@
         <div class="max-w-[1280px] mx-auto flex flex-col gap-space-sm md:gap-space-md">
           <div class="inline-flex items-center gap-space-xs text-secondary font-label-tag text-label-tag">
             <span class="w-2 h-2 rounded-none bg-secondary"></span>
-            <span>{{ $hero?->badge ?? 'Ruang Musyawarah & Konsultasi Terbuka' }}</span>
+            <span>{{ $hero?->badge ?? __('sections.contact.hero.badge') }}</span>
           </div>
-          <h1 class="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-on-surface tracking-tight">{{ $hero?->title ?? 'Hubungi Kami' }}</h1>
+          <h1 class="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-on-surface tracking-tight">{{ $hero?->title ?? __('sections.contact.hero.title') }}</h1>
           <p class="font-body-lead text-body-default md:text-body-lead text-on-surface-variant max-w-3xl leading-relaxed">
-            {{ $hero?->subtitle ?? 'Pintu dialog Destinara terbuka bagi pimpinan sekolah, dosen perancang riset, dan pegiat desa yang hendak merumuskan agenda pembelajaran kontekstual di tapak lokal Nusantara.' }}
+            {{ $hero?->subtitle ?? __('sections.contact.hero.subtitle') }}
           </p>
         </div>
       </section>
@@ -57,10 +57,10 @@
           <!-- Kolom Kiri: Formulir Konsultasi Lega (Architectural Plinth Style) -->
           <div class="lg:col-span-6 bg-surface p-space-lg sm:p-space-xl md:p-space-2xl rounded-none shadow-none border-l-4 border-l-primary border-t border-r border-b border-outline-variant/30 flex flex-col gap-space-lg md:gap-space-xl">
             <div class="flex flex-col gap-space-xs">
-              <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">Inisiasi Komunikasi</span>
-              <h2 class="font-headline-md text-headline-md text-on-surface">Formulir Penjajakan Agenda</h2>
+              <span class="font-caption-fieldnote text-caption-fieldnote text-secondary italic">{{ __('sections.contact.form.tag') }}</span>
+              <h2 class="font-headline-md text-headline-md text-on-surface">{{ __('sections.contact.form.title') }}</h2>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Sampaikan rincian rencana kegiatan Anda. Fasilitator kami akan menelaah kecocokan kurikulum dan kesiapan desa mitra dalam 1x24 jam kerja.
+                {{ __('sections.contact.form.subtitle') }}
               </p>
             </div>
 
@@ -68,62 +68,62 @@
               @csrf
               <div class="flex flex-col gap-space-2xs">
                 <label class="font-label-action text-label-action text-on-surface" for="full_name">
-                  Nama Lengkap Pemohon <span class="text-primary">*</span>
+                  {{ __('sections.contact.form.name_label') }} <span class="text-primary">*</span>
                 </label>
-                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="full_name" name="full_name" value="{{ old('full_name') }}" placeholder="cth. Prof. Hendrawan Danubroto, M.Hum." required type="text"/>
+                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="full_name" name="full_name" value="{{ old('full_name') }}" placeholder="{{ __('sections.contact.form.name_placeholder') }}" required type="text"/>
               </div>
 
               <div class="flex flex-col gap-space-2xs">
                 <label class="font-label-action text-label-action text-on-surface" for="institution">
-                  Asal Sekolah, Kampus, atau Komunitas <span class="text-primary">*</span>
+                  {{ __('sections.contact.form.inst_label') }} <span class="text-primary">*</span>
                 </label>
-                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="institution" name="institution" value="{{ old('institution') }}" placeholder="cth. SMA Kolese De Britto / Departemen Antropologi UGM" required type="text"/>
+                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="institution" name="institution" value="{{ old('institution') }}" placeholder="{{ __('sections.contact.form.inst_placeholder') }}" required type="text"/>
               </div>
 
               <div class="flex flex-col gap-space-2xs">
                 <label class="font-label-action text-label-action text-on-surface" for="whatsapp">
-                  Nomor WhatsApp Aktif <span class="text-primary">*</span>
+                  {{ __('sections.contact.form.wa_label') }} <span class="text-primary">*</span>
                 </label>
-                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="whatsapp" name="whatsapp" value="{{ old('whatsapp') }}" placeholder="+62 812-xxxx-xxxx (untuk koordinasi cepat)" required type="tel"/>
+                <input class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="whatsapp" name="whatsapp" value="{{ old('whatsapp') }}" placeholder="{{ __('sections.contact.form.wa_placeholder') }}" required type="tel"/>
               </div>
 
               <div class="flex flex-col gap-space-2xs">
                 <label class="font-label-action text-label-action text-on-surface" for="topic">
-                  Rencana Kebutuhan Program
+                  {{ __('sections.contact.form.topic_label') }}
                 </label>
                 <select class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none" id="topic" name="topic">
-                  <option value="sekolah">Ekskursi &amp; Live-in Siswa Sekolah Menengah</option>
-                  <option value="riset">Kuliah Kerja Lapangan &amp; Riset Komunitas Akademik</option>
-                  <option value="desa">Penjajakan Mitra Desa &amp; Sanggar Baru</option>
-                  <option value="kurikulum">Penyusunan Modul Lapangan Berbasis Muatan Lokal</option>
-                  <option value="lainnya">Kunjungan Khusus / Diskusi Terfokus Lainnya</option>
+                  <option value="sekolah">{{ __('sections.contact.form.topic_school') }}</option>
+                  <option value="riset">{{ __('sections.contact.form.topic_research') }}</option>
+                  <option value="desa">{{ __('sections.contact.form.topic_village') }}</option>
+                  <option value="kurikulum">{{ __('sections.contact.form.topic_curriculum') }}</option>
+                  <option value="lainnya">{{ __('sections.contact.form.topic_other') }}</option>
                 </select>
               </div>
 
               <div class="flex flex-col gap-space-2xs">
                 <label class="font-label-action text-label-action text-on-surface" for="notes">
-                  Catatan Rombongan &amp; Gambaran Harapan
+                  {{ __('sections.contact.form.notes_label') }}
                 </label>
-                <textarea class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none resize-y" id="notes" name="notes" placeholder="Tuliskan perkiraan jumlah peserta, rentang usia, usulan tanggal keberangkatan, atau capaian kompetensi yang dikehendaki." rows="4"></textarea>
+                <textarea class="w-full bg-surface-container-low px-space-md py-space-sm text-body-default text-on-surface rounded-none placeholder:text-outline border border-outline-variant/40 focus:border-primary focus:outline-none focus:bg-surface transition-colors shadow-none resize-y" id="notes" name="notes" placeholder="{{ __('sections.contact.form.notes_placeholder') }}" rows="4"></textarea>
               </div>
 
               <div class="bg-surface-container p-space-md rounded-none flex items-start gap-space-sm border-l-2 border-l-secondary">
                 <span class="material-symbols-outlined text-secondary text-[22px] flex-shrink-0 mt-0.5">verified_user</span>
                 <p class="font-body-sm text-body-sm text-on-surface-variant">
-                  Semua usulan kegiatan diselaraskan dengan asas FPIC (Persetujuan Awal Berbasis Informasi) desa penerima demi menjaga kenyamanan warga dan kesakralan ruang adat.
+                  {{ __('sections.contact.form.fpic_notice') }}
                 </p>
               </div>
 
               <button class="rgs-btn rgs-btn-primary rounded-none w-full text-center py-space-md flex items-center justify-center gap-space-xs cursor-pointer shadow-none" type="submit">
                 <span class="material-symbols-outlined text-[20px]">outgoing_mail</span>
-                <span>Kirim Pesan ke Tim Destinara</span>
+                <span>{{ __('sections.contact.form.submit_btn') }}</span>
               </button>
             </form>
 
             <div class="hidden p-space-md bg-secondary-container text-on-secondary-fixed rounded-none flex items-center gap-space-sm border border-secondary/30" id="confirm-box">
               <span class="material-symbols-outlined text-secondary text-[24px]">check_circle</span>
               <p class="font-body-sm text-body-sm">
-                Pesan terkirim. Narahubung kurikulum kami akan menyapa WhatsApp Anda sesaat lagi.
+                {{ __('sections.contact.form.confirm_msg') }}
               </p>
             </div>
           </div>
@@ -136,12 +136,12 @@
               <div class="flex items-center justify-between">
                 <span class="inline-flex items-center gap-space-xs font-label-tag text-label-tag text-secondary">
                   <span class="material-symbols-outlined text-[18px]">bolt</span>
-                  Respons Langsung Narahubung WhatsApp
+                  {{ __('sections.contact.wa_card.title') }}
                 </span>
-                <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant">Senin – Sabtu, 08.00–17.00 WIB</span>
+                <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant">{{ $officeHours?->label ?? __('sections.contact.office_hours.label') }}</span>
               </div>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Silakan hubungi narahubung Destinara sesuai dengan kebutuhan institusi atau agenda kegiatan Anda:
+                {{ __('sections.contact.wa_card.desc') }}
               </p>
 
               <div class="flex flex-col divide-y divide-[#8C5151]/15 pt-space-2xs">
@@ -150,16 +150,16 @@
                   <div class="flex flex-col">
                     <div class="flex items-center gap-2">
                       <span class="font-headline-sm text-lg font-bold text-on-surface">Maya</span>
-                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">Sekolah &amp; Kemitraan</span>
+                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">{{ __('sections.contact.wa_card.maya_tag') }}</span>
                     </div>
-                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">Program Ekskursi Siswa, Live-in, &amp; Kurikulum Merdeka (P5)</span>
-                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/6282116200363?text={{ urlencode('Halo Maya, saya ingin berkonsultasi mengenai program sekolah dan kemitraan Destinara.') }}" target="_blank" rel="noopener">
+                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">{{ __('sections.contact.wa_card.maya_desc') }}</span>
+                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_maya', '6282116200363') }}?text={{ urlencode('Halo Maya, saya ingin berkonsultasi mengenai program sekolah dan kemitraan Destinara.') }}" target="_blank" rel="noopener">
                       +62 821-1620-0363
                     </a>
                   </div>
-                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/6282116200363?text={{ urlencode('Halo Maya, saya ingin berkonsultasi mengenai program sekolah dan kemitraan Destinara.') }}" target="_blank" rel="noopener">
+                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_maya', '6282116200363') }}?text={{ urlencode('Halo Maya, saya ingin berkonsultasi mengenai program sekolah dan kemitraan Destinara.') }}" target="_blank" rel="noopener">
                     <span class="material-symbols-outlined text-[16px]">chat</span>
-                    <span>Chat Maya</span>
+                    <span>{{ __('sections.contact.wa_card.chat_btn', ['name' => 'Maya']) }}</span>
                   </a>
                 </div>
 
@@ -168,16 +168,16 @@
                   <div class="flex flex-col">
                     <div class="flex items-center gap-2">
                       <span class="font-headline-sm text-lg font-bold text-on-surface">Azki</span>
-                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">Riset &amp; Akademisi</span>
+                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">{{ __('sections.contact.wa_card.azki_tag') }}</span>
                     </div>
-                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">Penelitian Sivitas Akademika, KKL Kampus, &amp; Kliring Etik FPIC</span>
-                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/6285894860696?text={{ urlencode('Halo Azki, saya ingin berdiskusi mengenai penelitian lapangan dan kliring etik FPIC.') }}" target="_blank" rel="noopener">
+                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">{{ __('sections.contact.wa_card.azki_desc') }}</span>
+                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_azki', '6285894860696') }}?text={{ urlencode('Halo Azki, saya ingin berdiskusi mengenai penelitian lapangan dan kliring etik FPIC.') }}" target="_blank" rel="noopener">
                       +62 858-9486-0696
                     </a>
                   </div>
-                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/6285894860696?text={{ urlencode('Halo Azki, saya ingin berdiskusi mengenai penelitian lapangan dan kliring etik FPIC.') }}" target="_blank" rel="noopener">
+                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_azki', '6285894860696') }}?text={{ urlencode('Halo Azki, saya ingin berdiskusi mengenai penelitian lapangan dan kliring etik FPIC.') }}" target="_blank" rel="noopener">
                     <span class="material-symbols-outlined text-[16px]">chat</span>
-                    <span>Chat Azki</span>
+                    <span>{{ __('sections.contact.wa_card.chat_btn', ['name' => 'Azki']) }}</span>
                   </a>
                 </div>
 
@@ -186,16 +186,16 @@
                   <div class="flex flex-col">
                     <div class="flex items-center gap-2">
                       <span class="font-headline-sm text-lg font-bold text-on-surface">Ryan</span>
-                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">Desa Adat &amp; Tapak</span>
+                      <span class="text-[11px] uppercase tracking-wider bg-surface-container-high px-2 py-0.5 text-secondary border border-outline-variant/30 font-sans">{{ __('sections.contact.wa_card.ryan_tag') }}</span>
                     </div>
-                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">Kemitraan Komunitas Desa, Pengelola Wisata Adat, &amp; Lapangan</span>
-                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/6285774410978?text={{ urlencode('Halo Ryan, kami ingin berkonsultasi mengenai kemitraan desa adat dan operasional tapak.') }}" target="_blank" rel="noopener">
+                    <span class="font-body-sm text-xs text-on-surface-variant mt-0.5">{{ __('sections.contact.wa_card.ryan_desc') }}</span>
+                    <a class="font-serif font-semibold text-primary hover:text-primary-container text-base mt-1" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_ryan', '6285774410978') }}?text={{ urlencode('Halo Ryan, kami ingin berkonsultasi mengenai kemitraan desa adat dan operasional tapak.') }}" target="_blank" rel="noopener">
                       +62 857-7441-0978
                     </a>
                   </div>
-                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/6285774410978?text={{ urlencode('Halo Ryan, kami ingin berkonsultasi mengenai kemitraan desa adat dan operasional tapak.') }}" target="_blank" rel="noopener">
+                  <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-2 !px-4 text-xs shrink-0 self-start sm:self-center" href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp_ryan', '6285774410978') }}?text={{ urlencode('Halo Ryan, kami ingin berkonsultasi mengenai kemitraan desa adat dan operasional tapak.') }}" target="_blank" rel="noopener">
                     <span class="material-symbols-outlined text-[16px]">chat</span>
-                    <span>Chat Ryan</span>
+                    <span>{{ __('sections.contact.wa_card.chat_btn', ['name' => 'Ryan']) }}</span>
                   </a>
                 </div>
               </div>
@@ -205,35 +205,35 @@
             <div class="rgs-card-alt group flex flex-col gap-space-sm pt-0 pb-6">
               <div class="flex items-center gap-space-xs text-on-surface-variant">
                 <span class="material-symbols-outlined text-primary text-[20px]">mark_email_read</span>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">Surel Resmi &amp; Korespondensi</h3>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ __('sections.contact.email_card.title') }}</h3>
               </div>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Silakan arahkan surat resmi, proposal, atau pertanyaan Anda sesuai dengan kebutuhan koordinasi:
+                {{ __('sections.contact.email_card.desc') }}
               </p>
               
               <!-- 1. Kemitraan & Riset -->
               <div class="p-space-md bg-surface-container-low rounded-none flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-outline-variant/30">
                 <div class="flex flex-col">
-                  <span class="text-xs uppercase font-semibold text-on-surface tracking-wider">Kemitraan, Riset &amp; Tapak:</span>
+                  <span class="text-xs uppercase font-semibold text-on-surface tracking-wider">{{ __('sections.contact.email_card.partnership_label') }}</span>
                   <span class="font-label-action text-label-action text-primary select-all">partnership@destinara.id</span>
-                  <span class="text-[12px] text-on-surface-variant">Untuk TOR, proposal penelitian, MoU institusi, atau pendaftaran desa.</span>
+                  <span class="text-[12px] text-on-surface-variant">{{ __('sections.contact.email_card.partnership_sub') }}</span>
                 </div>
                 <a class="rgs-btn rgs-btn-primary rounded-none inline-flex items-center justify-center gap-1.5 !py-1.5 !px-3.5 text-xs shrink-0 self-start sm:self-center" href="mailto:partnership@destinara.id">
                   <span class="material-symbols-outlined text-[16px]">mail</span>
-                  Tulis Surel
+                  {{ __('sections.contact.email_card.write_email') }}
                 </a>
               </div>
 
               <!-- 2. Umum & Sapaan -->
               <div class="p-space-md bg-surface-container-low rounded-none flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-outline-variant/30">
                 <div class="flex flex-col">
-                  <span class="text-xs uppercase font-semibold text-on-surface tracking-wider">Korespondensi Umum &amp; Layanan:</span>
+                  <span class="text-xs uppercase font-semibold text-on-surface tracking-wider">{{ __('sections.contact.email_card.general_label') }}</span>
                   <span class="font-label-action text-label-action text-primary select-all">hello@destinara.id</span>
-                  <span class="text-[12px] text-on-surface-variant">Untuk pertanyaan umum, informasi layanan, dan konfirmasi sekretariat.</span>
+                  <span class="text-[12px] text-on-surface-variant">{{ __('sections.contact.email_card.general_sub') }}</span>
                 </div>
                 <a class="rgs-btn rgs-btn-outline rounded-none inline-flex items-center justify-center gap-1.5 !py-1.5 !px-3.5 text-xs shrink-0 self-start sm:self-center" href="mailto:hello@destinara.id">
                   <span class="material-symbols-outlined text-[16px]">mail</span>
-                  Tulis Surel
+                  {{ __('sections.contact.email_card.write_email') }}
                 </a>
               </div>
             </div>
@@ -244,18 +244,18 @@
                 <div class="flex flex-col">
                   <div class="inline-flex items-center gap-space-2xs text-secondary font-label-tag text-label-tag">
                     <span class="material-symbols-outlined text-[16px]">cottage</span>
-                    <span>Pusat Riset Lapangan &amp; Laboratorium Desa</span>
+                    <span>{{ $officeHours?->sleman_lab ?? __('sections.contact.office_hours.sleman_lab') }}</span>
                   </div>
-                  <h3 class="font-headline-sm text-headline-sm text-on-surface">Sanggar Lapangan Sleman, Yogyakarta</h3>
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ $officeHours?->sleman_title ?? __('sections.contact.office_hours.sleman_title') }}</h3>
                 </div>
-                <span class="px-space-sm py-space-2xs bg-surface-container text-on-surface-variant rounded-none border border-outline-variant/30 font-label-tag text-label-tag">Pusat Lapang</span>
+                <span class="px-space-sm py-space-2xs bg-surface-container text-on-surface-variant rounded-none border border-outline-variant/30 font-label-tag text-label-tag">{{ __('sections.contact.office_hours.sleman_badge') }}</span>
               </div>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Jl. Palagan Tentara Pelajar Km. 9, Sinduharjo, Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581.
+                {{ $officeHours?->sleman_desc ?? __('sections.contact.office_hours.sleman_desc') }}
               </p>
               <div class="flex items-center gap-space-xs text-on-surface-variant font-caption-fieldnote text-caption-fieldnote italic">
                 <span class="material-symbols-outlined text-[18px] text-tertiary">schedule</span>
-                <span>Jam temu pendampingan dosen &amp; guru: Selasa – Sabtu, 09.00 – 16.00 WIB (diharapkan konfirmasi)</span>
+                <span>{{ $officeHours?->sleman_time ?? __('sections.contact.office_hours.sleman_time') }}</span>
               </div>
               
               <!-- Foto Sanggar & Penanda Lokasi -->
@@ -263,7 +263,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                 <div class="relative z-10 bg-surface/90 backdrop-blur-sm px-space-md py-space-xs rounded-none border border-outline-variant/30 flex items-center gap-space-xs">
                   <span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
-                  <span class="font-body-sm text-body-sm font-medium text-on-surface">Peta Sanggar Tapak Lereng Merapi</span>
+                  <span class="font-body-sm text-body-sm font-medium text-on-surface">{{ __('sections.contact.office_hours.sleman_map') }}</span>
                 </div>
               </div>
             </div>
@@ -274,17 +274,17 @@
                 <div class="flex flex-col">
                   <div class="inline-flex items-center gap-space-2xs text-secondary font-label-tag text-label-tag">
                     <span class="material-symbols-outlined text-[16px]">apartment</span>
-                    <span>Sekretariat Administrasi &amp; Penyelarasan Kurikulum</span>
+                    <span>{{ $officeHours?->jakarta_office ?? __('sections.contact.office_hours.jakarta_office') }}</span>
                   </div>
-                  <h3 class="font-headline-sm text-headline-sm text-on-surface">Ruang Dialog Menteng, Jakarta Pusat</h3>
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ $officeHours?->jakarta_title ?? __('sections.contact.office_hours.jakarta_title') }}</h3>
                 </div>
-                <span class="px-space-sm py-space-2xs bg-surface-container text-on-surface-variant rounded-none border border-outline-variant/30 font-label-tag text-label-tag">Kemitraan</span>
+                <span class="px-space-sm py-space-2xs bg-surface-container text-on-surface-variant rounded-none border border-outline-variant/30 font-label-tag text-label-tag">{{ __('sections.contact.office_hours.jakarta_badge') }}</span>
               </div>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Kawasan Cikini Raya No. 42 / Jl. Teuku Umar No. 12, Menteng, Jakarta Pusat 10330.
+                {{ $officeHours?->jakarta_desc ?? __('sections.contact.office_hours.jakarta_desc') }}
               </p>
               <p class="font-body-sm text-body-sm text-on-surface-variant">
-                Tersedia untuk temu diskusi formal yayasan pendidikan, penandatanganan kesepakatan (MoU), dan peninjauan monograf desa (berdasarkan janji temu terlebih dahulu).
+                {{ $officeHours?->jakarta_time ?? __('sections.contact.office_hours.jakarta_time') }}
               </p>
             </div>
 
@@ -296,8 +296,8 @@
       <section class="w-full bg-surface-container px-gutter-mobile md:px-gutter-desktop py-space-2xl md:py-space-3xl mt-space-xl border-t border-outline-variant/30">
         <div class="max-w-[1280px] mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-space-xl">
-            <span class="text-secondary font-label-tag text-label-tag tracking-wider uppercase">Nilai Musyawarah</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface mt-space-2xs">Tiga Pilar Etika Kemitraan Lapangan</h3>
+            <span class="text-secondary font-label-tag text-label-tag tracking-wider uppercase">{{ __('sections.contact.ethics.tag') }}</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface mt-space-2xs">{{ __('sections.contact.ethics.title') }}</h3>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg md:gap-space-xl items-stretch">
@@ -305,9 +305,9 @@
               <div class="w-12 h-12 rounded-none bg-secondary/10 flex items-center justify-center mb-space-xs border border-outline-variant/20">
                 <span class="material-symbols-outlined text-secondary text-[28px]">nature_people</span>
               </div>
-              <h4 class="font-headline-sm text-headline-sm text-on-surface">Menjaga Kedaulatan Warga</h4>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface">{{ __('sections.contact.ethics.p1_title') }}</h4>
               <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                Setiap kunjungan belajar memprioritaskan privasi ruang hidup masyarakat desa serta hak mutlak warga untuk menolak dokumentasi yang bersifat sakral.
+                {{ __('sections.contact.ethics.p1_desc') }}
               </p>
             </div>
 
@@ -315,9 +315,9 @@
               <div class="w-12 h-12 rounded-none bg-primary/10 flex items-center justify-center mb-space-xs border border-outline-variant/20">
                 <span class="material-symbols-outlined text-primary text-[28px]">local_library</span>
               </div>
-              <h4 class="font-headline-sm text-headline-sm text-on-surface">Pewarisan Makna yang Sahih</h4>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface">{{ __('sections.contact.ethics.p2_title') }}</h4>
               <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                Narasumber lapangan merupakan sesepuh, empu kriya, dan petani penjaga benih lokal yang dihormati secara sah oleh pranata adat dan komunitasnya.
+                {{ __('sections.contact.ethics.p2_desc') }}
               </p>
             </div>
 
@@ -325,9 +325,9 @@
               <div class="w-12 h-12 rounded-none bg-tertiary/10 flex items-center justify-center mb-space-xs border border-outline-variant/20">
                 <span class="material-symbols-outlined text-tertiary text-[28px]">account_balance_wallet</span>
               </div>
-              <h4 class="font-headline-sm text-headline-sm text-on-surface">Keadilan Nilai Ekonomi</h4>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface">{{ __('sections.contact.ethics.p3_title') }}</h4>
               <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                Mayoritas alokasi biaya penyelenggaraan disalurkan langsung pada kas paguyuban desa, konsumsi berbasis pangan kebun warga, dan pelestarian alam tapak.
+                {{ __('sections.contact.ethics.p3_desc') }}
               </p>
             </div>
           </div>

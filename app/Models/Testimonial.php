@@ -22,10 +22,16 @@ class Testimonial extends Model
         'order' => 'integer',
     ];
 
+    use \App\Traits\LocalizableModel;
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)->orderBy('order', 'asc');
     }
+
+    public function getRoleAttribute($value) { return $this->getLocalized('role'); }
+    public function getInstitutionAttribute($value) { return $this->getLocalized('institution'); }
+    public function getQuoteAttribute($value) { return $this->getLocalized('quote'); }
 
     public function getAvatarUrlAttribute(): string
     {

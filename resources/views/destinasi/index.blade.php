@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Destinasi Tapak — Desa Budaya & Ruang Belajar Terkurasi | Destinara')
-@section('meta_description', 'Jelajahi direktori dan inventaris tapak belajar, desa wisata budaya, dan balai adat terkurasi di seluruh Nusantara bersama Destinara.')
+@section('title', __('site.common.curated_destinations') . ' | Destinara')
+@section('meta_description', __('site.common.curated_destinations_desc'))
 @section('meta_keywords', 'destinasi desa wisata, desa adat nusantara, direktori tapak edukasi, tempat study tour budaya, live in desa wisata, destinara destinasi')
 @section('og_image', asset('assets/img/hd/hero-fieldwork.jpg'))
 
@@ -14,13 +14,13 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Beranda",
+      "name": "{{ __('site.nav.home') }}",
       "item": "{{ url('/') }}"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Destinasi Tapak",
+      "name": "{{ __('site.nav.destinations') }}",
       "item": "{{ route('destinations.index') }}"
     }
   ]
@@ -37,15 +37,15 @@
       <div class="grid grid-cols-12 gap-space-lg items-end">
         <div class="col-span-12 lg:col-span-8 flex flex-col gap-space-sm">
           <span class="font-caption-fieldnote text-caption-fieldnote italic text-secondary">
-            Inventaris Lapangan Edisi {{ date('Y') }}
+            {{ __('site.common.field_inventory_edition', ['year' => date('Y')]) }}
           </span>
           <h1 class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-display-hero text-on-surface tracking-tight leading-tight">
-            Destinasi yang Kami Kurasi
+            {{ __('site.common.curated_destinations') }}
           </h1>
         </div>
         <div class="col-span-12 lg:col-span-4 pb-space-xs">
           <p class="font-body-default text-body-default text-on-surface-variant">
-            Setiap tapak diverifikasi melalui persetujuan bebas didahulukan (FPIC), audit keamanan jelajah pelajar, dan ketersediaan tetua adat sebagai narasumber primer.
+            {{ __('site.common.curated_destinations_desc') }}
           </p>
         </div>
       </div>
@@ -54,25 +54,25 @@
       <div class="mt-space-lg sm:mt-space-2xl bg-surface p-3 sm:p-4 rounded-none border border-[#8C5151]/20 flex flex-col gap-2.5">
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 w-full flex-nowrap scroll-smooth touch-pan-x" id="categoryFilter">
           <a href="{{ route('destinations.index') }}" class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-none {{ !request('category') || request('category') === 'all' ? 'bg-[#8C5151] text-white font-bold' : 'text-on-surface bg-surface-container-low hover:bg-surface-container border border-[#2B211E]/15' }} font-label-action text-xs sm:text-sm uppercase tracking-wider transition-all min-h-[40px] flex items-center">
-            Semua Wilayah
+            {{ __('site.common.all_regions') }}
           </a>
           <a href="{{ route('destinations.index', ['category' => 'budaya']) }}" class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-none {{ request('category') === 'budaya' ? 'bg-[#8C5151] text-white font-bold' : 'text-on-surface bg-surface-container-low hover:bg-surface-container border border-[#2B211E]/15' }} font-label-action text-xs sm:text-sm uppercase tracking-wider transition-all min-h-[40px] flex items-center">
-            Budaya &amp; Tradisi
+            {{ __('site.common.cat_culture') }}
           </a>
           <a href="{{ route('destinations.index', ['category' => 'ekologi']) }}" class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-none {{ request('category') === 'ekologi' ? 'bg-[#8C5151] text-white font-bold' : 'text-on-surface bg-surface-container-low hover:bg-surface-container border border-[#2B211E]/15' }} font-label-action text-xs sm:text-sm uppercase tracking-wider transition-all min-h-[40px] flex items-center">
-            Ekologi &amp; Hutan
+            {{ __('site.common.cat_ecology') }}
           </a>
           <a href="{{ route('destinations.index', ['category' => 'pangan']) }}" class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-none {{ request('category') === 'pangan' ? 'bg-[#8C5151] text-white font-bold' : 'text-on-surface bg-surface-container-low hover:bg-surface-container border border-[#2B211E]/15' }} font-label-action text-xs sm:text-sm uppercase tracking-wider transition-all min-h-[40px] flex items-center">
-            Kemandirian Pangan
+            {{ __('site.common.cat_food') }}
           </a>
           <a href="{{ route('destinations.index', ['category' => 'bahari']) }}" class="flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-none {{ request('category') === 'bahari' ? 'bg-[#8C5151] text-white font-bold' : 'text-on-surface bg-surface-container-low hover:bg-surface-container border border-[#2B211E]/15' }} font-label-action text-xs sm:text-sm uppercase tracking-wider transition-all min-h-[40px] flex items-center">
-            Lanskap Bahari
+            {{ __('site.common.cat_marine') }}
           </a>
         </div>
         <div class="flex items-center justify-between px-1 text-xs text-secondary font-medium pt-2 border-t border-[#8C5151]/15">
           <div class="flex items-center gap-1.5 font-caption-fieldnote italic">
             <span class="w-2 h-2 bg-secondary inline-block"></span>
-            <span>{{ $destinations->count() }} tapak aktif diverifikasi</span>
+            <span>{{ $destinations->count() }} {{ __('site.common.active_verified_sites') }}</span>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
                 </p>
                 @if($dest->research_focus)
                   <div class="p-3.5 bg-surface border border-[#2B211E]/10 rounded-none flex flex-col gap-1 text-sm">
-                    <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">Fokus Riset Lapangan</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">{{ __('site.common.research_focus') }}</span>
                     <p class="text-on-surface font-body-sm">
                       {{ $dest->research_focus }}
                     </p>
@@ -111,7 +111,7 @@
                 @endif
                 <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#8C5151]/15">
                   <a href="{{ route('destinations.show', $dest->slug) }}" class="rgs-btn rgs-btn-outline !py-2 !px-4 self-start">
-                    <span>Buka Silabus Tapak</span>
+                    <span>{{ __('site.common.open_syllabus') }}</span>
                   </a>
                   <div class="flex items-center gap-space-sm text-on-surface-variant font-caption-fieldnote text-xs italic">
                     @if($dest->module_name)
@@ -134,8 +134,8 @@
         </section>
       @empty
         <div class="max-w-[1280px] mx-auto px-gutter-mobile py-16 text-center text-on-surface-variant">
-          <p class="font-headline-sm">Tidak ada tapak destinasi yang sesuai dengan kategori yang dipilih.</p>
-          <a href="{{ route('destinations.index') }}" class="inline-block mt-4 text-primary underline">Kembali ke seluruh wilayah</a>
+          <p class="font-headline-sm">{{ __('site.common.no_destinations') }}</p>
+          <a href="{{ route('destinations.index') }}" class="inline-block mt-4 text-primary underline">{{ __('site.common.back_to_all') }}</a>
         </div>
       @endforelse
     </div>

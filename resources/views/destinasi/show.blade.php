@@ -16,13 +16,13 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Beranda",
+          "name": "{{ __('site.nav.home') }}",
           "item": "{{ url('/') }}"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Destinasi Tapak",
+          "name": "{{ __('site.nav.destinations') }}",
           "item": "{{ route('destinations.index') }}"
         },
         {
@@ -63,7 +63,7 @@
       <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col gap-4">
         <a href="{{ route('destinations.index') }}" class="inline-flex items-center gap-1.5 text-secondary font-bold text-sm hover:underline">
           <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-          <span>Kembali ke Indeks Destinasi</span>
+          <span>{{ __('site.common.back_to_index') }}</span>
         </a>
         <div class="flex items-center gap-3 flex-wrap pt-1">
           @if($destination->badge)
@@ -75,7 +75,7 @@
             {{ $destination->location }}
           </span>
           <span class="text-xs uppercase tracking-wider font-bold text-secondary font-sans">
-            Kategori: {{ $destination->category }}
+            {{ __('site.common.category_label') }}: {{ $destination->category }}
           </span>
         </div>
         <h1 class="font-display-hero text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-tight leading-tight">
@@ -97,7 +97,7 @@
           </div>
 
           <div class="flex flex-col gap-4 font-body-default text-base text-on-surface leading-relaxed">
-            <h3 class="font-headline-md text-2xl text-on-surface font-normal">Narasi Tapak &amp; Konteks Ekologis</h3>
+            <h3 class="font-headline-md text-2xl text-on-surface font-normal">{{ __('site.common.site_narrative_context') }}</h3>
             <div class="space-y-4 text-on-surface-variant leading-relaxed">
               {!! nl2br(e($destination->description)) !!}
             </div>
@@ -105,7 +105,7 @@
 
           @if($destination->research_focus)
             <div class="p-6 bg-surface rounded-none border-l-4 border-l-[#51634b] border-y border-r border-[#2B211E]/10 flex flex-col gap-2">
-              <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">Fokus Riset &amp; Pembelajaran</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">{{ __('site.common.research_learning_focus') }}</span>
               <p class="font-body-default text-on-surface text-[15px] leading-relaxed">
                 {{ $destination->research_focus }}
               </p>
@@ -116,37 +116,37 @@
         <!-- Sidebar / Dossier Summary Plinth -->
         <div class="lg:col-span-4 flex flex-col gap-6 sticky top-32">
           <div class="bg-surface p-6 sm:p-7 rounded-none border-t-4 border-t-[#8C5151] border-x border-b border-[#2B211E]/15 flex flex-col gap-4">
-            <h4 class="font-headline-sm text-xl text-on-surface font-bold">Ringkasan Dokumen Tapak</h4>
+            <h4 class="font-headline-sm text-xl text-on-surface font-bold">{{ __('site.common.dossier_summary') }}</h4>
             <div class="flex flex-col gap-3 border-t border-[#2B211E]/10 pt-4 text-sm">
               <div>
-                <span class="text-on-surface-variant block text-xs">Lokasi Administratif</span>
+                <span class="text-on-surface-variant block text-xs">{{ __('site.common.administrative_location') }}</span>
                 <span class="font-bold text-on-surface">{{ $destination->location }}</span>
               </div>
               <div>
-                <span class="text-on-surface-variant block text-xs">Kategori Lanskap</span>
+                <span class="text-on-surface-variant block text-xs">{{ __('site.common.landscape_category') }}</span>
                 <span class="font-bold text-on-surface uppercase">{{ $destination->category }}</span>
               </div>
               <div>
-                <span class="text-on-surface-variant block text-xs">Modul Pembelajaran Lapangan</span>
-                <span class="font-bold text-on-surface">{{ $destination->module_name ?? 'Kurikulum Kontekstual' }}</span>
+                <span class="text-on-surface-variant block text-xs">{{ __('site.common.field_learning_module') }}</span>
+                <span class="font-bold text-on-surface">{{ $destination->module_name ?? __('site.common.contextual_curriculum') }}</span>
               </div>
               <div>
-                <span class="text-on-surface-variant block text-xs">Kapasitas Maksimal Rombongan</span>
-                <span class="font-bold text-secondary">{{ $destination->capacity ?? '20-30 Peserta' }}</span>
+                <span class="text-on-surface-variant block text-xs">{{ __('site.common.max_group_capacity') }}</span>
+                <span class="font-bold text-secondary">{{ $destination->capacity ?? __('site.common.default_capacity_range') }}</span>
               </div>
               <div>
-                <span class="text-on-surface-variant block text-xs">Protokol Budaya</span>
-                <span class="font-bold text-on-surface">Persetujuan FPIC Terverifikasi</span>
+                <span class="text-on-surface-variant block text-xs">{{ __('site.common.cultural_protocol') }}</span>
+                <span class="font-bold text-on-surface">{{ __('site.common.fpic_verified_badge') }}</span>
               </div>
             </div>
 
             <div class="pt-4 border-t border-[#2B211E]/10 flex flex-col gap-3">
               <a href="{{ route('contact.index') }}" class="rgs-btn rgs-btn-primary w-full text-center">
-                <span>Ajukan Program ke Tapak Ini</span>
+                <span>{{ __('site.common.apply_program_here') }}</span>
               </a>
               <a href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp', '6282116200363') }}?text={{ urlencode('Halo Destinara, saya tertarik dengan tapak ' . $destination->name . ' untuk program lapangan.') }}" target="_blank" rel="noopener noreferrer" class="rgs-btn rgs-btn-outline w-full text-center flex items-center justify-center gap-1.5">
                 <span class="material-symbols-outlined text-[18px]">chat</span>
-                <span>Konsultasi WhatsApp</span>
+                <span>{{ __('site.common.consult_whatsapp') }}</span>
               </a>
             </div>
           </div>

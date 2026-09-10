@@ -53,13 +53,15 @@ class LegalDocumentController extends Controller
      */
     public function privacyId()
     {
-        $doc = $this->documents['privacy-id'];
+        $locale = app()->getLocale();
+        $docKey = ($locale === 'en' || $locale === 'zh') ? 'privacy-en' : 'privacy-id';
+        $doc = $this->documents[$docKey];
 
         return view('legal.privacy', [
             'doc' => $doc,
-            'lang' => 'id',
-            'streamUrl' => route('legal.stream', 'privacy-id'),
-            'downloadUrl' => route('legal.download', 'privacy-id'),
+            'lang' => ($docKey === 'privacy-en') ? 'en' : 'id',
+            'streamUrl' => route('legal.stream', $docKey),
+            'downloadUrl' => route('legal.download', $docKey),
         ]);
     }
 
