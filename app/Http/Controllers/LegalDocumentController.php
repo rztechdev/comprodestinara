@@ -18,17 +18,10 @@ class LegalDocumentController extends Controller
             'version'  => '1.0 (Final)',
             'updated'  => 'September 2026',
         ],
-        'privacy-id' => [
+        'privacy' => [
             'title_id' => 'Kebijakan Privasi',
-            'title_en' => 'Privacy Policy (Bahasa Indonesia)',
+            'title_en' => 'Privacy Policy',
             'filename' => 'Destinara-KebijakanPrivasi-v1.0.pdf',
-            'version'  => '1.0',
-            'updated'  => 'September 2026',
-        ],
-        'privacy-en' => [
-            'title_id' => 'Privacy Policy',
-            'title_en' => 'Privacy Policy (English Version)',
-            'filename' => 'Destinara-PrivacyPolicy-v1.0.pdf',
             'version'  => '1.0',
             'updated'  => 'September 2026',
         ],
@@ -49,48 +42,27 @@ class LegalDocumentController extends Controller
     }
 
     /**
-     * Halaman Kebijakan Privasi (Bahasa Indonesia).
+     * Halaman Kebijakan Privasi.
      */
+    public function privacy()
+    {
+        $doc = $this->documents['privacy'];
+
+        return view('legal.privacy', [
+            'doc' => $doc,
+            'streamUrl' => route('legal.stream', 'privacy'),
+            'downloadUrl' => route('legal.download', 'privacy'),
+        ]);
+    }
+
     public function privacyId()
     {
-        $locale = app()->getLocale();
-        $docKey = ($locale === 'en' || $locale === 'zh') ? 'privacy-en' : 'privacy-id';
-        $doc = $this->documents[$docKey];
-
-        return view('legal.privacy', [
-            'doc' => $doc,
-            'lang' => ($docKey === 'privacy-en') ? 'en' : 'id',
-            'streamUrl' => route('legal.stream', $docKey),
-            'downloadUrl' => route('legal.download', $docKey),
-        ]);
+        return $this->privacy();
     }
 
-    /**
-     * Halaman Privacy Policy (English Version).
-     */
     public function privacyEn()
     {
-        $doc = $this->documents['privacy-en'];
-
-        return view('legal.privacy', [
-            'doc' => $doc,
-            'lang' => 'en',
-            'streamUrl' => route('legal.stream', 'privacy-en'),
-            'downloadUrl' => route('legal.download', 'privacy-en'),
-        ]);
-    }
-
-    /**
-     * Halaman Kebijakan Privasi (Privacy Policy) dengan pemilih bahasa ID / EN query param.
-     */
-    public function privacy(Request $request)
-    {
-        $lang = $request->query('lang', 'id');
-        if (!in_array($lang, ['id', 'en'])) {
-            $lang = 'id';
-        }
-
-        return $lang === 'en' ? $this->privacyEn() : $this->privacyId();
+        return redirect()->route('legal.privacy');
     }
 
     /**
@@ -98,6 +70,7 @@ class LegalDocumentController extends Controller
      */
     public function stream(string $type): BinaryFileResponse
     {
+        $type = $this->normalizeType($type);
         $path = $this->resolveFilePath($type);
         $doc = $this->documents[$type];
 
@@ -113,6 +86,7 @@ class LegalDocumentController extends Controller
      */
     public function download(string $type): BinaryFileResponse
     {
+        $type = $this->normalizeType($type);
         $path = $this->resolveFilePath($type);
         $doc = $this->documents[$type];
 
@@ -122,10 +96,24 @@ class LegalDocumentController extends Controller
     }
 
     /**
+     * Normalisasi tipe dokumen (support legacy route types).
+     */
+    protected function normalizeType(string $type): string
+    {
+        if ($type === 'privacy-id' || $type === 'privacy-en') {
+            return 'privacy';
+        }
+
+        return $type;
+    }
+
+    /**
      * Mencari path file fisik dokumen.
      */
     protected function resolveFilePath(string $type): string
     {
+        $type = $this->normalizeType($type);
+
         if (!array_key_exists($type, $this->documents)) {
             abort(404, 'Dokumen resmi tidak ditemukan.');
         }

@@ -49,7 +49,7 @@
             <span class="text-xs text-on-surface-variant font-medium">{{ __('site.legal.version') }} {{ $doc['version'] }}</span>
           </div>
           <h1 class="font-headline-sm text-2xl md:text-3xl lg:text-4xl text-on-surface font-semibold">
-            {{ app()->getLocale() === 'zh' ? __('site.legal.privacy_title') : ($lang === 'en' ? $doc['title_en'] : $doc['title_id']) }}
+            {{ __('site.legal.privacy_title') }}
           </h1>
           <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
             {!! __('site.legal.privacy_intro', ['company' => \App\Models\SiteSetting::get('company_legal_name', 'PT DESTINARA CHAKRAWAL ARTHA')]) !!}
@@ -71,25 +71,23 @@
         </div>
       </div>
 
-      <!-- Language Switcher & Navigasi Cepat Dokumen -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6 pt-4 border-t border-outline-variant/30 text-xs">
-        <div class="flex items-center gap-2">
-          <span class="text-on-surface-variant font-medium mr-1">{{ __('site.legal.doc_language') }}</span>
-          <a href="{{ route('legal.privacy') }}" 
-             class="px-3 py-1.5 font-medium transition-all {{ $lang === 'id' ? 'bg-primary text-on-primary shadow-xs' : 'bg-surface text-on-surface-variant border border-outline-variant/50 hover:text-primary hover:border-primary' }}">
-            🇮🇩 Bahasa Indonesia
-          </a>
-          <a href="{{ route('legal.privacy.en') }}" 
-             class="px-3 py-1.5 font-medium transition-all {{ $lang === 'en' ? 'bg-primary text-on-primary shadow-xs' : 'bg-surface text-on-surface-variant border border-outline-variant/50 hover:text-primary hover:border-primary' }}">
-            🇬🇧 English (International)
-          </a>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <a href="{{ route('legal.terms') }}" class="text-on-surface-variant hover:text-primary transition-colors">
-            &larr; {{ __('site.legal.terms_title') }}
-          </a>
-        </div>
+      <!-- Navigasi Dokumen Resmi Sesuai Footer (Terms, Kebijakan Privasi) -->
+      <div class="flex items-center gap-3 md:gap-4 mt-6 pt-4 border-t border-outline-variant/30 text-xs flex-wrap">
+        <span class="text-on-surface-variant font-medium">{{ __('site.legal.related_docs') }}:</span>
+        
+        <!-- Syarat & Ketentuan -->
+        <a href="{{ route('legal.terms') }}" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">description</span>
+          <span>{{ __('site.footer.terms') }}</span>
+        </a>
+        
+        <span class="text-outline-variant/60">•</span>
+        
+        <!-- Kebijakan Privasi (Aktif) -->
+        <span class="font-bold text-primary pb-0.5 border-b-2 border-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">shield</span>
+          <span>{{ __('site.footer.privacy') }}</span>
+        </span>
       </div>
     </div>
 
@@ -98,7 +96,7 @@
       <div class="px-4 py-3 bg-surface-container-high/60 border-b border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant flex-wrap gap-2">
         <div class="flex items-center gap-2 font-medium">
           <span class="material-symbols-outlined text-base text-secondary">verified</span>
-          <span>{{ $doc['filename'] }} ({{ $lang === 'en' ? 'English Version' : 'Bahasa Indonesia' }})</span>
+          <span>{{ $doc['filename'] }}</span>
           <span class="hidden md:inline text-[11px] text-on-surface-variant/70 font-normal">({{ __('site.legal.view_scale') }})</span>
         </div>
         <div class="flex items-center gap-2">

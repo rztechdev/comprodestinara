@@ -86,7 +86,6 @@ Route::get('/sitemap.xml', function () {
         ['url' => route('contact.index'), 'priority' => '0.8', 'freq' => 'monthly', 'img' => null, 'title' => null],
         ['url' => route('legal.terms'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Syarat & Ketentuan Layanan Destinara'],
         ['url' => route('legal.privacy'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Kebijakan Privasi & Perlindungan Data Destinara'],
-        ['url' => route('legal.privacy.en'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Privacy Policy Destinara (English Version)'],
     ];
 
     foreach ($pages as $p) {

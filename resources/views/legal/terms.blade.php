@@ -49,7 +49,7 @@
             <span class="text-xs text-on-surface-variant font-medium">{{ __('site.legal.version') }} {{ $doc['version'] }}</span>
           </div>
           <h1 class="font-headline-sm text-2xl md:text-3xl lg:text-4xl text-on-surface font-semibold">
-            {{ app()->getLocale() === 'en' ? $doc['title_en'] : (app()->getLocale() === 'zh' ? __('site.legal.terms_title') : $doc['title_id']) }}
+            {{ __('site.legal.terms_title') }}
           </h1>
           <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
             {!! __('site.legal.terms_intro', ['company' => \App\Models\SiteSetting::get('company_legal_name', 'PT DESTINARA CHAKRAWAL ARTHA')]) !!}
@@ -71,12 +71,17 @@
         </div>
       </div>
 
-      <!-- Navigasi Cepat Tab Legal -->
-      <div class="flex items-center gap-4 mt-6 pt-4 border-t border-outline-variant/30 text-xs">
-        <span class="text-on-surface-variant font-medium">{{ __('site.legal.related_docs') }}</span>
-        <span class="font-semibold text-primary pb-0.5 border-b-2 border-primary">{{ __('site.legal.terms_title') }}</span>
-        <a href="{{ route('legal.privacy') }}" class="text-on-surface-variant hover:text-primary transition-colors">
-          {{ __('site.legal.privacy_title') }} &rarr;
+      <!-- Navigasi Dokumen Resmi Sesuai Footer (Terms, Kebijakan Privasi) -->
+      <div class="flex items-center gap-3 md:gap-4 mt-6 pt-4 border-t border-outline-variant/30 text-xs flex-wrap">
+        <span class="text-on-surface-variant font-medium">{{ __('site.legal.related_docs') }}:</span>
+        <span class="font-bold text-primary pb-0.5 border-b-2 border-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">description</span>
+          <span>{{ __('site.footer.terms') }}</span>
+        </span>
+        <span class="text-outline-variant/60">•</span>
+        <a href="{{ route('legal.privacy') }}" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px]">shield</span>
+          <span>{{ __('site.footer.privacy') }}</span>
         </a>
       </div>
     </div>

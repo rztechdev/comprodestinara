@@ -755,9 +755,6 @@
             <li class="font-body-sm text-body-sm">
               <a href="{{ route('legal.privacy') }}" class="w-fit inline-block pb-0.5 border-b-2 border-transparent text-on-surface-variant hover:text-primary hover:border-primary transition-all duration-150">{{ __('site.footer.privacy') }}</a>
             </li>
-            <li class="font-body-sm text-body-sm">
-              <a href="{{ route('legal.privacy.en') }}" class="w-fit inline-block pb-0.5 border-b-2 border-transparent text-on-surface-variant hover:text-primary hover:border-primary transition-all duration-150">{{ __('site.footer.privacy_en') }}</a>
-            </li>
           </ul>
         </div>
         <!-- Kolom 2: Untuk Pengguna -->
