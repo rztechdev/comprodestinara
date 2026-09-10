@@ -93,6 +93,223 @@ body {
   width: 100%;
 }
 
+/* =========================================================
+   RGS-INSPIRED ARCHITECTURAL & EDITORIAL UTILITIES
+   ========================================================= */
+
+/* Optical Sizing for Newsreader Headings */
+.font-serif-display, 
+h1, h2, h3, .font-headline-lg, .font-headline-md, .font-display-hero {
+  font-feature-settings: "opsz" 36, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Crisp Hairline Borders */
+.border-hairline {
+  border-color: rgba(140, 81, 81, 0.2);
+}
+
+.border-hairline-subtle {
+  border-color: rgba(43, 33, 30, 0.12);
+}
+
+/* Authentic RGS Hero Content Panel (100% Matching RGS Reference) */
+.rgs-hero-panel {
+  background-color: #e8e8e8;
+  border-left: 14px solid #8c5151;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  position: relative;
+  z-index: 20;
+}
+
+@media (min-width: 640px) {
+  .rgs-hero-panel {
+    border-left: 18px solid #8c5151;
+  }
+}
+
+/* RGS Signature Hero Cartographic Grid Lines (Crosshair Lines Across Image) */
+.rgs-hero-grid-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .rgs-hero-grid-v {
+    left: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rgs-hero-grid-v {
+    left: clamp(2.25rem, 1.5rem + 1.2vw, 4rem);
+  }
+}
+
+.rgs-hero-grid-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(2rem, -0.04rem + 6.3vw, 5.5rem);
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+/* Pinned RGS Category Tag (Flush to Image Edge) */
+.rgs-category-tag {
+  display: inline-block;
+  padding: 6px 14px 5px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  border-radius: 0px !important;
+}
+
+/* RGS Sharp Rectangular Buttons */
+.rgs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 0px !important;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rgs-btn-primary {
+  background-color: #8c5151;
+  color: #ffffff;
+  border: 2px solid #8c5151;
+}
+
+.rgs-btn-primary:hover {
+  background-color: #703a3a;
+  border-color: #703a3a;
+  color: #ffffff;
+}
+
+.rgs-btn-secondary {
+  background-color: #51634b;
+  color: #ffffff;
+  border: 2px solid #51634b;
+}
+
+.rgs-btn-secondary:hover {
+  background-color: #41503c;
+  border-color: #41503c;
+  color: #ffffff;
+}
+
+.rgs-btn-outline {
+  background-color: transparent;
+  color: #2b211e;
+  border: 2px solid #2b211e;
+}
+
+.rgs-btn-outline:hover {
+  background-color: #2b211e;
+  color: #ffffff;
+}
+
+/* RGS Line-Delimited Editorial Items (No Boxed Card, Signature Connected Bottom Demarcation Line) */
+.rgs-card {
+  border-radius: 0px !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(140, 81, 81, 0.35) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 0 1.75rem 0;
+  position: relative;
+  transition: border-color 0.25s ease;
+}
+
+.rgs-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-bottom-color: #8c5151 !important;
+  z-index: 2;
+}
+
+.rgs-card-alt {
+  border-radius: 0px !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(43, 33, 30, 0.2) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 0 1.5rem 0;
+  position: relative;
+  transition: border-color 0.25s ease;
+}
+
+.rgs-card-alt:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-bottom-color: #703a3a !important;
+  z-index: 2;
+}
+
+/* Continuous connecting line across the gaps beside cards (Desktop & Tablet) */
+@media (min-width: 768px) {
+  .rgs-card::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -2.5rem;
+    right: -2.5rem;
+    height: 2px;
+    background-color: rgba(140, 81, 81, 0.35);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .rgs-card-alt::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -2rem;
+    right: -2rem;
+    height: 2px;
+    background-color: rgba(43, 33, 30, 0.2);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+/* Continuous Grid Baseline Connection (RGS Style: seamless connected line under & beside cards) */
+.rgs-grid-connected {
+  align-items: stretch;
+  border-bottom: 2px solid rgba(140, 81, 81, 0.35);
+  overflow: hidden;
+}
+
+.rgs-grid-connected-alt {
+  align-items: stretch;
+  border-bottom: 2px solid rgba(43, 33, 30, 0.2);
+  overflow: hidden;
+}
+
+/* Mobile Sticky Bar Safe Area */
+.mobile-sticky-action-bar {
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+}
+
 /* Active Nav State Highlight */
 .nav-link.active,
 .mobile-nav-link.active {

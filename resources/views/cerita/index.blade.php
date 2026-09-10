@@ -1,9 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Cerita & Monograf Lapangan — Destinara')
+@section('title', 'Cerita & Monograf Lapangan — Warta Etnografi & Arsip Budaya | Destinara')
+@section('meta_description', 'Kumpulan catatan lapangan, monograf etnobotani, warta komunitas adat, dan refleksi pedagogis dari penelusuran tapak di Nusantara.')
+@section('meta_keywords', 'cerita destinara, monograf lapangan, etnobotani nusantara, warta budaya adat, catatan antropologi, arsip pengetahuan tapak')
+@section('og_image', asset('assets/img/hd/hero-about.jpg'))
+
+@push('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cerita Tapak",
+      "item": "{{ route('stories.index') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
-<main class="w-full pt-20 bg-surface">
+<main class="w-full pt-20 lg:pt-[124px] xl:pt-[132px] bg-surface pb-16 lg:pb-0">
   <div class="flex flex-col w-full">
 
     <!-- Header Section -->
@@ -27,14 +53,14 @@
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
             <div class="lg:col-span-7">
-              <a href="{{ route('stories.show', $featuredStory->slug) }}" class="block relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-md group">
+              <a href="{{ route('stories.show', $featuredStory->slug) }}" class="block relative w-full aspect-[16/10] rounded-none overflow-hidden border border-outline-variant/30 group">
                 <img src="{{ $featuredStory->image_url }}" alt="{{ $featuredStory->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
               </a>
             </div>
             <div class="lg:col-span-5 flex flex-col gap-space-md">
               <div class="flex items-center gap-space-sm text-xs text-secondary font-label-tag">
-                <span class="bg-surface-container-highest px-2 py-1 rounded">{{ $featuredStory->category }}</span>
+                <span class="bg-surface px-2.5 py-1 rounded-none border border-outline-variant/30">{{ $featuredStory->category }}</span>
                 <span>{{ $featuredStory->archive_no }}</span>
                 <span>• {{ $featuredStory->read_time }}</span>
               </div>
@@ -48,7 +74,7 @@
               </p>
               <div class="flex items-center justify-between pt-space-xs border-t border-outline-variant/30 text-body-sm text-on-surface-variant">
                 <span>Oleh {{ $featuredStory->author_name }}</span>
-                <a href="{{ route('stories.show', $featuredStory->slug) }}" class="text-primary font-label-action inline-flex items-center gap-1 hover:underline">
+                <a href="{{ route('stories.show', $featuredStory->slug) }}" class="text-primary font-label-action inline-flex items-center gap-1.5 pb-0.5 border-b border-primary/40 hover:border-primary transition-colors">
                   <span>Baca Selengkapnya</span>
                   <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
@@ -59,20 +85,23 @@
       </section>
     @endif
 
-    <!-- Stories Grid -->
+    <!-- Stories Grid: Unboxed Cards with Bottom Demarcation Lines -->
     <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop py-space-3xl w-full">
-      <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xl">Arsip Catatan Terbaru</h3>
+      <div class="flex flex-col gap-1 mb-space-xl">
+        <span class="font-caption-fieldnote text-caption-fieldnote italic text-secondary">Koleksi Lapangan</span>
+        <h3 class="font-headline-md text-headline-md text-on-surface">Arsip Catatan Terbaru</h3>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-xl">
         @forelse($stories as $story)
-          <article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow">
-            <a href="{{ route('stories.show', $story->slug) }}" class="relative w-full aspect-[16/10] overflow-hidden block group">
+          <article class="rgs-card group flex flex-col pt-0 pb-6">
+            <a href="{{ route('stories.show', $story->slug) }}" class="relative w-full aspect-[16/10] overflow-hidden block rounded-none">
               <img src="{{ $story->image_url }}" alt="{{ $story->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
               <div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
             </a>
-            <div class="p-space-lg flex flex-col justify-between flex-grow gap-space-md">
+            <div class="pt-space-md flex flex-col justify-between flex-grow gap-space-md">
               <div class="flex flex-col gap-space-xs">
                 <div class="flex items-center gap-space-xs text-xs text-secondary font-label-tag">
-                  <span>{{ $story->category }}</span>
+                  <span class="bg-surface-container-high px-2 py-0.5 rounded-none border border-outline-variant/20">{{ $story->category }}</span>
                   <span>•</span>
                   <span>{{ $story->read_time }}</span>
                 </div>

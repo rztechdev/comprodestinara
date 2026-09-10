@@ -5,6 +5,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LegalDocumentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DestinationController as AdminDestinationController;
 use App\Http\Controllers\Admin\StoryController as AdminStoryController;
@@ -32,6 +33,13 @@ Route::get('/cerita/{slug}', [StoryController::class, 'show'])->name('stories.sh
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.send')->middleware('throttle:10,1');
 
+// Dokumen Resmi & Kebijakan Hukum (Inline Viewer PDF & Unduhan)
+Route::get('/syarat-ketentuan', [LegalDocumentController::class, 'terms'])->name('legal.terms');
+Route::get('/kebijakan-privasi', [LegalDocumentController::class, 'privacyId'])->name('legal.privacy');
+Route::get('/privacy-policy', [LegalDocumentController::class, 'privacyEn'])->name('legal.privacy.en');
+Route::get('/dokumen/legal/{type}/stream', [LegalDocumentController::class, 'stream'])->name('legal.stream');
+Route::get('/dokumen/legal/{type}/download', [LegalDocumentController::class, 'download'])->name('legal.download');
+
 // Fallback Route untuk melayani file gambar storage di hosting tanpa symlink (cPanel & Hostinger)
 Route::get('/storage/{path}', function (string $path) {
     $paths = [
@@ -54,42 +62,61 @@ Route::middleware('auth')->get('/admin/clear-cache', function () {
     return redirect()->route('admin.dashboard')->with('success', 'Semua cache aplikasi (Route, Config, View) berhasil dibersihkan!');
 })->name('admin.clear-cache');
 
-// SEO Sitemap Dinamis untuk Google Search Console
+// SEO Sitemap Dinamis untuk Google Search Console & Google Images
 Route::get('/sitemap.xml', function () {
     $destinations = Destination::where('is_active', true)->get();
     $stories = Story::where('is_active', true)->get();
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
-    // Static pages
+    // Static service and landing pages
     $pages = [
-        ['url' => url('/'), 'priority' => '1.0', 'freq' => 'weekly'],
-        ['url' => route('about'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['url' => route('destinations.index'), 'priority' => '0.9', 'freq' => 'weekly'],
-        ['url' => route('for-schools'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['url' => route('for-researchers'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['url' => route('for-villages'), 'priority' => '0.8', 'freq' => 'monthly'],
-        ['url' => route('stories.index'), 'priority' => '0.8', 'freq' => 'weekly'],
-        ['url' => route('contact.index'), 'priority' => '0.8', 'freq' => 'monthly'],
+        ['url' => url('/'), 'priority' => '1.0', 'freq' => 'weekly', 'img' => asset('assets/img/hd/hero-home.jpg'), 'title' => 'Destinara — Menghidupkan Ruang Belajar Nyata di Tapak Nusantara'],
+        ['url' => route('for-schools'), 'priority' => '0.9', 'freq' => 'weekly', 'img' => asset('assets/img/hd/hero-fieldwork.jpg'), 'title' => 'Program Untuk Sekolah Destinara'],
+        ['url' => route('for-researchers'), 'priority' => '0.9', 'freq' => 'weekly', 'img' => asset('assets/img/hd/hero-about.jpg'), 'title' => 'Layanan Untuk Peneliti & Akademisi Destinara'],
+        ['url' => route('for-villages'), 'priority' => '0.9', 'freq' => 'weekly', 'img' => asset('assets/img/hd/desa-serambi.jpg'), 'title' => 'Mitra Desa & Komunitas Adat Destinara'],
+        ['url' => route('destinations.index'), 'priority' => '0.9', 'freq' => 'weekly', 'img' => asset('assets/img/hd/hero-fieldwork.jpg'), 'title' => 'Katalog Destinasi Tapak Terkurasi'],
+        ['url' => route('stories.index'), 'priority' => '0.8', 'freq' => 'weekly', 'img' => asset('assets/img/hd/hero-about.jpg'), 'title' => 'Cerita & Monograf Lapangan Destinara'],
+        ['url' => route('about'), 'priority' => '0.8', 'freq' => 'monthly', 'img' => asset('assets/img/hd/hero-about.jpg'), 'title' => 'Tentang Inisiatif Destinara'],
+        ['url' => route('contact.index'), 'priority' => '0.8', 'freq' => 'monthly', 'img' => null, 'title' => null],
+        ['url' => route('legal.terms'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Syarat & Ketentuan Layanan Destinara'],
+        ['url' => route('legal.privacy'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Kebijakan Privasi & Perlindungan Data Destinara'],
+        ['url' => route('legal.privacy.en'), 'priority' => '0.5', 'freq' => 'monthly', 'img' => null, 'title' => 'Privacy Policy Destinara (English Version)'],
     ];
 
     foreach ($pages as $p) {
-        $xml .= "  <url>\n    <loc>{$p['url']}</loc>\n    <lastmod>" . date('Y-m-d') . "</lastmod>\n    <changefreq>{$p['freq']}</changefreq>\n    <priority>{$p['priority']}</priority>\n  </url>\n";
+        $xml .= "  <url>\n    <loc>{$p['url']}</loc>\n    <lastmod>" . date('Y-m-d') . "</lastmod>\n    <changefreq>{$p['freq']}</changefreq>\n    <priority>{$p['priority']}</priority>\n";
+        if (!empty($p['img'])) {
+            $imgEsc = htmlspecialchars($p['img'], ENT_XML1, 'UTF-8');
+            $titleEsc = htmlspecialchars($p['title'], ENT_XML1, 'UTF-8');
+            $xml .= "    <image:image>\n      <image:loc>{$imgEsc}</image:loc>\n      <image:title>{$titleEsc}</image:title>\n    </image:image>\n";
+        }
+        $xml .= "  </url>\n";
     }
 
     // Destinations
     foreach ($destinations as $d) {
         $loc = route('destinations.show', $d->slug);
         $date = $d->updated_at->format('Y-m-d');
-        $xml .= "  <url>\n    <loc>{$loc}</loc>\n    <lastmod>{$date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n";
+        $imgUrl = $d->image_url ? (str_starts_with($d->image_url, 'http') ? $d->image_url : url($d->image_url)) : asset('assets/img/hd/hero-fieldwork.jpg');
+        $imgEsc = htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8');
+        $nameEsc = htmlspecialchars($d->name . ' - ' . $d->location, ENT_XML1, 'UTF-8');
+        $xml .= "  <url>\n    <loc>{$loc}</loc>\n    <lastmod>{$date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n";
+        $xml .= "    <image:image>\n      <image:loc>{$imgEsc}</image:loc>\n      <image:title>{$nameEsc}</image:title>\n    </image:image>\n";
+        $xml .= "  </url>\n";
     }
 
     // Stories
     foreach ($stories as $s) {
         $loc = route('stories.show', $s->slug);
         $date = ($s->published_at ?? $s->updated_at)->format('Y-m-d');
-        $xml .= "  <url>\n    <loc>{$loc}</loc>\n    <lastmod>{$date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n";
+        $imgUrl = $s->image_url ? (str_starts_with($s->image_url, 'http') ? $s->image_url : url($s->image_url)) : asset('assets/img/hd/hero-about.jpg');
+        $imgEsc = htmlspecialchars($imgUrl, ENT_XML1, 'UTF-8');
+        $titleEsc = htmlspecialchars($s->title, ENT_XML1, 'UTF-8');
+        $xml .= "  <url>\n    <loc>{$loc}</loc>\n    <lastmod>{$date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n";
+        $xml .= "    <image:image>\n      <image:loc>{$imgEsc}</image:loc>\n      <image:title>{$titleEsc}</image:title>\n    </image:image>\n";
+        $xml .= "  </url>\n";
     }
 
     $xml .= '</urlset>';

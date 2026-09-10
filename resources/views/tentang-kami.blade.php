@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami — Jejak Cerita Pendiri & Nilai Dasar Destinara')
+@section('title', 'Tentang Kami — Jejak Cerita Pendiri & Nilai Dasar Inisiatif | Destinara')
+@section('meta_description', 'Mengenal visi, manifesto, dan dedikasi Destinara dalam menghidupkan ruang belajar berbasis komunitas adat dan kedaulatan pengetahuan lokal di seluruh Indonesia.')
+@section('meta_keywords', 'tentang destinara, profil destinara, pt destinara chakrawal artha, inisiatif pendidikan tapak, pendiri destinara, pelestarian budaya nusantara')
+@section('og_image', asset('assets/img/hd/hero-about.jpg'))
+
+@push('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": "{{ url('/') }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tentang Kami",
+      "item": "{{ route('about') }}"
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
 @php
@@ -11,32 +37,51 @@
   $gov = $sections['governance'] ?? null;
 @endphp
 
-<main class="w-full pt-20 bg-surface">
+<main class="w-full pt-20 lg:pt-[124px] xl:pt-[132px] bg-surface pb-16 lg:pb-0">
     <div class="flex flex-col w-full">
       
       @if(!$hero || $hero->is_active)
-      <!-- 1. Hero: Foto Besar Tapak Desa Full-Bleed -->
-      <section class="relative w-full -mt-20 overflow-hidden bg-inverse-surface">
-        <div class="w-full min-h-[520px] sm:min-h-[600px] lg:min-h-[720px] bg-cover bg-center flex flex-col justify-end relative" style="background-image: url('{{ $hero?->image_url ?? asset('assets/img/hd/hero-about.jpg') }}')">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#231917] via-[#231917]/50 to-transparent"></div>
-          <div class="relative z-10 max-w-[1280px] w-full mx-auto px-gutter-mobile md:px-gutter-desktop pt-28 sm:pt-space-3xl lg:pt-space-4xl pb-space-xl sm:pb-space-2xl lg:pb-space-3xl flex flex-col items-start">
-            @if($hero?->badge)
-            <div class="inline-flex items-center gap-space-xs px-space-md py-space-2xs rounded-lg bg-surface/15 backdrop-blur-md mb-space-md sm:mb-space-lg text-primary-fixed">
-              <span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span>
-              <span class="font-body-sm text-xs sm:text-body-sm text-surface-container-low tracking-normal">{{ $hero->badge }}</span>
+      <!-- 1. Hero: Foto Dokumenter Tapak Desa dengan Format Editorial RGS -->
+      <section class="relative w-full bg-[#231917] overflow-hidden">
+        <div class="relative w-full h-[460px] sm:h-[560px] md:h-[620px] lg:h-[680px] xl:h-[740px] overflow-hidden">
+          <img src="{{ $hero?->image_url ?? asset('assets/img/hd/hero-about.jpg') }}" 
+               alt="{{ $hero?->title ?? 'Tentang Kami Destinara' }}" 
+               class="w-full h-full object-cover object-[center_32%] brightness-95"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#231917]/90 via-[#231917]/30 via-40% to-transparent pointer-events-none"></div>
+          <!-- RGS Architectural Cartographic Lines (100% Sejajar dengan Needle & Margin Header) -->
+          <div class="absolute inset-0 pointer-events-none z-10">
+            <div class="max-w-[1440px] mx-auto px-gutter-mobile md:px-gutter-desktop h-full relative">
+              <!-- Garis Vertikal: SEJAJAR PRESISI 100% DENGAN NEEDLE LOGO HEADER -->
+              <div class="relative w-5 h-full mr-1">
+                <div class="w-[2px] h-full bg-white/90 absolute left-1/2 -translate-x-1/2 top-0"></div>
+              </div>
             </div>
-            @endif
-            <h1 class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-display-hero text-surface-container-lowest max-w-4xl tracking-tight leading-tight">
-              {{ $hero?->title ?? 'Tentang Kami: Merajut Dialog Setara antara Ruang Kuliah dan Kearifan Warga Tapak Nusantara' }}
-            </h1>
-            <div class="mt-space-md sm:mt-space-lg flex flex-wrap items-center gap-space-md sm:gap-space-xl text-surface-container-high font-body-sm text-xs sm:text-body-sm">
-              <span class="flex items-center gap-space-2xs text-secondary-fixed">
-                <span class="material-symbols-outlined text-[18px]">verified</span>
-                {{ $hero?->subtitle ?? 'Didokumentasikan sejak 2018' }}
-              </span>
-              <span class="text-outline-variant font-caption-fieldnote text-caption-fieldnote italic">
-                {{ $hero?->image_caption ?? 'Arsip Inisiatif Destinara — Yogyakarta, Magelang, & Enrekang' }}
-              </span>
+          </div>
+
+          <!-- Garis Horizontal Melintang Penuh dari Kiri ke Kanan Layar -->
+          <div class="rgs-hero-grid-h pointer-events-none"></div>
+          
+          <div class="absolute bottom-0 inset-x-0 z-20">
+            <div class="max-w-[1440px] mx-auto px-gutter-mobile md:px-gutter-desktop pb-24 sm:pb-28 lg:pb-32 xl:pb-36">
+              <div class="max-w-3xl flex flex-col items-start gap-3 pl-8 sm:pl-10 md:pl-12 lg:pl-14">
+                @if($hero?->badge)
+                <span class="rgs-category-tag bg-[#8C5151]">
+                  {{ $hero->badge }}
+                </span>
+                @endif
+                <h1 class="font-display-hero text-2xl sm:text-3xl lg:text-4xl xl:text-[44px] text-white tracking-tight leading-snug drop-shadow-md">
+                  {{ $hero?->title ?? 'Merajut Dialog Setara antara Ruang Kuliah dan Kearifan Warga Tapak Nusantara' }}
+                </h1>
+                <div class="flex flex-wrap items-center gap-4 text-white/90 font-body-sm text-xs sm:text-sm pt-1">
+                  <span class="flex items-center gap-1.5 text-secondary-fixed">
+                    <span class="material-symbols-outlined text-[18px]">verified</span>
+                    {{ $hero?->subtitle ?? 'Didokumentasikan sejak 2018' }}
+                  </span>
+                  <span class="font-caption-fieldnote italic text-white/75">
+                    {{ $hero?->image_caption ?? 'Arsip Inisiatif Destinara — Yogyakarta, Magelang, & Enrekang' }}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -45,22 +90,22 @@
 
       @if(!$manifesto || $manifesto->is_active)
       <!-- 2. Section Visi-Misi & Manifesto -->
-      <section class="w-full bg-surface py-space-2xl sm:py-space-3xl lg:py-space-4xl relative" id="manifesto">
+      <section class="w-full bg-surface py-16 sm:py-20 lg:py-24 relative border-b border-[#8C5151]/15" id="manifesto">
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col items-center">
-          <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary mb-space-lg sm:mb-space-xl">
-            <span class="material-symbols-outlined text-[24px]">menu_book</span>
+          <div class="w-12 h-12 bg-surface-container flex items-center justify-center text-primary mb-6">
+            <span class="material-symbols-outlined text-[26px]">menu_book</span>
           </div>
-          <div class="max-w-[720px] mx-auto text-center flex flex-col items-center">
-            <blockquote class="font-headline-lg text-xl sm:text-2xl md:text-3xl lg:text-headline-lg text-on-surface leading-snug tracking-tight" id="filosofi">
+          <div class="max-w-[760px] mx-auto text-center flex flex-col items-center">
+            <blockquote class="font-headline-lg text-2xl sm:text-3xl lg:text-[34px] text-on-surface leading-snug tracking-tight" id="filosofi">
               {{ $manifesto?->title ?? '“Pendidikan tidak semestinya datang ke desa sebagai penilai luar, melainkan sebagai tamu yang beradab dan pembelajar yang rendah hati.”' }}
             </blockquote>
-            <div class="w-16 h-[2px] bg-primary/30 my-space-lg"></div>
-            <p class="font-caption-fieldnote text-caption-fieldnote italic text-secondary max-w-[560px]">
+            <div class="w-16 h-[2px] bg-primary/40 my-6"></div>
+            <p class="font-caption-fieldnote text-caption-fieldnote italic text-secondary max-w-[580px] text-base">
               {{ $manifesto?->subtitle ?? 'Sebuah pegangan moral yang kami tuangkan dalam setiap penyusunan protokol etika tapak, modul pembekalan siswa, dan interaksi dengan sesepuh adat.' }}
             </p>
           </div>
           
-          <!-- Micro Metrics -->
+          <!-- Micro Metrics — RGS Line-Delimited Items -->
           @php
             $manifestoItems = $manifesto?->items ?? [
                 ['stat' => '12 Orang', 'desc' => 'Batas ketat daya tampung per kelompok guna menekan beban ekologis tapak.'],
@@ -68,11 +113,11 @@
                 ['stat' => '48 Jam', 'desc' => 'Waktu orientasi hening tanpa gawai sebelum kegiatan riset lapangan dimulai.']
             ];
           @endphp
-          <div class="mt-space-3xl w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+          <div class="mt-14 w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8 rgs-grid-connected-alt">
             @foreach($manifestoItems as $idx => $mItem)
-              <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between card-interactive">
-                <span class="font-headline-md text-headline-md {{ $idx == 0 ? 'text-primary' : ($idx == 1 ? 'text-secondary' : 'text-tertiary') }} font-serif">{{ $mItem['stat'] ?? $mItem['title'] ?? '' }}</span>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs">{{ $mItem['desc'] ?? '' }}</p>
+              <div class="rgs-card-alt flex flex-col justify-between">
+                <span class="font-headline-md text-2xl lg:text-3xl {{ $idx == 0 ? 'text-primary' : ($idx == 1 ? 'text-secondary' : 'text-tertiary') }} font-serif font-normal">{{ $mItem['stat'] ?? $mItem['title'] ?? '' }}</span>
+                <p class="font-body-sm text-[15px] text-on-surface-variant mt-2 leading-relaxed">{{ $mItem['desc'] ?? '' }}</p>
               </div>
             @endforeach
           </div>
@@ -82,28 +127,28 @@
 
       @if(!$founder || $founder->is_active)
       <!-- 3. Cerita Pendirian & Rekam Jejak -->
-      <section class="w-full bg-surface-container-low py-space-4xl relative overflow-hidden" id="rekam-jejak">
+      <section class="w-full bg-surface-container-low py-16 sm:py-20 lg:py-24 relative overflow-hidden border-b border-[#8C5151]/15" id="rekam-jejak">
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-2xl lg:gap-space-3xl items-start">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <!-- Left Column: Archival Plates -->
-            <div class="lg:col-span-5 flex flex-col gap-space-xl">
-              <div class="relative bg-surface rounded-xl p-space-sm shadow-sm">
-                <img class="w-full h-80 lg:h-96 object-cover rounded-lg" alt="{{ $founder?->title ?? 'Cuplikan jurnal observasi lapangan' }}" src="{{ $founder?->image_url ?? asset('assets/img/hd/about-musyawarah.jpg') }}"/>
-                <div class="pt-space-md px-space-xs pb-space-2xs flex flex-col">
-                  <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant">
+            <div class="lg:col-span-5 flex flex-col gap-6">
+              <div class="relative bg-surface p-2 border border-[#8C5151]/20">
+                <img class="w-full h-80 lg:h-96 object-cover" alt="{{ $founder?->title ?? 'Cuplikan jurnal observasi lapangan' }}" src="{{ $founder?->image_url ?? asset('assets/img/hd/about-musyawarah.jpg') }}"/>
+                <div class="pt-3 px-1 pb-1 flex flex-col">
+                  <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant text-xs sm:text-sm">
                     {{ $founder?->image_caption ?? 'Plat Arsip I: Cuplikan musyawarah pembentukan etika tapak bersama dewan tetua adat.' }}
                   </span>
                 </div>
               </div>
               
-              <!-- Marginalia Note Box -->
-              <div class="bg-surface-container p-space-lg rounded-xl flex items-start gap-space-md">
+              <!-- Marginalia Note Plinth -->
+              <div class="bg-surface border-l-4 border-l-[#8C5151] border-y border-r border-[#2B211E]/15 p-6 flex items-start gap-4">
                 <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-1">notes</span>
                 <div>
                   <p class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface leading-relaxed">
                     “Beban terbesar pariwisata edukasi konvensional adalah kecenderungan menjadikan kehidupan pedesaan sekadar tontonan akhir pekan, bukan ekosistem hidup yang memiliki ritme dan martabatnya sendiri.”
                   </p>
-                  <span class="font-label-tag text-label-tag text-on-surface-variant mt-space-2xs block">
+                  <span class="font-label-tag text-xs text-on-surface-variant mt-2 block font-semibold">
                     Catatan Lapangan Ryan Prasetya, November 2018
                   </span>
                 </div>
@@ -112,12 +157,12 @@
 
             <!-- Right Column: Essay -->
             <div class="lg:col-span-7 flex flex-col">
-              <div class="max-w-[620px] flex flex-col gap-space-lg">
-                <div class="flex items-center gap-space-xs text-secondary font-body-sm text-body-sm">
+              <div class="max-w-[620px] flex flex-col gap-5">
+                <div class="flex items-center gap-2 text-secondary font-body-sm text-sm font-semibold">
                   <span class="material-symbols-outlined text-[18px]">history_edu</span>
                   <span>{{ $founder?->badge ?? 'Latar Belakang & Perjalanan' }}</span>
                 </div>
-                <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-snug">
+                <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-[34px] text-on-surface tracking-tight leading-snug">
                   {{ $founder?->title ?? 'Bermula dari Keresahan atas Ekskursi yang Berjarak' }}
                 </h2>
                 @if($founder?->subtitle)
@@ -125,7 +170,7 @@
                   {{ $founder->subtitle }}
                 </div>
                 @endif
-                <div class="font-body-default text-body-default text-on-surface-variant space-y-space-md leading-relaxed">
+                <div class="font-body-default text-body-default text-on-surface-variant space-y-4 leading-relaxed">
                   @if($founder?->content)
                     {!! nl2br(e($founder->content)) !!}
                   @else
@@ -145,43 +190,42 @@
       @endif
 
       <!-- 4. Section Profil Tim (Dewan Kurator) -->
-      <section class="w-full bg-surface py-space-4xl">
+      <section class="w-full bg-surface py-16 sm:py-20 lg:py-24 border-b border-[#8C5151]/15">
         <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop">
-          <div class="max-w-2xl mb-space-2xl">
-            <div class="inline-flex items-center gap-space-xs text-primary font-body-sm text-body-sm mb-space-xs">
-              <span class="material-symbols-outlined text-[18px]">group</span>
-              <span>Dewan Penggagas &amp; Penjaga Tapak</span>
-            </div>
-            <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          <div class="max-w-2xl mb-12">
+            <span class="text-xs font-bold uppercase tracking-widest text-primary block mb-2">
+              DEWAN PENGGAGAS &amp; PENJAGA TAPAK
+            </span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface tracking-tight">
               Pribadi di Balik Percakapan Lapangan
             </h2>
-            <p class="font-body-default text-body-default text-on-surface-variant mt-space-xs">
+            <p class="font-body-default text-base text-on-surface-variant mt-2 leading-relaxed">
               Menggabungkan ketelitian metodologi akademis dengan kepekaan kultural yang diasah bertahun-tahun di tanah perjumpaan.
             </p>
           </div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-space-xl">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 rgs-grid-connected">
             @forelse($team as $member)
-              <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col justify-between border border-outline-variant/40 card-interactive">
-                <div class="flex flex-col gap-space-lg">
-                  <div class="flex flex-col sm:flex-row gap-space-lg items-start sm:items-center">
-                    <img class="w-24 h-24 lg:w-28 lg:h-28 rounded-xl object-cover shrink-0" alt="{{ $member->name }}" src="{{ $member->photo_url }}"/>
+              <div class="rgs-card flex flex-col justify-between">
+                <div class="flex flex-col gap-4">
+                  <div class="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+                    <img class="w-24 h-24 lg:w-28 lg:h-28 rounded-none object-cover shrink-0 border border-[#8C5151]/20" alt="{{ $member->name }}" src="{{ $member->photo_url }}"/>
                     <div class="flex flex-col">
-                      <span class="font-label-tag text-label-tag text-secondary font-medium">{{ $member->role }}</span>
-                      <h3 class="font-headline-sm text-headline-sm text-on-surface mt-space-2xs">{{ $member->name }}</h3>
+                      <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">{{ $member->role }}</span>
+                      <h3 class="font-headline-sm text-xl text-on-surface mt-1 font-bold">{{ $member->name }}</h3>
                       @if($member->affiliation)
-                        <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant">{{ $member->affiliation }}</span>
+                        <span class="font-caption-fieldnote text-caption-fieldnote italic text-on-surface-variant text-sm">{{ $member->affiliation }}</span>
                       @endif
                     </div>
                   </div>
                   @if($member->bio)
-                  <div class="font-body-default text-body-default text-on-surface-variant space-y-space-sm leading-relaxed text-xs sm:text-sm">
+                  <div class="font-body-default text-sm sm:text-[15px] text-on-surface-variant space-y-2 leading-relaxed pt-2">
                     {!! nl2br(e($member->bio)) !!}
                   </div>
                   @endif
                 </div>
-                <div class="mt-space-xl pt-space-md flex flex-wrap items-center justify-between gap-space-sm border-t border-outline-variant/30">
-                  <div class="flex items-center gap-space-2xs text-secondary font-body-sm text-xs">
+                <div class="mt-6 pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-[#2B211E]/10">
+                  <div class="flex items-center gap-1.5 text-secondary font-body-sm text-xs">
                     <span class="material-symbols-outlined text-[16px]">location_on</span>
                     <span>{{ $member->location ?? 'Sekretariat Destinara' }}</span>
                   </div>
@@ -200,23 +244,23 @@
       </section>
 
       <!-- 5. CTA Penutup -->
-      <section class="w-full bg-surface-container-high py-space-4xl relative overflow-hidden">
+      <section class="w-full bg-surface-container-low py-16 sm:py-20 lg:py-24 relative overflow-hidden">
         <div class="max-w-[760px] mx-auto px-gutter-mobile md:px-gutter-desktop text-center flex flex-col items-center">
-          <span class="font-caption-fieldnote text-caption-fieldnote italic text-primary mb-space-xs">
-            {{ $gov?->badge ?? 'Pintu Kami Selalu Terbuka' }}
+          <span class="text-xs font-bold uppercase tracking-widest text-primary mb-2">
+            {{ $gov?->badge ?? 'PINTU KAMI SELALU TERBUKA' }}
           </span>
-          <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-on-surface tracking-tight">
             {{ $gov?->title ?? 'Mari Duduk dan Bercerita' }}
           </h2>
-          <p class="font-body-default text-body-default text-on-surface-variant mt-space-md max-w-xl leading-relaxed">
+          <p class="font-body-default text-base text-on-surface-variant mt-3 max-w-xl leading-relaxed">
             {{ $gov?->subtitle ?? 'Apakah Anda seorang pendidik yang ingin memperkaya ruang kelas dengan realitas lapangan, atau peneliti yang mencari ruang belajar beretika? Kami mengundang Anda untuk bertukar pikiran bersama kami.' }}
           </p>
-          <div class="mt-space-2xl flex flex-col sm:flex-row items-center justify-center gap-space-md w-full sm:w-auto">
-            <a class="w-full sm:w-auto bg-primary-container text-on-primary font-label-action text-label-action px-space-xl py-space-md rounded-lg hover:bg-primary transition-colors text-center shadow-sm" href="{{ $gov?->button_link ?? route('contact.index') }}">
-              {{ $gov?->button_text ?? 'Kirim Pesan ke Tim Destinara' }}
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+            <a class="rgs-btn rgs-btn-primary w-full sm:w-auto text-center" href="{{ $gov?->button_link ?? route('contact.index') }}">
+              <span>{{ $gov?->button_text ?? 'Kirim Pesan ke Tim Destinara' }}</span>
             </a>
-            <a class="font-label-action text-label-action text-secondary hover:text-on-surface py-space-sm px-space-md transition-colors underline underline-offset-8 decoration-secondary/50 hover:decoration-secondary" href="{{ route('destinations.index') }}">
-              Jelajahi Wilayah Dampingan
+            <a class="rgs-btn rgs-btn-outline w-full sm:w-auto text-center" href="{{ route('destinations.index') }}">
+              <span>Jelajahi Wilayah Dampingan</span>
             </a>
           </div>
         </div>

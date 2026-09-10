@@ -24,11 +24,10 @@
             <div class="absolute bottom-0 left-0 w-72 h-72 bg-[#51634b]/20 rounded-full blur-2xl"></div>
         </div>
 
-        <div class="relative flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-[#703a3a] text-white flex items-center justify-center font-bold text-xl shadow-md">
-                D
-            </div>
-            <span class="text-white font-extrabold text-xl tracking-wider">DESTINARA</span>
+        <div class="relative flex items-center">
+            <a href="{{ route('home') }}" class="inline-block" title="Destinara">
+                <img src="{{ asset('assets/img/logo-mark-tight.png') }}" alt="Logo Destinara" class="h-14 w-auto object-contain drop-shadow-md">
+            </a>
         </div>
 
         <div class="relative">
@@ -65,15 +64,12 @@
     <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-white">
         <div class="w-full max-w-sm">
 
-            {{-- Mobile branding --}}
-            <div class="flex items-center gap-2.5 mb-8 lg:hidden">
-                <div class="w-9 h-9 rounded-lg bg-[#703a3a] text-white flex items-center justify-center font-bold text-lg">
-                    D
-                </div>
-                <span class="text-gray-900 font-extrabold text-lg">DESTINARA</span>
-            </div>
-
             <div class="mb-7">
+                <div class="mb-5">
+                    <a href="{{ route('home') }}" class="inline-block" title="Destinara">
+                        <img src="{{ asset('assets/img/logo-mark-tight.png') }}" alt="Logo Destinara" class="h-12 w-auto object-contain">
+                    </a>
+                </div>
                 <h2 class="text-2xl font-bold text-gray-900">Masuk ke Panel</h2>
                 <p class="text-gray-500 text-xs mt-1">Masukkan email dan password akun administrator Destinara</p>
             </div>
@@ -90,7 +86,7 @@
                 <div>
                     <label for="email" class="block text-xs font-semibold text-gray-700 mb-1.5">Alamat Email</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username"
-                           placeholder="kemitraan@destinara.id"
+                           placeholder="admin@destinara.id"
                            class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-xs focus:outline-none focus:border-[#703a3a] focus:ring-1 focus:ring-[#703a3a] transition-all">
                 </div>
 

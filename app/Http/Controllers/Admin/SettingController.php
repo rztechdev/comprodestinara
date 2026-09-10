@@ -18,7 +18,12 @@ class SettingController extends Controller
     {
         $data = $request->except(['_token', '_method']);
         foreach ($data as $key => $value) {
-            SiteSetting::set($key, $value);
+            if ($value && ($key === 'google_site_verification' || $key === 'bing_site_verification')) {
+                if (preg_match('/content=[\'"]([^\'"]+)[\'"]/i', $value, $matches)) {
+                    $value = $matches[1];
+                }
+            }
+            SiteSetting::set($key, $value ? trim($value) : $value);
         }
         return back()->with('success', 'Pengaturan website berhasil diperbarui!');
     }

@@ -1,7 +1,11 @@
+# Destinara Search Engine Optimization Directives
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /login
 Disallow: /register
+Disallow: /password/
+Disallow: /storage/framework/
 
-Sitemap: https://jadisatukreatif.com/sitemap.xml
+# Sitemaps
+Sitemap: https://destinara.id/sitemap.xml

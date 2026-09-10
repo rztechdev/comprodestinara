@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
 
         $adminPassword = config('admin.password', 'Destinara2025*');
         User::updateOrCreate(
-            ['email' => config('admin.email', 'kemitraan@destinara.id')],
+            ['email' => config('admin.email', 'admin@destinara.id')],
             [
-                'name' => config('admin.name', 'Kemitraan Destinara'),
+                'name' => config('admin.name', 'Admin Destinara'),
                 'password' => Hash::make($adminPassword),
             ]
         );
@@ -40,9 +40,17 @@ class DatabaseSeeder extends Seeder
             'company_legal_name' => 'PT DESTINARA CHAKRAWAL ARTHA',
             'site_tagline' => 'Menghidupkan Ruang Belajar Nyata di Tapak Nusantara',
             'site_description' => 'Inisiatif pendidikan lapangan dan riset berbasis komunitas yang menjembatani kurikulum institusi dengan kearifan tapak dan pengetahuan lokal di seluruh Nusantara.',
-            'contact_email' => 'kemitraan@destinara.id',
-            'contact_phone' => '+62 812-8890-4411',
-            'contact_whatsapp' => '6281288904411',
+            'contact_email' => 'hello@destinara.id',
+            'contact_email_partnership' => 'partnership@destinara.id',
+            'contact_email_hello' => 'hello@destinara.id',
+            'contact_phone' => '+62 821-1620-0363',
+            'contact_whatsapp' => '6282116200363',
+            'contact_phone_maya' => '+62 821-1620-0363',
+            'contact_whatsapp_maya' => '6282116200363',
+            'contact_phone_azki' => '+62 858-9486-0696',
+            'contact_whatsapp_azki' => '6285894860696',
+            'contact_phone_ryan' => '+62 857-7441-0978',
+            'contact_whatsapp_ryan' => '6285774410978',
             'address_sleman' => 'Jl. Kaliurang KM 14, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta',
             'address_jakarta' => 'Jl. Teuku Umar No. 12, Menteng, Jakarta Pusat',
             'office_hours' => 'Senin – Sabtu, 08.00–17.00 WIB',

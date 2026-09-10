@@ -17,25 +17,23 @@
 
 <div class="flex h-screen overflow-hidden">
     {{-- Sidebar --}}
-    <aside class="fixed inset-y-0 left-0 z-50 w-60 bg-[#392e2b] transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col justify-between"
+    <aside class="fixed inset-y-0 left-0 z-50 w-72 bg-[#392e2b] transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col justify-between"
            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
         <div>
-            <div class="flex items-center justify-between h-14 px-4 border-b border-white/10">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-[#703a3a] flex items-center justify-center text-white font-bold text-base shadow-sm">
-                        D
-                    </div>
+            <div class="flex items-center justify-between h-14 px-5">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3" title="Destinara Admin">
+                    <img src="{{ asset('assets/img/logo-mark-tight.png') }}" alt="Logo Destinara" class="h-8 w-auto object-contain drop-shadow-sm flex-shrink-0">
                     <div>
-                        <span class="text-white font-semibold text-sm tracking-wider uppercase">DESTINARA</span>
+                        <span class="text-white font-bold text-sm tracking-wider uppercase">DESTINARA</span>
                         <span class="block text-[10px] text-white/50 tracking-normal">Panel Kurator &amp; Admin</span>
                     </div>
-                </div>
+                </a>
                 <button @click="sidebarOpen = false" class="lg:hidden text-white/60 hover:text-white">
                     <span class="material-symbols-outlined text-sm">close</span>
                 </button>
             </div>
 
-            <nav class="mt-4 px-3 space-y-1">
+            <nav class="mt-2 px-3.5 space-y-1">
                 @php
                     $unreadMessagesCount = \App\Models\ContactMessage::where('is_read', false)->count();
                     $navItems = [
@@ -100,12 +98,15 @@
                 <button @click="sidebarOpen = true" class="lg:hidden text-gray-500 hover:text-gray-700">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center lg:hidden" title="Destinara Admin">
+                    <img src="{{ asset('assets/img/logo-mark-tight.png') }}" alt="Logo Destinara" class="h-7 w-auto object-contain">
+                </a>
                 <h1 class="text-xs uppercase tracking-wider font-semibold text-gray-700">@yield('title', 'Dashboard')</h1>
             </div>
             <div class="flex items-center gap-3">
                 <div class="text-right hidden sm:block">
                     <div class="text-xs font-medium text-gray-800">{{ auth()->user()?->name ?? 'Admin Destinara' }}</div>
-                    <div class="text-[10px] text-gray-400">{{ auth()->user()?->email ?? 'kemitraan@destinara.id' }}</div>
+                    <div class="text-[10px] text-gray-400">{{ auth()->user()?->email ?? 'admin@destinara.id' }}</div>
                 </div>
                 <div class="w-8 h-8 rounded-full bg-[#703a3a] flex items-center justify-center text-white text-xs font-semibold shadow-sm">
                     {{ strtoupper(substr(auth()->user()?->name ?? 'D', 0, 1)) }}

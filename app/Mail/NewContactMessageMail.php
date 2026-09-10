@@ -24,7 +24,7 @@ class NewContactMessageMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Pesan Baru dari Website JADISATU: ' . $this->contactMessage->name . ($this->contactMessage->company ? ' (' . $this->contactMessage->company . ')' : ''),
+            subject: 'Pesan Baru dari Website Destinara: ' . $this->contactMessage->name . ($this->contactMessage->company ? ' (' . $this->contactMessage->company . ')' : ''),
             replyTo: [
                 new Address($this->contactMessage->email, $this->contactMessage->name),
             ],

@@ -1,95 +1,152 @@
 @extends('layouts.app')
 
-@section('title', $destination->name . ' — Dossier Tapak Destinara')
+@section('title', $destination->name . ' — ' . $destination->location . ' | Destinara')
+@section('meta_description', Str::limit(strip_tags($destination->description ?? ($destination->name . ' di ' . $destination->location . '. Tapak belajar budaya terkurasi bersama Destinara.')), 155))
+@section('meta_keywords', $destination->name . ', ' . $destination->location . ', ' . ($destination->badge ?? '') . ', tapak edukasi, desa adat, wisata budaya nusantara, destinara')
+@section('og_image', $destination->image_url ?? asset('assets/img/hd/hero-fieldwork.jpg'))
+
+@push('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Beranda",
+          "item": "{{ url('/') }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinasi Tapak",
+          "item": "{{ route('destinations.index') }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ addslashes($destination->name) }}",
+          "item": "{{ url()->current() }}"
+        }
+      ]
+    },
+    {
+      "@type": "TouristDestination",
+      "@id": "{{ url()->current() }}#destination",
+      "name": "{{ addslashes($destination->name) }}",
+      "description": "{{ addslashes(Str::limit(strip_tags($destination->description ?? ''), 250)) }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ addslashes($destination->location) }}",
+        "addressCountry": "ID"
+      },
+      "image": "{{ $destination->image_url ?? asset('assets/img/hd/hero-fieldwork.jpg') }}",
+      "touristType": [
+        "CulturalTourism",
+        "EducationalTourism"
+      ]
+    }
+  ]
+}
+</script>
+@endpush
 
 @section('content')
-<main class="w-full pt-20 bg-surface">
+<main class="w-full pt-20 lg:pt-[124px] xl:pt-[132px] bg-surface pb-16 lg:pb-0">
   <div class="flex flex-col w-full">
 
-    <!-- Header & Hero -->
-    <section class="w-full bg-surface-container-low py-space-2xl md:py-space-3xl border-b border-outline-variant/30">
-      <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col gap-space-md">
-        <a href="{{ route('destinations.index') }}" class="inline-flex items-center gap-1.5 text-secondary font-label-action text-body-sm hover:underline">
+    <!-- Header & Hero Dossier Top -->
+    <section class="w-full bg-surface-container-low py-10 md:py-14 border-b border-[#8C5151]/15">
+      <div class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop flex flex-col gap-4">
+        <a href="{{ route('destinations.index') }}" class="inline-flex items-center gap-1.5 text-secondary font-bold text-sm hover:underline">
           <span class="material-symbols-outlined text-[18px]">arrow_back</span>
           <span>Kembali ke Indeks Destinasi</span>
         </a>
-        <div class="flex items-center gap-space-sm flex-wrap">
+        <div class="flex items-center gap-3 flex-wrap pt-1">
           @if($destination->badge)
-            <span class="px-space-sm py-space-2xs rounded-lg bg-surface-container-highest text-secondary font-label-tag text-label-tag">
+            <span class="rgs-category-tag bg-[#8C5151]">
               {{ $destination->badge }}
             </span>
           @endif
-          <span class="font-body-sm text-on-surface-variant">{{ $destination->location }}</span>
+          <span class="rgs-category-tag bg-[#51634b]">
+            {{ $destination->location }}
+          </span>
+          <span class="text-xs uppercase tracking-wider font-bold text-secondary font-sans">
+            Kategori: {{ $destination->category }}
+          </span>
         </div>
-        <h1 class="font-display-hero text-3xl sm:text-4xl md:text-display-hero text-on-surface tracking-tight leading-tight">
+        <h1 class="font-display-hero text-3xl sm:text-4xl md:text-5xl text-on-surface tracking-tight leading-tight">
           {{ $destination->name }}
         </h1>
-        <p class="font-body-lead text-body-default md:text-body-lead text-on-surface-variant max-w-3xl leading-relaxed">
+        <p class="font-body-lead text-base md:text-lg text-on-surface-variant max-w-3xl leading-relaxed">
           {{ $destination->lead ?? Str::limit(strip_tags($destination->description), 200) }}
         </p>
       </div>
     </section>
 
     <!-- Main Content & Details -->
-    <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop py-space-3xl w-full">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-start">
+    <section class="max-w-[1280px] mx-auto px-gutter-mobile md:px-gutter-desktop py-12 md:py-16 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 items-start">
         <!-- Content Column -->
-        <div class="lg:col-span-8 flex flex-col gap-space-xl">
-          <div class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-md">
+        <div class="lg:col-span-8 flex flex-col gap-8">
+          <div class="relative w-full aspect-[16/9] rounded-none overflow-hidden border border-[#8C5151]/20">
             <img src="{{ $destination->image_url }}" alt="{{ $destination->name }}" class="w-full h-full object-cover">
           </div>
 
-          <div class="flex flex-col gap-space-md font-body-default text-body-default text-on-surface leading-relaxed">
-            <h3 class="font-headline-md text-headline-md text-on-surface">Narasi Tapak &amp; Konteks Ekologis</h3>
-            <div class="space-y-4">
+          <div class="flex flex-col gap-4 font-body-default text-base text-on-surface leading-relaxed">
+            <h3 class="font-headline-md text-2xl text-on-surface font-normal">Narasi Tapak &amp; Konteks Ekologis</h3>
+            <div class="space-y-4 text-on-surface-variant leading-relaxed">
               {!! nl2br(e($destination->description)) !!}
             </div>
           </div>
 
           @if($destination->research_focus)
-            <div class="p-space-xl bg-surface-container-low rounded-xl border border-outline-variant/30 flex flex-col gap-space-sm">
-              <span class="font-label-action text-secondary font-semibold">Fokus Riset &amp; Pembelajaran</span>
-              <p class="font-body-default text-on-surface">
+            <div class="p-6 bg-surface rounded-none border-l-4 border-l-[#51634b] border-y border-r border-[#2B211E]/10 flex flex-col gap-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-secondary font-sans">Fokus Riset &amp; Pembelajaran</span>
+              <p class="font-body-default text-on-surface text-[15px] leading-relaxed">
                 {{ $destination->research_focus }}
               </p>
             </div>
           @endif
         </div>
 
-        <!-- Sidebar / Dossier Summary -->
-        <div class="lg:col-span-4 flex flex-col gap-space-lg sticky top-28">
-          <div class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col gap-space-md">
-            <h4 class="font-headline-sm text-headline-sm text-on-surface">Ringkasan Dokumen Tapak</h4>
-            <div class="flex flex-col gap-space-sm border-t border-outline-variant/20 pt-space-sm text-body-sm">
+        <!-- Sidebar / Dossier Summary Plinth -->
+        <div class="lg:col-span-4 flex flex-col gap-6 sticky top-32">
+          <div class="bg-surface p-6 sm:p-7 rounded-none border-t-4 border-t-[#8C5151] border-x border-b border-[#2B211E]/15 flex flex-col gap-4">
+            <h4 class="font-headline-sm text-xl text-on-surface font-bold">Ringkasan Dokumen Tapak</h4>
+            <div class="flex flex-col gap-3 border-t border-[#2B211E]/10 pt-4 text-sm">
               <div>
                 <span class="text-on-surface-variant block text-xs">Lokasi Administratif</span>
-                <span class="font-medium text-on-surface">{{ $destination->location }}</span>
+                <span class="font-bold text-on-surface">{{ $destination->location }}</span>
               </div>
               <div>
                 <span class="text-on-surface-variant block text-xs">Kategori Lanskap</span>
-                <span class="font-medium text-on-surface uppercase">{{ $destination->category }}</span>
+                <span class="font-bold text-on-surface uppercase">{{ $destination->category }}</span>
               </div>
               <div>
                 <span class="text-on-surface-variant block text-xs">Modul Pembelajaran Lapangan</span>
-                <span class="font-medium text-on-surface">{{ $destination->module_name ?? 'Kurikulum Kontekstual' }}</span>
+                <span class="font-bold text-on-surface">{{ $destination->module_name ?? 'Kurikulum Kontekstual' }}</span>
               </div>
               <div>
                 <span class="text-on-surface-variant block text-xs">Kapasitas Maksimal Rombongan</span>
-                <span class="font-medium text-secondary">{{ $destination->capacity ?? '20-30 Peserta' }}</span>
+                <span class="font-bold text-secondary">{{ $destination->capacity ?? '20-30 Peserta' }}</span>
               </div>
               <div>
                 <span class="text-on-surface-variant block text-xs">Protokol Budaya</span>
-                <span class="font-medium text-on-surface">Persetujuan FPIC Terverifikasi</span>
+                <span class="font-bold text-on-surface">Persetujuan FPIC Terverifikasi</span>
               </div>
             </div>
 
-            <div class="pt-space-sm border-t border-outline-variant/20 flex flex-col gap-space-xs">
-              <a href="{{ route('contact.index') }}" class="w-full bg-primary-container text-on-primary font-label-action text-label-action py-space-sm px-space-md rounded-lg text-center hover:bg-primary transition-colors shadow-sm">
-                Ajukan Program ke Tapak Ini
+            <div class="pt-4 border-t border-[#2B211E]/10 flex flex-col gap-3">
+              <a href="{{ route('contact.index') }}" class="rgs-btn rgs-btn-primary w-full text-center">
+                <span>Ajukan Program ke Tapak Ini</span>
               </a>
-              <a href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp', '6281288904411') }}?text=Halo%20Destinara,%20saya%20tertarik%20dengan%20tapak%20{{ urlencode($destination->name) }}" target="_blank" rel="noopener" class="w-full bg-surface-container text-on-surface font-label-action text-body-sm py-space-sm px-space-md rounded-lg text-center hover:bg-surface-container-high transition-colors border border-outline-variant/30 flex items-center justify-center gap-1.5">
+              <a href="https://wa.me/{{ \App\Models\SiteSetting::get('contact_whatsapp', '6282116200363') }}?text={{ urlencode('Halo Destinara, saya tertarik dengan tapak ' . $destination->name . ' untuk program lapangan.') }}" target="_blank" rel="noopener noreferrer" class="rgs-btn rgs-btn-outline w-full text-center flex items-center justify-center gap-1.5">
                 <span class="material-symbols-outlined text-[18px]">chat</span>
-                <span>Konsultasi WhatsApp Cepat</span>
+                <span>Konsultasi WhatsApp</span>
               </a>
             </div>
           </div>
